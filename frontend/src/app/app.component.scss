@@ -1,0 +1,17 @@
+@import 'theme.scss';
+
+#app {
+	width: 100vw;
+	height: 100vh;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background: map-get($colours, 'dark');
+}
+
+.container {
+	width: 100%;
+	max-width: 640px;
+	height: 800px;
+	margin: 0 auto;
+}

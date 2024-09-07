@@ -1,0 +1,4 @@
+<div class="tooltip-container" (mouseenter)="show()" (mouseleave)="hide()">
+    <ng-content></ng-content>
+    <span class="tooltip-text" *ngIf="showTooltip">{{ text }}</span>
+</div>

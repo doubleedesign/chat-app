@@ -1,0 +1,15 @@
+@import '../theme.scss';
+
+.icon-button {
+	cursor: pointer;
+	width: 100%;
+	aspect-ratio: 1 / 1;
+	background: transparent;
+	border: 0;
+	font-size: 1.25rem;
+	color: rgba(map-get($colours, 'light'), 0.25);
+
+	&--active {
+		color: map-get($colours, 'secondary');
+	}
+}
