@@ -3,6 +3,7 @@ body {
 	padding: 0;
 	font-family: "area-variable", sans-serif;
 	font-variation-settings: 'INKT' 0, 'wght' 400, 'wdth' 100, 'slnt' 0;
+	overflow: hidden;
 }
 
 button, input, textarea, a {
@@ -41,4 +42,14 @@ p {
 	&:last-child {
 		margin-bottom: 0;
 	}
+}
+
+/* Ignore Angular component tags for styling because they're too fiddly to target with scoped styles */
+app-login-screen,
+app-page-content,
+app-global-tabs,
+app-tabs-container,
+app-groups,
+app-channels {
+	display: contents;
 }

@@ -6,8 +6,13 @@ import { ChannelsComponent } from './channels/channels.component';
 import { GlobalTabsComponent } from './global-tabs/global-tabs.component';
 import { LogoutScreen } from './logout-screen/logout-screen.component';
 import { ChatWindow } from './chat-window/chat-window.component';
+import { LoginScreen } from './login-screen/login-screen.component';
 
 export const routes: Routes = [
+	{
+		path: 'login',
+		component: LoginScreen
+	},
 	{
 		path: 'chat',
 		component: GlobalTabsComponent,
@@ -24,7 +29,7 @@ export const routes: Routes = [
 			{ path: '', redirectTo: 'home', pathMatch: 'full' }, // Default tab
 		],
 	},
-	{ path: '**', redirectTo: 'home' }, // Fallback route
+	{ path: '**', redirectTo: 'login' }, // Fallback route
 ];
 
 @NgModule({

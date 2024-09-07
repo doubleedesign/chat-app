@@ -1,22 +1,17 @@
 <section class="tabbed-content">
-    <nav class="tabs">
+    <nav class="tabs" [attr.data-theme]="theme" [attr.data-size]="size">
         <ul class="tab-list">
-            <li *ngFor="let tab of tabs"
-                class="tab-list__item"
-                [class.tab--active]="isActive(tab.route)">
-                <!-- If an icon is specified, render as icon button -->
-                <app-icon-button *ngIf="tab.icon" [iconClass]="tab.icon"
-                        [tooltip]="tab.label"
-                        [active]="isActive(tab.route)"
-                        (click)="selectTab(tab.route)">
-                </app-icon-button>
-                <!-- If no icon is specified, render as text button -->
-                <app-button *ngIf="!tab.icon"
-                        [label]="tab.label"
-                        [classNames]="'tab-list__button'"
-                        [active]="isActive(tab.route)"
-                        (click)="selectTab(tab.route)">
-                </app-button>
+            <li *ngFor="let tab of tabs">
+                <!-- ngTemplateOutlet: Use the button template if it is passed in, otherwise use the default button template -->
+                <!-- Context: make the current tab and tabsContainer instance available to the passed-in template -->
+                <!-- Having the tabsContainer instance available allows the button template to use TabContainer's methods -->
+                <ng-container
+                        *ngTemplateOutlet="buttonTemplate ? buttonTemplate : defaultButtonTemplate;
+                        context: {
+                            tab: tab,
+                            tabsContainer: this
+                        }">
+                </ng-container>
             </li>
         </ul>
     </nav>
@@ -24,3 +19,12 @@
         <router-outlet></router-outlet>
     </main>
 </section>
+
+<!-- Default button template to use if a custom one is not passed in -->
+<ng-template #defaultButtonTemplate let-tab="tab">
+    <app-button [label]="tab.label"
+                [classNames]="'tab-list__button'"
+                [active]="isActive(tab.route)"
+                (click)="selectTab(tab.route)">
+    </app-button>
+</ng-template>

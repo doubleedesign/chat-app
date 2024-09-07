@@ -40,13 +40,14 @@
 	&__content {
 		visibility: hidden;
 		opacity: 0;
-		// fixed height set dynamically so the CSS transition works for height
 		transition: all 0.2s ease-in-out;
+		// fixed height set dynamically so the CSS transition works for height
 
 		&--expanded {
 			visibility: visible;
 			opacity: 1;
 			padding: 0.75rem;
+			box-shadow: 0 -2px 8px -4px rgba(0, 0, 0, 0.75);
 		}
 	}
 

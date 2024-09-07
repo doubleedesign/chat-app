@@ -1,0 +1,25 @@
+@import '../theme';
+
+.chat-list {
+	height: 100%;
+
+	.chat-list-button {
+		font-variation-settings: 'wght' 700;
+		width: 100%;
+		border: 0;
+		text-align: left;
+		padding: 0.5rem 0.5rem 0.25rem 0.5rem;
+		border-radius: 0.25rem;
+		font-size: 0.8rem;
+		display: flex;
+		align-items: center;
+		height: 3rem;
+		background: transparent;
+
+		&__active,
+		&:hover, &:focus, &:active {
+            background: map-get($colours, 'light');
+            color: map-get($colours, 'secondary');
+        }
+	}
+}

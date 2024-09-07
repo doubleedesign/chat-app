@@ -1,5 +1,11 @@
+@import '../theme.scss';
+
 .page-content {
 	padding: 1rem;
+	background: map-get($colours, 'light');
+	flex-grow: 1;
+	flex-basis: auto;
+	box-sizing: border-box;
 
 	&__title {
 		font-size: 0.8rem;

@@ -4,19 +4,48 @@
 	display: flex;
 	flex-wrap: nowrap;
 	height: 100%;
+	container-name: tabs-container;
+	container-type: inline-size;
 
 	.tabs {
-		width: 3rem;
-		flex-basis: 3rem;
 		height: 100%;
 		background: map-get($colours, 'dark');
+		box-sizing: border-box;
 
 		.tab-list {
 			padding: 0;
 			margin: 0;
+			list-style: none;
 
 			&__item {
 				display: block;
+			}
+		}
+
+		&[data-theme="light"] {
+			background: darken(map-get($colours, 'light'), 10%);
+		}
+
+		&[data-size="narrow"] {
+			width: 3rem;
+			flex-basis: 3rem;
+		}
+
+		&[data-size="wide"] {
+			width: 10rem;
+			flex-basis: 10rem;
+			padding: 0.5rem;
+
+			@container tabs-container (min-width: 900px) {
+				width: 15rem;
+				flex-basis: 15rem;
+			}
+
+			.tab-list {
+				display: grid;
+				grid-template-columns: 1fr;
+				grid-auto-rows: min-content;
+				grid-gap: 0.25rem;
 			}
 		}
 	}

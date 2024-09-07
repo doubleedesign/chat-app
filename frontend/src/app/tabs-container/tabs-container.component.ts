@@ -1,9 +1,9 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, TemplateRef } from '@angular/core';
 import { Router, RouterOutlet } from '@angular/router';
 import { TooltipComponent } from '../tooltip/tooltip.component';
 import { IconButtonComponent } from '../icon-button/icon-button.component';
 import { TabConfig } from '../types';
-import { NgForOf, NgIf } from '@angular/common';
+import { NgForOf, NgIf, NgTemplateOutlet } from '@angular/common';
 import { ButtonComponent } from '../button/button.component';
 
 @Component({
@@ -16,12 +16,16 @@ import { ButtonComponent } from '../button/button.component';
 		IconButtonComponent,
 		NgForOf,
 		NgIf,
-		ButtonComponent
+		ButtonComponent,
+		NgTemplateOutlet
 	],
 	standalone: true
 })
 export class TabsContainer {
 	@Input() tabs: TabConfig[] = [];
+	@Input() buttonTemplate: TemplateRef<any> | null = null; // Accept a template from the parent
+	@Input() theme: 'light' | 'dark' = 'dark';
+	@Input() size: 'narrow' | 'wide' = 'wide';
 
 	constructor(private router: Router) {}
 

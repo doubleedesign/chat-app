@@ -1,3 +1,12 @@
 <div class="global-tabs">
-    <app-tabs-container [tabs]="tabs"></app-tabs-container>
+    <app-tabs-container [tabs]="tabs" [buttonTemplate]="globalTabButtonTemplate" size="narrow"></app-tabs-container>
+
+    <!-- Template to use for the buttons in the tabs in this context -->
+    <ng-template #globalTabButtonTemplate let-tab="tab" let-tabsContainer="tabsContainer">
+        <app-icon-button [iconClass]="tab.icon"
+                         [tooltip]="tab.label"
+                         [active]="tabsContainer.isActive(tab.route)"
+                         (click)="tabsContainer.selectTab(tab.route)">
+        </app-icon-button>
+    </ng-template>
 </div>

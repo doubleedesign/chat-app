@@ -5,7 +5,7 @@
 	height: 100vh;
 	display: flex;
 	flex-wrap: wrap;
-	justify-content: center;
+	justify-content: flex-start;
 	align-items: center;
 	flex-direction: column;
 	background-color: rgba(map-get($colours, 'dark'), 0.75);
@@ -13,10 +13,23 @@
 	background-blend-mode: overlay;
 	background-position: center;
 	background-size: cover;
+	padding-block-start: 2rem;
+	overflow: hidden;
+
+	@media screen and (min-height: 800px) {
+		justify-content: center;
+		padding-block-start: 0;
+		transform: translateY(-2rem); // account for the footer
+		overflow: visible;
+	}
 
 	&__header {
 		width: 100%;
 		max-width: 640px;
+
+		@media screen and (min-width: 1440px) {
+			max-width: 1024px;
+		}
 
 		h1 {
 			color: map-get($colours, 'secondary');
@@ -34,8 +47,17 @@
 	&__container {
 		width: 100%;
 		max-width: 640px;
-		height: 800px;
+		height: calc(100dvh - 100px);
 		margin: 0 auto;
+		display: flex;
+
+		@media screen and (min-height: 800px) {
+			height: 75dvh;
+		}
+
+		@media screen and (min-width: 1440px) {
+			max-width: 1024px;
+		}
 	}
 
 	&__footer {
@@ -46,6 +68,10 @@
 		color: map-get($colours, 'light');
 		text-align: center;
 		background: map-get($colours, 'dark');
+
+		@media screen and (min-height: 800px) {
+			transform: translateY(2rem); // account for the transform on .app making this fixed to it, not the viewport
+		}
 
 		ul {
 			list-style-type: none;
