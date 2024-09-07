@@ -30,7 +30,7 @@ export class TabsContainer {
 	}
 
 	isActive(route: string): boolean {
-		return this.router.url === route;
+		return this.router.url === route || this.router.url.startsWith(route);
 	}
 
 	logout() {

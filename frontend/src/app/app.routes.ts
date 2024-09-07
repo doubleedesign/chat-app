@@ -5,6 +5,7 @@ import { GroupsComponent } from './groups/groups.component';
 import { ChannelsComponent } from './channels/channels.component';
 import { GlobalTabsComponent } from './global-tabs/global-tabs.component';
 import { LogoutScreen } from './logout-screen/logout-screen.component';
+import { ChatWindow } from './chat-window/chat-window.component';
 
 export const routes: Routes = [
 	{
@@ -15,6 +16,11 @@ export const routes: Routes = [
 			{ path: 'groups', component: GroupsComponent },
 			{ path: 'channels', component: ChannelsComponent },
 			{ path: 'logout', component: LogoutScreen },
+			{
+				path: 'groups',
+				component: GroupsComponent,
+				children: [{ path: ':groupId', component: ChatWindow }],
+			},
 			{ path: '', redirectTo: 'home', pathMatch: 'full' }, // Default tab
 		],
 	},
