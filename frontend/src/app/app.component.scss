@@ -1,17 +1,75 @@
 @import 'theme.scss';
 
-#app {
+.app {
 	width: 100vw;
 	height: 100vh;
 	display: flex;
+	flex-wrap: wrap;
 	justify-content: center;
 	align-items: center;
-	background: map-get($colours, 'dark');
+	flex-direction: column;
+	background-color: rgba(map-get($colours, 'dark'), 0.75);
+	background-image: url('/pawel-czerwinski-JG2DaZZzvzk-unsplash.jpg');
+	background-blend-mode: overlay;
+	background-position: center;
+	background-size: cover;
+
+	&__header {
+		width: 100%;
+		max-width: 640px;
+
+		h1 {
+			color: map-get($colours, 'secondary');
+			font-variation-settings: 'wght' 700;
+			font-style: normal;
+			text-transform: lowercase;
+			margin: 0;
+
+			svg {
+				transform: translate(-0.5rem, -0.5rem);
+			}
+		}
+	}
+
+	&__container {
+		width: 100%;
+		max-width: 640px;
+		height: 800px;
+		margin: 0 auto;
+	}
+
+	&__footer {
+		position: fixed;
+		bottom: 0;
+		left: 0;
+		width: 100%;
+		color: map-get($colours, 'light');
+		text-align: center;
+		background: map-get($colours, 'dark');
+
+		ul {
+			list-style-type: none;
+			padding: 0;
+			margin: 0;
+
+			li {
+				display: block;
+				margin: 0.25rem;
+				font-size: 0.75rem;
+
+				&:last-of-type {
+					margin-bottom: 0;
+				}
+
+				a {
+					color: currentColor;
+
+					&:hover, &:focus, &:active {
+						color: map-get($colours, 'accent');
+					}
+				}
+			}
+		}
+	}
 }
 
-.container {
-	width: 100%;
-	max-width: 640px;
-	height: 800px;
-	margin: 0 auto;
-}

@@ -1,0 +1,58 @@
+@import '../theme.scss';
+
+.expandable {
+	display: flex;
+	flex-direction: column;
+
+	&__toggle {
+		background: map-get($colours, 'primary');
+		color: color-contrast(map-get($colours, 'primary'));
+		gap: 0.5rem;
+		border: 0;
+		padding: 0.75rem 0.5rem 0.5rem 0.5rem;
+		line-height: 1;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		text-decoration: underline;
+		text-decoration-color: transparent;
+		position: relative;
+		z-index: 100;
+
+		svg {
+			transition: all 0.2s ease-in-out;
+			font-size: 0.9em;
+			transform: translateY(-1px);
+		}
+
+		&:hover, &:focus, &:active, &--expanded {
+			background: darken(map-get($colours, 'primary'), 10%);
+			text-decoration-color: currentColor;
+		}
+
+		&--expanded {
+			svg {
+				transform: rotate(180deg) translateY(2px);
+			}
+		}
+	}
+
+	&__content {
+		visibility: hidden;
+		opacity: 0;
+		// fixed height set dynamically so the CSS transition works for height
+		transition: all 0.2s ease-in-out;
+
+		&--expanded {
+			visibility: visible;
+			opacity: 1;
+			padding: 0.75rem;
+		}
+	}
+
+	&[data-direction="up"] {
+		.expandable__content {
+			order: -1;
+		}
+	}
+}

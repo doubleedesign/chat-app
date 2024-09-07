@@ -1,5 +1,19 @@
-<div id="app">
-    <div class="container">
+<div class="app">
+    <header class="app__header">
+        <h1>Chatty. <i class="fa-duotone fa-solid fa-comments"></i></h1>
+    </header>
+    <div class="app__container">
       <router-outlet></router-outlet>
     </div>
+    <footer class="app__footer">
+        <app-expandable label="Credits" direction="up">
+            <ul>
+                <li>Application by Leesa Ward, student ID s2881107.</li>
+                <li>Background image by <a href="https://unsplash.com/@pawel_czerwinski?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Pawel Czerwinski</a> on <a href="https://unsplash.com/photos/a-computer-generated-image-of-wavy-lines-JG2DaZZzvzk?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a>.</li>
+                <li>Icons used under licence from <a href="https://fontawesome.com/">Font Awesome</a>.</li>
+                <li>Fonts used under licence from <a href="https://fonts.adobe.com/fonts/area-variable">Adobe Fonts</a>.</li>
+            </ul>
+        </app-expandable>
+    </footer>
 </div>
+
