@@ -1,0 +1,19 @@
+@import '../theme.scss';
+
+.alert {
+	padding: 1rem;
+	border-radius: 0.25rem;
+	text-align: center;
+
+	@each $style, $colour in $colours {
+		&--#{$style} {
+			background: rgba($colour, 0.1);
+			border: 1px solid $colour;
+			color: map-get($colours, 'dark');
+
+			h3 {
+				color: darken($colour, 10%);
+			}
+		}
+	}
+}
