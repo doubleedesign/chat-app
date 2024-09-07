@@ -12,13 +12,23 @@ import { NgIf } from '@angular/common';
 })
 export class TooltipComponent {
 	@Input() text: string = '';
-	showTooltip = false;
+	@Input() position: string = 'bottom';
+	visible = false;
+	transitionClasses = '';
 
 	show() {
-		this.showTooltip = true;
+		this.visible = true;
+		setTimeout(() => {
+			this.transitionClasses = 'visible';
+		}, 200);
 	}
 
 	hide() {
-		this.showTooltip = false;
+		setTimeout(() => {
+			this.transitionClasses = '';
+			setTimeout(() => {
+				this.visible = false;
+			}, 300);
+		}, 300);
 	}
 }

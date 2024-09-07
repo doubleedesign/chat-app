@@ -1,4 +1,6 @@
-<div class="tooltip-container" (mouseenter)="show()" (mouseleave)="hide()">
+<div class="tooltip" (mouseenter)="show()" (mouseleave)="hide()">
     <ng-content></ng-content>
-    <span class="tooltip-text" *ngIf="showTooltip">{{ text }}</span>
+    <span class="tooltip__content" [class]="transitionClasses" *ngIf="visible" [attr.data-position]="position">
+        {{ text }}
+    </span>
 </div>

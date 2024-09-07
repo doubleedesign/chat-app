@@ -1,0 +1,115 @@
+@import '../theme.scss';
+
+.tooltip {
+	position: relative;
+
+	&__content {
+		display: block;
+		background-color: map-get($colours, 'secondary');
+		color: color-contrast(map-get($colours, 'secondary'));
+		padding: 0.5rem 0.5rem 0.25rem 0.5rem;
+		font-size: 0.75rem;
+		position: absolute;
+		width: fit-content;
+		min-width: 4rem;
+		z-index: 500;
+		text-align: center;
+		line-height: 1;
+		border-radius: 0.25rem;
+		font-variation-settings: 'wght' 600;
+		opacity: 0;
+		transition: all 0.3s ease-in-out;
+
+		&.visible {
+			opacity: 1;
+		}
+
+		&[data-position='top'] {
+			bottom: calc(100% + 0.5rem);
+			left: 50%;
+			transform: translate(-50%, 1rem);
+
+			&:before {
+				content: '';
+				position: absolute;
+				bottom: -0.5rem;
+				left: calc(50% - 0.5rem);
+				width: 0;
+				height: 0;
+				border-style: solid;
+				border-width: 0.5rem 0.5rem 0 0.5rem;
+				border-color: map-get($colours, 'secondary') transparent transparent transparent;
+			}
+
+			&.visible {
+				transform: translate(-50%, 0.5rem);
+			}
+		}
+
+		&[data-position='bottom'] {
+			top: calc(100% + 0.5rem);
+			left: 50%;
+			transform: translate(-50%, -1rem);
+
+			&:before {
+				content: '';
+				position: absolute;
+				top: -0.5rem;
+				left: calc(50% - 0.5rem);
+				width: 0;
+				height: 0;
+				border-style: solid;
+				border-width: 0 0.5rem 0.5rem 0.5rem;
+				border-color: transparent transparent map-get($colours, 'secondary') transparent;
+			}
+
+			&.visible {
+				transform: translate(-50%, -0.5rem);
+			}
+		}
+
+		&[data-position='left'] {
+			top: 50%;
+			right: calc(100%);
+			transform: translate(1rem, -50%);
+
+			&:before {
+				content: '';
+				position: absolute;
+				top: calc(50% - 0.35rem);
+				right: -0.35rem;
+				width: 0;
+				height: 0;
+				border-style: solid;
+				border-width: 0.35rem 0 0.35rem 0.35rem;
+				border-color: transparent transparent transparent map-get($colours, 'secondary');
+			}
+
+			&.visible {
+				transform: translate(0, -50%);
+			}
+		}
+
+		&[data-position='right'] {
+			top: 50%;
+			left: calc(100%);
+			transform: translate(-1rem, -50%);
+
+			&:before {
+				content: '';
+				position: absolute;
+				top: calc(50% - 0.35rem);
+				left: -0.35rem;
+				width: 0;
+				height: 0;
+				border-style: solid;
+				border-width: 0.35rem 0.35rem 0.35rem 0;
+				border-color: transparent map-get($colours, 'secondary') transparent transparent;
+			}
+
+			&.visible {
+				transform: translate(0, -50%);
+			}
+		}
+	}
+}

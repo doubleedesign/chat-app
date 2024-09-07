@@ -6,7 +6,11 @@
 	background: map-get($colours, 'dark');
 	border: 0;
 	font-size: 1.25rem;
-	color: rgba(map-get($colours, 'light'), 0.25);
+	color: rgba((color-contrast(map-get($colours, 'dark'))), 0.25);
+
+	&:hover, &:focus, &:active {
+		color: color-contrast(map-get($colours, 'dark'));
+	}
 
 	&--active {
 		color: map-get($colours, 'secondary');
