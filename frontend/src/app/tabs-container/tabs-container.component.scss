@@ -23,7 +23,19 @@
 		}
 
 		&[data-theme="light"] {
-			background: darken(map-get($colours, 'light'), 10%);
+			background: darken(map-get($colours, 'light'), 5%);
+
+			&[data-size="wide"] {
+				@include pretty-scrollbar(darken(map-get($colours, 'light'), 10%));
+			}
+		}
+
+		&[data-theme="dark"] {
+			background: map-get($colours, 'dark');
+
+			&[data-size="wide"] {
+				@include pretty-scrollbar(map-get($colours, 'dark'));
+			}
 		}
 
 		&[data-size="narrow"] {

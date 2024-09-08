@@ -1,3 +1,8 @@
+/**
+ * This file is for global styles that are not specific to any component,
+ * to avoid repeating basic styles across many components.
+ * (And to do a basic reset of the browser's default styles on the body.)
+ */
 body {
 	margin: 0;
 	padding: 0;
