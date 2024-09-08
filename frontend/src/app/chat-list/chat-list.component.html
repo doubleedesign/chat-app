@@ -2,7 +2,9 @@
     <app-tabs-container [tabs]="tabs"
             [buttonTemplate]="chatListButtonTemplate"
             theme="light"
-            [size]="location === 'sidebar' ? 'wide' : 'fullwidth'">
+            [size]="location === 'sidebar' ? 'wide' : 'fullwidth'"
+            [showBackButton]="showBackButton"
+    >
     </app-tabs-container>
 
     <!-- Template to use for the buttons in the tabs in this context -->

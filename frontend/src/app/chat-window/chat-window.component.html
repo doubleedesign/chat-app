@@ -5,7 +5,8 @@
         <app-chat-list
                 *ngIf="type === 'group' && subTabs.length > 0"
                 location="window"
-                [tabs]="subTabs">
+                [tabs]="subTabs"
+        >
         </app-chat-list>
     </app-page-content>
 </ng-template>

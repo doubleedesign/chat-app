@@ -3,8 +3,9 @@ import { Router, RouterOutlet } from '@angular/router';
 import { TooltipComponent } from '../tooltip/tooltip.component';
 import { IconButtonComponent } from '../icon-button/icon-button.component';
 import { TabConfig } from '../types';
-import { NgForOf, NgIf, NgTemplateOutlet } from '@angular/common';
+import { Location, NgForOf, NgIf, NgTemplateOutlet } from '@angular/common';
 import { ButtonComponent } from '../button/button.component';
+import { BackButtonComponent } from '../back-button/back-button.component';
 
 @Component({
 	selector: 'app-tabs-container',
@@ -17,7 +18,8 @@ import { ButtonComponent } from '../button/button.component';
 		NgForOf,
 		NgIf,
 		ButtonComponent,
-		NgTemplateOutlet
+		NgTemplateOutlet,
+		BackButtonComponent
 	],
 	standalone: true
 })
@@ -26,6 +28,7 @@ export class TabsContainer {
 	@Input() buttonTemplate: TemplateRef<any> | null = null; // Accept a template from the parent
 	@Input() theme: 'light' | 'dark' = 'dark';
 	@Input() size: 'narrow' | 'wide' | 'fullwidth' = 'wide';
+	@Input() showBackButton: boolean = false;
 
 	constructor(private router: Router) {}
 

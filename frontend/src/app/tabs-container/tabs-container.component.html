@@ -1,6 +1,7 @@
 <section class="tabbed-content">
     <nav class="tabs" [attr.data-theme]="theme" [attr.data-size]="size">
         <ul class="tab-list">
+            <app-back-button *ngIf="showBackButton"></app-back-button>
             <li *ngFor="let tab of tabs">
                 <!-- ngTemplateOutlet: Use the button template if it is passed in, otherwise use the default button template -->
                 <!-- Context: make the current tab and tabsContainer instance available to the passed-in template -->
