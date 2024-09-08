@@ -7,6 +7,7 @@
 	border: 0;
 	font-size: 1.25rem;
 	color: rgba((colour-contrast(map-get($colours, 'dark'))), 0.25);
+	padding: 0;
 
 	&:hover, &:focus, &:active {
 		color: colour-contrast(map-get($colours, 'dark'));

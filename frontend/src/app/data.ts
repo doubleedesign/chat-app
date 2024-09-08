@@ -92,8 +92,8 @@ export async function getGroups(): Promise<ChatContainer[]> {
 	]);
 }
 
-export async function getChannels(): Promise<ChatContainer[]> {
-	// TODO: Replace this with the user's channels, dynamically fetched from the server
+export async function getChannels(groupId = '0'): Promise<ChatContainer[]> {
+	// TODO: Replace this with the selected group or user's channels, dynamically fetched from the server
 
 	return Promise.resolve([
 		{

@@ -1,10 +1,25 @@
-<app-page-content [title]="title">
-    <!-- If no chat is selected, show a message -->
-    <app-message-box *ngIf="!selected" [style]="'info'">
-        <p>Select a {{ type }} to view messages.</p>
-    </app-message-box>
-    <!-- TODO: If a chat is selected, show the chat messages -->
-    <app-message-box *ngIf="selected" [style]="'info'">
-        <p>This is where {{ type }} messages will show up.</p>
-    </app-message-box>
-</app-page-content>
+<ng-container *ngIf="type === 'group'; then groupContext else channelContext"></ng-container>
+
+<ng-template #groupContext>
+    <app-page-content title="Group channels">
+        <app-chat-list
+                *ngIf="type === 'group' && subTabs.length > 0"
+                location="window"
+                [tabs]="subTabs">
+        </app-chat-list>
+    </app-page-content>
+</ng-template>
+
+<ng-template #channelContext>
+    <app-page-content [title]="title">
+        <!-- If no chat is selected, show a message -->
+        <app-message-box *ngIf="!selected" [style]="'info'">
+            <p *ngIf="type === 'group'">Select a {{ type }} to view channels.</p>
+            <p *ngIf="type === 'channel'">Select a {{ type }} to view messages.</p>
+        </app-message-box>
+        <!-- TODO: If a channel is selected, show the messages -->
+        <app-message-box *ngIf="selected && type !== 'group'" [style]="'info'">
+            <p>This is where {{ type }} messages will show up.</p>
+        </app-message-box>
+    </app-page-content>
+</ng-template>

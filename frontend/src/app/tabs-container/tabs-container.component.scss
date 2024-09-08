@@ -60,6 +60,15 @@
 				grid-gap: 0.25rem;
 			}
 		}
+
+		&[data-size="fullwidth"] {
+			width: 100%;
+			flex-basis: 100%;
+
+			&[data-theme="light"] {
+				background: map-get($colours, 'light');
+			}
+		}
 	}
 
 	.tab-content {

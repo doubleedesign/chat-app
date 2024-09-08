@@ -1,10 +1,15 @@
 <div class="chat-list">
-    <app-tabs-container [tabs]="tabs" [buttonTemplate]="chatListButtonTemplate" theme="light" size="wide"></app-tabs-container>
+    <app-tabs-container [tabs]="tabs"
+            [buttonTemplate]="chatListButtonTemplate"
+            theme="light"
+            [size]="location === 'sidebar' ? 'wide' : 'fullwidth'">
+    </app-tabs-container>
 
     <!-- Template to use for the buttons in the tabs in this context -->
     <ng-template #chatListButtonTemplate let-tab="tab" let-tabsContainer="tabsContainer">
         <button class="chat-list-button"
-             [class.chat-list-button__active]="tabsContainer.isActive(tab.route)"
+             [class.chat-list-button--fullwidth]="location === 'window'"
+             [class.chat-list-button--active]="tabsContainer.isActive(tab.route)"
              (click)="tabsContainer.selectTab(tab.route)">
             <div class="chat-list-button__avatar">
                 <img *ngIf="tab.icon" [src]="tab.icon" [alt]="tab.label + ' Avatar'">

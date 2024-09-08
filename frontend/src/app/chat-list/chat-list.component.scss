@@ -6,7 +6,7 @@
 	.chat-list-button {
 		font-variation-settings: 'wght' 700;
 		width: 100%;
-		border: 0;
+		border: 1px solid transparent;
 		text-align: left;
 		padding: 0.5rem;
 		border-radius: 0.25rem;
@@ -16,6 +16,7 @@
 		background: transparent;
 		container-type: inline-size;
 		container-name: button;
+		transition: all 0.3s ease-in-out;
 
 		&__avatar {
 			width: 2rem;
@@ -79,21 +80,34 @@
 			}
 		}
 
-		&__active,
+		&--fullwidth {
+			width: 100%;
+			border: 1px solid darken(map-get($colours, 'light'), 10%);
+			margin-block-end: 0.25rem;
+		}
+
+		&--active,
 		&:hover, &:focus, &:active {
             background: map-get($colours, 'light');
 
 			.chat-list-button__avatar {
 				border: 1px solid darken(map-get($colours, 'light'), 10%);
 			}
+
+			&.chat-list-button--fullwidth {
+				.chat-list-button__avatar {
+					border: 1px solid darken(map-get($colours, 'light'), 20%);
+				}
+			}
         }
 
-		&__active {
+		&--active {
 			color: map-get($colours, 'secondary');
 		}
 
 		&:hover, &:focus, &:active {
 			color: map-get($colours, 'primary');
+			box-shadow: 0 0 2px 0 map-get($colours, 'primary');
 
 			.chat-list-button__avatar {
 				img {

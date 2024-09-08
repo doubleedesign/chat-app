@@ -25,7 +25,7 @@ export class TabsContainer {
 	@Input() tabs: TabConfig[] = [];
 	@Input() buttonTemplate: TemplateRef<any> | null = null; // Accept a template from the parent
 	@Input() theme: 'light' | 'dark' = 'dark';
-	@Input() size: 'narrow' | 'wide' = 'wide';
+	@Input() size: 'narrow' | 'wide' | 'fullwidth' = 'wide';
 
 	constructor(private router: Router) {}
 
@@ -35,9 +35,5 @@ export class TabsContainer {
 
 	isActive(route: string): boolean {
 		return this.router.url === route || this.router.url.startsWith(route);
-	}
-
-	logout() {
-		alert('Not implemented yet');
 	}
 }

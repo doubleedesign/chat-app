@@ -15,4 +15,5 @@ import { NgIf } from '@angular/common';
 })
 export class ChatListComponent {
 	@Input() tabs: TabConfig[] = [];
+	@Input() location: 'sidebar' | 'window' = 'sidebar';
 }
