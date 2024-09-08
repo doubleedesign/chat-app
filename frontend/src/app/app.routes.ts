@@ -24,31 +24,46 @@ export const routes: Routes = [
 	{
 		path: 'chat',
 		component: GlobalTabsComponent,
+		data: { animation: 'GlobalTabs' },
 		children: [
-			{ path: 'home', component: HomeComponent, canActivate: [AuthGuard] },
+			{
+				path: 'home',
+				component: HomeComponent,
+				canActivate: [AuthGuard],
+			},
 			{
 				path: 'groups',
 				component: ChatScreen,
 				canActivate: [AuthGuard],
-				data: { title: 'Group chat' },
+				data: {
+					title: 'Group chat',
+					animation: 'ChatScreen'
+				},
 				resolve: { items: ChatScreenProvider },
 				children: [
-					{ path: ':groupId', component: ChatWindow },
-					{ path: '', component: ChatWindow }, // Where to land when no chat is selected
+					{ path: ':groupId', component: ChatWindow, data: { animation: 'ChatWindow' } },
+					{ path: '', component: ChatWindow, data: { animation: 'ChatWindow' } }, // Where to land when no chat is selected
 				],
 			},
 			{
 				path: 'channels',
 				component: ChatScreen,
 				canActivate: [AuthGuard],
-				data: { title: 'Channel chat' },
+				data: {
+					title: 'Channel chat',
+					animation: 'ChatScreen'
+				},
 				resolve: { items: ChatScreenProvider },
 				children: [
-					{ path: ':channelId', component: ChatWindow },
-					{ path: '', component: ChatWindow }, // Where to land when no chat is selected
+					{ path: ':channelId', component: ChatWindow, data: { animation: 'ChatWindow' } },
+					{ path: '', component: ChatWindow, data: { animation: 'ChatWindow' } }, // Where to land when no chat is selected
 				],
 			},
-			{ path: 'logout', component: LogoutScreen, canActivate: [AuthGuard] },
+			{
+				path: 'logout',
+				component: LogoutScreen,
+				canActivate: [AuthGuard]
+			},
 			{ path: '', redirectTo: 'home', pathMatch: 'full' }, // Default tab
 		],
 	},
@@ -56,7 +71,7 @@ export const routes: Routes = [
 ];
 
 @NgModule({
-	imports: [RouterModule.forRoot(routes)],
+	imports: [RouterModule.forRoot(routes, { onSameUrlNavigation: 'reload' })],
 	exports: [RouterModule]
 })
 export class AppRoutingModule {

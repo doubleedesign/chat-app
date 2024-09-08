@@ -25,7 +25,9 @@ export class ChatListComponent implements OnInit {
 		this.router.events.subscribe(() => {
 			const currentRoute = this.router.url;
 			// Check if the current route starts with 'groups' or 'channels'
-			this.showBackButton = currentRoute.startsWith('/chat/groups') || currentRoute.startsWith('/chat/channels');
+			this.showBackButton =
+				this.location !== 'window' &&
+				(currentRoute.startsWith('/chat/groups') || currentRoute.startsWith('/chat/channels'));
 		});
 	}
 }
