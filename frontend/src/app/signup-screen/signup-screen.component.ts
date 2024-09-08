@@ -14,7 +14,7 @@ import { Router, RouterLink } from '@angular/router';
 		RouterLink
 	],
 	templateUrl: './signup-screen.component.html',
-	styleUrl: './signup-screen.component.scss'
+	styleUrl: './signup-screen.component.scss',
 })
 export class SignupScreen implements OnInit {
 	signupForm: FormGroup;

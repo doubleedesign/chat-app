@@ -3,7 +3,9 @@
         <h1>Chatty. <i class="fa-duotone fa-solid fa-comments"></i></h1>
     </header>
     <div class="app__container">
-      <router-outlet></router-outlet>
+        <div class="page-transitions-wrapper" [@routeAnimations]="prepareRoute(outlet)">
+            <router-outlet #outlet="outlet"></router-outlet>
+        </div>
     </div>
     <footer class="app__footer">
         <app-expandable label="Credits" direction="up">

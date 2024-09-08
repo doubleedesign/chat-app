@@ -13,11 +13,13 @@ import { SignupScreen } from './signup-screen/signup-screen.component';
 export const routes: Routes = [
 	{
 		path: 'login',
-		component: LoginScreen
+		component: LoginScreen,
+		data: { animation: 'LoginScreen' }
 	},
 	{
 		path: 'register',
-		component: SignupScreen
+		component: SignupScreen,
+		data: { animation: 'SignupScreen' }
 	},
 	{
 		path: 'chat',
@@ -55,6 +57,7 @@ export const routes: Routes = [
 
 @NgModule({
 	imports: [RouterModule.forRoot(routes)],
-	exports: [RouterModule],
+	exports: [RouterModule]
 })
-export class AppRoutingModule {}
+export class AppRoutingModule {
+}

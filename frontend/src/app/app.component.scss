@@ -58,6 +58,12 @@
 		@media screen and (min-width: 1440px) {
 			max-width: 1024px;
 		}
+
+		.page-transitions-wrapper {
+			position: relative;
+			width: 100%;
+			height: fit-content;
+		}
 	}
 
 	&__footer {
