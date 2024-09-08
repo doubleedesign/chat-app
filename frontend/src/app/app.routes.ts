@@ -7,6 +7,7 @@ import { ChatWindow } from './chat-window/chat-window.component';
 import { LoginScreen } from './login-screen/login-screen.component';
 import { ChatScreen } from './chat-screen/chat-screen.component';
 import { ChatScreenProvider } from './chat-screen/chat-screen.provider';
+import { AuthGuard } from './auth.guard';
 
 export const routes: Routes = [
 	{
@@ -17,10 +18,11 @@ export const routes: Routes = [
 		path: 'chat',
 		component: GlobalTabsComponent,
 		children: [
-			{ path: 'home', component: HomeComponent },
+			{ path: 'home', component: HomeComponent, canActivate: [AuthGuard] },
 			{
 				path: 'groups',
 				component: ChatScreen,
+				canActivate: [AuthGuard],
 				data: { title: 'Group chat' },
 				resolve: { items: ChatScreenProvider },
 				children: [
@@ -31,6 +33,7 @@ export const routes: Routes = [
 			{
 				path: 'channels',
 				component: ChatScreen,
+				canActivate: [AuthGuard],
 				data: { title: 'Channel chat' },
 				resolve: { items: ChatScreenProvider },
 				children: [
@@ -38,7 +41,7 @@ export const routes: Routes = [
 					{ path: '', component: ChatWindow }, // Where to land when no chat is selected
 				],
 			},
-			{ path: 'logout', component: LogoutScreen },
+			{ path: 'logout', component: LogoutScreen, canActivate: [AuthGuard] },
 			{ path: '', redirectTo: 'home', pathMatch: 'full' }, // Default tab
 		],
 	},

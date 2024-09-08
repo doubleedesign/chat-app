@@ -1,3 +1,41 @@
-<app-page-content title="Log in">
+<div class="login-form-wrapper">
+    <app-page-content title="Log in">
+        <form class="chatty-form" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+                <div class="chatty-form__row">
+                    <div class="chatty-form__row__field">
+                        <label for="email">Email</label>
+                        <input id="email" formControlName="email" type="email" />
+                    </div>
+                    <div class="chatty-form__row__messages" *ngIf="submitted && loginForm.controls['email'].errors">
+                        <p *ngIf="loginForm.controls['email'].errors?.['required']">
+                            <i class="fa-solid fa-triangle-exclamation"></i>
+                            Email is required
+                        </p>
+                        <p *ngIf="loginForm.controls['email'].errors?.['email']">
+                            <i class="fa-solid fa-triangle-exclamation"></i>
+                            Invalid email format
+                        </p>
+                    </div>
+                </div>
 
-</app-page-content>
+                <div class="chatty-form__row">
+                    <div class="chatty-form__row__field">
+                        <label for="password">Password</label>
+                        <input id="password" formControlName="password" type="password" />
+                    </div>
+                    <div class="chatty-form__row__messages" *ngIf="submitted && loginForm.controls['password'].errors">
+                        <p *ngIf="loginForm.controls['password'].errors?.['required']">
+                            <i class="fa-solid fa-triangle-exclamation"></i>Password is required
+                        </p>
+                        <p *ngIf="loginForm.controls['password'].errors?.['minlength']">
+                            <i class="fa-solid fa-triangle-exclamation"></i> Password must be at least 6 characters
+                        </p>
+                    </div>
+                </div>
+
+                <div class="chatty-form__row">
+                    <button class="chatty-form__row__button button--primary" type="submit">Let's chat</button>
+                </div>
+            </form>
+    </app-page-content>
+</div>

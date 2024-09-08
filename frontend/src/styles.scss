@@ -1,0 +1,151 @@
+@import 'app/theme.scss';
+
+/**
+ * This file is for global styles that are not specific to any component,
+ * to avoid repeating basic styles across many components.
+ * (And to do a basic reset of the browser's default styles on the body.)
+ */
+body {
+	margin: 0;
+	padding: 0;
+	font-family: "area-variable", sans-serif;
+	font-variation-settings: 'INKT' 0, 'wght' 400, 'wdth' 100, 'slnt' 0;
+	overflow: hidden;
+}
+
+button, input, textarea, a {
+	transition: all 0.2s ease-in-out;
+}
+
+button, input {
+	font-family: "area-variable", sans-serif;
+	font-variation-settings: 'INKT' 0, 'wght' 400, 'wdth' 100, 'slnt' 0;
+	cursor: pointer;
+}
+
+button {
+	border: 0;
+	appearance: none;
+	padding: 0.75rem 1rem 0.5rem 1rem;
+	font-variation-settings: 'wght' 700;
+	border-radius: 0.25rem;
+
+	@each $colour, $value in $colours {
+		&.button--#{$colour} {
+			background: $value;
+			color: colour-contrast($value);
+			text-decoration: underline;
+			text-decoration-color: transparent;
+
+			&:hover, &:focus, &:active {
+				background: darken($value, 10%);
+				text-decoration-color: currentColor;
+			}
+		}
+	}
+}
+
+h2, h3, h4, strong {
+	font-weight: normal;
+	font-variation-settings: 'wght' 700;
+}
+
+h2, h3, h4 {
+	margin-top: 0;
+	margin-bottom: 0.5rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+}
+
+h3 {
+	font-size: 1rem;
+}
+
+p {
+	font-size: 0.8rem;
+	margin-top: 0;
+	margin-bottom: 0.5rem;
+
+	&:last-child {
+		margin-bottom: 0;
+	}
+}
+
+/* Ignore Angular component tags for styling because they're too fiddly to target with scoped styles */
+app-login-screen,
+app-page-content,
+app-global-tabs,
+app-tabs-container,
+app-groups,
+app-channels {
+	display: contents;
+}
+
+.chatty-form {
+
+	label {
+		font-size: 0.8rem;
+	}
+
+	input, textarea {
+		padding: 0.5rem;
+		box-sizing: border-box;
+	}
+
+	&__row {
+		padding-block: 0.5rem;
+
+		&:has(button) {
+			display: flex;
+			justify-content: flex-end;
+		}
+
+		&__field {
+			width: 100%;
+			background: white;
+			border: 1px solid darken(map-get($colours, 'light'), 10%);
+			border-radius: 0.25rem;
+			box-sizing: border-box;
+			padding-bottom: 1px; // allows for the border-radius
+
+			label {
+				display: block;
+				padding-inline: 0.5rem;
+				padding-block-start: 0.5rem;
+				font-variation-settings: 'wght' 700;
+			}
+
+			input, textarea {
+				width: 100%;
+				border: 0;
+
+				&:focus {
+					outline: none;
+				}
+			}
+
+			&:focus-within {
+				box-shadow: 0 0 4px 0 map-get($colours, 'primary');
+
+				label {
+					color: map-get($colours, 'primary');
+				}
+			}
+		}
+
+		&__messages {
+			padding: 0.5rem;
+			color: map-get($colours, 'alert');
+			font-variation-settings: 'wght' 700;
+
+			svg {
+				margin-inline-end: 0.25rem;
+			}
+		}
+
+		&__button {
+		}
+	}
+}
