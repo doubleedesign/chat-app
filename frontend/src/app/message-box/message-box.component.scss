@@ -7,12 +7,12 @@
 
 	@each $style, $colour in $colours {
 		&--#{$style} {
-			background: rgba($colour, 0.1);
+			background: rgba($colour, 0.05);
 			border: 1px solid $colour;
 			color: map-get($colours, 'dark');
 
 			h3 {
-				color: darken($colour, 10%);
+				color: colourful-contrast(rgba($colour, 0.05), $colour);
 			}
 		}
 	}

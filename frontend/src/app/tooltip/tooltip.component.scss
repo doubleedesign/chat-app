@@ -6,7 +6,7 @@
 	&__content {
 		display: block;
 		background-color: map-get($colours, 'secondary');
-		color: color-contrast(map-get($colours, 'secondary'));
+		color: colour-contrast(map-get($colours, 'secondary'));
 		padding: 0.5rem 0.5rem 0.25rem 0.5rem;
 		font-size: 0.75rem;
 		position: absolute;

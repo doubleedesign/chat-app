@@ -6,7 +6,7 @@
 
 	&__toggle {
 		background: map-get($colours, 'primary');
-		color: color-contrast(map-get($colours, 'primary'));
+		color: colour-contrast(map-get($colours, 'primary'));
 		gap: 0.5rem;
 		border: 0;
 		padding: 0.75rem 0.5rem 0.5rem 0.5rem;

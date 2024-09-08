@@ -1,3 +1,6 @@
+@use "sass:math";
+@use "sass:color";
+
 $colours: (
 	primary: #3e0897,
 	secondary: #da00a5,
@@ -10,8 +13,11 @@ $colours: (
 	light: #f4f4f4
 );
 
-@function color-contrast($background-color) {
-	$luminance: (red($background-color) * 0.299 + green($background-color) * 0.587 + blue($background-color) * 0.114) / 255;
+/**
+ * Calculate whether a given colour is light or dark, and return whether to use white or black text for contrast.
+ */
+@function colour-contrast($background-colour) {
+	$luminance: getLuminance($background-colour);
 
 	@if $luminance > 0.5 {
 		@return black;
@@ -21,15 +27,106 @@ $colours: (
 }
 
 /**
+ * Lighten or darken a colour based on its background colour to ensure sufficient contrast.
+ * Based on previous external projects where I used Polished's getContrast and meetsContrastGuidelines functions
+ * (https://polished.js.org/docs/#getcontrast, https://polished.js.org/docs/#meetscontrastguidelines)
+ * to progressively adjust a given colour until it meets WCAG 2.0 guidelines.
+ */
+@function colourful-contrast($background-colour, $colour, $max-attempts: 10, $attempt: 0) {
+	$bgLuminance: getLuminance($background-colour);
+	$colourLuminance: getLuminance($colour);
+	$contrast: contrast-ratio($background-colour, $colour);
+	$threshold: 4.5; // WCAG 2.0 Level AA guideline
+
+	// Cap the number of attempts to prevent exceeding the max call stack size
+	@if($attempt > $max-attempts) {
+		@return colour-contrast($background-colour);
+	}
+
+	// If contrast is already above the threshold, return the color
+	@if $contrast >= $threshold {
+		@return $colour;
+	}
+	// Otherwise, adjust the colour to darker or lighter
+	@else {
+		@if $bgLuminance >= $colourLuminance {
+			@return colourful-contrast($background-colour, darken($colour, 4%), $max-attempts, $attempt + 1);
+		}
+		@else {
+			@return colourful-contrast($background-colour, lighten($colour, 5%), $max-attempts, $attempt + 1);
+		}
+	}
+}
+
+/**
+ * Calculate the contrast ratio between two colours.
+ * Based on the Bootstrap implementation: https://github.com/twbs/bootstrap/blob/main/scss/_functions.scss
+ * See also: https://www.w3.org/TR/WCAG20-TECHS/G18.html
+ */
+@function contrast-ratio($background, $foreground) {
+	$l1: getLuminance($background);
+	$l2: getLuminance(opaque($background, $foreground));
+
+	@return if($l1 > $l2, math.div($l1 + .05, $l2 + .05), math.div($l2 + .05, $l1 + .05));
+}
+
+/**
+ * Calculate the resulting flattened colour that is seen when a semi-transparent colour is placed on top of a solid background.
+ * From the Bootstrap implementation: https://github.com/twbs/bootstrap/blob/main/scss/_functions.scss
+ */
+@function opaque($background, $foreground) {
+	@return mix(rgba($foreground, 1), $background, opacity($foreground) * 100%);
+}
+
+/**
+ * Calculate the luminance of a given colour.
+ * Based on: https://gist.github.com/Metaviolet/525b45df7473797e2fc2
+ * but with accounting for semi-transparent colours added in.
+ * See also: https://www.w3.org/TR/WCAG20-TECHS/G18.html
+ */
+@function getLuminance($colour) {
+
+	// If the colour is semi-transparent, get the fully opaque equivalent
+	// TODO: This assumes the background is white - it should also account for dark backgrounds
+	$alpha: alpha($colour);
+	@if $alpha < 1 {
+		$colour: opaque(white, $colour);
+	}
+
+	$channels: (
+		'red': red($colour),
+		'green': green($colour),
+		'blue': blue($colour)
+	);
+
+	@each $name, $value in $channels {
+		$adjusted: 0;
+		$value: math.div($value, 255);
+
+		@if $value < 0.03928 {
+			$value: math.div($value, 12.92);
+		} @else {
+			$value: math.div($value + 0.055, 1.055) or calc(($value + 0.055) / 1.055);
+			$value: pow($value, 2.4);
+		}
+
+		$channels: map-merge($channels, ($name: $value));
+	}
+
+	@return (map-get($channels, 'red') * .2126) + (map-get($channels, 'green') * .7152) + (map-get($channels, 'blue') * .0722);
+}
+
+
+/**
  * Calculate a subtle overlay colour for a given background colour - darker for light backgrounds, and lighter for dark backgrounds.
- * Works like color-contrast, but with less contrast.
+ * Works like colour-contrast, but with less contrast.
  * Intended for scrollbars and other subtle UI interactions, not text.
  */
-@function color-subtle-overlay($color) {
-	$luminance: (red($color) * 0.299 + green($color) * 0.587 + blue($color) * 0.114) / 255;
+@function color-subtle-overlay($colour) {
+	$luminance: getLuminance($colour);
 
 	@if $luminance > 0.5 {
-		@return darken($color, 15%);
+		@return darken($colour, 15%);
 	} @else {
 		@return rgba(255, 255, 255, 0.3);
 	}
@@ -39,16 +136,20 @@ $colours: (
  * Calculate a slightly less subtle overlay colour.
  * Intended for use in hover/focus/active states for elements using color-subtle-overlay.
  */
-@function color-subtle-overlay-hover($color) {
-	$luminance: (red($color) * 0.299 + green($color) * 0.587 + blue($color) * 0.114) / 255;
+@function color-subtle-overlay-hover($colour) {
+	$luminance: getLuminance($colour);
 
 	@if $luminance > 0.5 {
-		@return darken($color, 30%);
+		@return darken($colour, 30%);
 	} @else {
 		@return rgba(255, 255, 255, 0.6);
 	}
 }
 
+/**
+ * Mixin to style scrollbars.
+ * @param {string} $background-colour - The background colour of the element the scrollbar is on.
+ */
 @mixin pretty-scrollbar($background-colour) {
 	overflow-y: auto;
 
