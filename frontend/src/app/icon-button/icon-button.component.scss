@@ -14,5 +14,9 @@
 
 	&--active {
 		color: map-get($colours, 'secondary');
+
+		&:hover, &:focus, &:active {
+			color: map-get($colours, 'secondary');
+		}
 	}
 }

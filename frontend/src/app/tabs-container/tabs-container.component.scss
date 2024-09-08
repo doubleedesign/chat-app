@@ -23,7 +23,7 @@
 		}
 
 		&[data-theme="light"] {
-			background: darken(map-get($colours, 'light'), 5%);
+			background: darken(map-get($colours, 'light'), 10%);
 
 			&[data-size="wide"] {
 				@include pretty-scrollbar(darken(map-get($colours, 'light'), 10%));

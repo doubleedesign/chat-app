@@ -4,7 +4,7 @@ export type TabConfig = {
 	icon?: string;
 };
 
-export type Group = {
+export type ChatContainer = {
 	id: number;
 	label: string;
 	avatar?: string;

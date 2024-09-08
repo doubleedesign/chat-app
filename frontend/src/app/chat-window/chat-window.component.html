@@ -1,5 +1,10 @@
-<app-page-content title="Group Chat">
-    <app-message-box style="info">
-        <p>This is where group messages will show up.</p>
+<app-page-content [title]="title">
+    <!-- If no chat is selected, show a message -->
+    <app-message-box *ngIf="!selected" [style]="'info'">
+        <p>Select a {{ type }} to view messages.</p>
+    </app-message-box>
+    <!-- TODO: If a chat is selected, show the chat messages -->
+    <app-message-box *ngIf="selected" [style]="'info'">
+        <p>This is where {{ type }} messages will show up.</p>
     </app-message-box>
 </app-page-content>

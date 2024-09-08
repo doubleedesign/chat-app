@@ -1,10 +1,10 @@
-import { Group } from './types';
+import { ChatContainer } from './types';
 
-export function getGroups(userId = 1): Group[] {
+export async function getGroups(): Promise<ChatContainer[]> {
 	// TODO: Replace this with the user's groups, dynamically fetched from the server
 	//return fetch(`/api/groups/${userId}`).then(response => response.json());
 
-	return [
+	return Promise.resolve([
 		{
 			label: 'The Spice Girls',
 			id: 1,
@@ -89,9 +89,24 @@ export function getGroups(userId = 1): Group[] {
 			// eslint-disable-next-line max-len
 			avatar: 'https://i.discogs.com/lG99rWxmwcCAOGWpNRN5OLkusOy-IfZrkzD8tKFN-AU/rs:fit/g:sm/q:90/h:600/w:598/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTQ0MTA3/Ni0xMzUwOTM1NDUz/LTc3MjcuanBlZw.jpeg'
 		}
-	];
+	]);
 }
 
-export function getChannels(userId = 1) {
+export async function getChannels(): Promise<ChatContainer[]> {
+	// TODO: Replace this with the user's channels, dynamically fetched from the server
 
+	return Promise.resolve([
+		{
+			label: 'VH1',
+			id: 1
+		},
+		{
+			label: 'Billboard Hot 100',
+			id: 2
+		},
+		{
+			label: 'MTV',
+			id: 3
+		}
+	]);
 }
