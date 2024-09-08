@@ -1,35 +1,31 @@
 import { Component, OnInit } from '@angular/core';
-import { MessageBoxComponent } from '../message-box/message-box.component';
+import { NgIf } from '@angular/common';
 import { PageContentComponent } from '../page-content/page-content.component';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { CommonModule, NgIf } from '@angular/common';
 import { Router, RouterLink } from '@angular/router';
 
 @Component({
-	selector: 'app-login-screen',
+	selector: 'app-signup-screen',
 	standalone: true,
 	imports: [
-		MessageBoxComponent,
-		PageContentComponent,
 		NgIf,
+		PageContentComponent,
 		ReactiveFormsModule,
-		CommonModule,
 		RouterLink
 	],
-	templateUrl: './login-screen.component.html',
-	styleUrl: './login-screen.component.scss'
+	templateUrl: './signup-screen.component.html',
+	styleUrl: './signup-screen.component.scss'
 })
-export class LoginScreen implements OnInit {
-	loginForm: FormGroup;
+export class SignupScreen implements OnInit {
+	signupForm: FormGroup;
 	submitted = false;
 
 	constructor(private fb: FormBuilder, private router: Router) {
-		this.loginForm = this.fb.group({
+		this.signupForm = this.fb.group({
 			email: ['', [Validators.required, Validators.email]],
 			password: ['', [Validators.required, Validators.minLength(6)]]
 		});
 	}
-
 	ngOnInit(): void {
 		// Redirect to chat screen if user is already logged in
 		const loggedIn = localStorage.getItem('chatty-user');
@@ -41,12 +37,12 @@ export class LoginScreen implements OnInit {
 	onSubmit() {
 		this.submitted = true;
 
-		if (this.loginForm.invalid) {
+		if (this.signupForm.invalid) {
 			return;
 		}
 
-		// TODO: Implement proper login logic
-		localStorage.setItem('chatty-user', JSON.stringify(this.loginForm.value.email));
+		// TODO: Implement proper registration logic
+		localStorage.setItem('chatty-user', JSON.stringify(this.signupForm.value.email));
 		this.router.navigate(['/chat']);
 	}
 }

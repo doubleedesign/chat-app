@@ -1,0 +1,51 @@
+@use "sass:math";
+@use "sass:color";
+@import 'functions';
+
+$colours: (
+	primary: #3e0897,
+	secondary: #da00a5,
+	accent: #28f132,
+	success: #28f132,
+	alert: #ea1e3d,
+	warning: #ffa616,
+	info: #0079e9,
+	dark: darken(#3e0897, 20%),
+	light: #f4f4f4
+);
+
+
+/**
+ * Mixin to style scrollbars.
+ * @param {string} $background-colour - The background colour of the element the scrollbar is on.
+ */
+@mixin pretty-scrollbar($background-colour) {
+	overflow-y: auto;
+
+	/* Firefox */
+	scrollbar-width: thin;
+	scrollbar-color: colour-subtle-overlay($background-colour) $background-colour;
+
+	/* WebKit Browsers (Chrome, Edge) */
+	&::-webkit-scrollbar {
+		width: 0.5rem;
+	}
+
+	&::-webkit-scrollbar-track {
+		background: $background-colour;
+	}
+
+	&::-webkit-scrollbar-thumb {
+		background-color: colour-subtle-overlay($background-colour);
+	}
+
+	&:hover, &:focus-within {
+		/* Firefox */
+		scrollbar-color: colour-subtle-overlay-hover($background-colour) $background-colour;
+
+		/* WebKit Browsers (Chrome, Edge) */
+		&::-webkit-scrollbar-thumb {
+			background-color: colour-subtle-overlay-hover($background-colour);
+		}
+	}
+}

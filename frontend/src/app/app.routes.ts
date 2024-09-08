@@ -8,11 +8,16 @@ import { LoginScreen } from './login-screen/login-screen.component';
 import { ChatScreen } from './chat-screen/chat-screen.component';
 import { ChatScreenProvider } from './chat-screen/chat-screen.provider';
 import { AuthGuard } from './auth.guard';
+import { SignupScreen } from './signup-screen/signup-screen.component';
 
 export const routes: Routes = [
 	{
 		path: 'login',
 		component: LoginScreen
+	},
+	{
+		path: 'register',
+		component: SignupScreen
 	},
 	{
 		path: 'chat',

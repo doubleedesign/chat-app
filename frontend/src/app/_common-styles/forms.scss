@@ -1,0 +1,146 @@
+@import 'theme';
+@import 'animation';
+@import 'functions';
+
+.user-form-wrapper {
+	padding: 1rem;
+	width: 100%;
+
+	&__header {
+
+		h1 {
+			font-size: 0.8rem;
+			font-weight: normal;
+			font-variation-settings: 'wght' 900;
+			text-transform: uppercase;
+			color: colour-contrast(map-get($colours, 'dark'));
+			text-align: center;
+		}
+	}
+
+	@each $style, $colour in $colours {
+		&[data-theme="#{$style}"] {
+			.chatty-form {
+				background: $colour;
+				color: colour-contrast($colour);
+
+				&__row {
+
+					&__field {
+						border: 1px solid colour-subtle-overlay($colour);
+						background: transparent;
+
+						input, textarea {
+							background: transparent;
+							color: colour-contrast($colour);
+						}
+
+						&:focus-within {
+							box-shadow: 0 0 4px 0 colourful-contrast($colour, map-get($colours, 'primary'));
+
+							label {
+								color: colourful-contrast($colour, map-get($colours, 'primary'))
+							}
+						}
+					}
+
+					&__messages {
+						background: darken($colour, 10%);
+						color: colourful-contrast(darken($colour, 10%), map-get($colours, 'alert'));
+						border-bottom-left-radius: 0.25rem;
+						border-bottom-right-radius: 0.25rem;
+						border: 1px solid colour-subtle-overlay($colour);
+						border-top: 0;
+						padding-top: 0.75rem;
+						transform: translateY(-3px);
+					}
+				}
+			}
+		}
+	}
+}
+
+.chatty-form {
+	border-radius: 0.25rem;
+
+	label {
+		font-size: 0.8rem;
+	}
+
+	input, textarea {
+		padding: 0.5rem;
+		box-sizing: border-box;
+	}
+
+	&__row {
+		padding-block: 0.5rem;
+
+		&:has(button) {
+			display: flex;
+			justify-content: flex-end;
+		}
+
+		&__field {
+			width: 100%;
+			border-radius: 0.25rem;
+			box-sizing: border-box;
+			padding-bottom: 1px; // allows for the border-radius
+
+			label {
+				display: block;
+				padding-inline: 0.5rem;
+				padding-block-start: 0.5rem;
+				font-variation-settings: 'wght' 700;
+			}
+
+			input, textarea {
+				width: 100%;
+				border: 0;
+
+				&:focus {
+					outline: none;
+				}
+			}
+		}
+
+		&__messages {
+			padding: 0.5rem;
+			font-variation-settings: 'wght' 700;
+
+			svg {
+				margin-inline-end: 0.25rem;
+			}
+		}
+	}
+}
+
+@mixin user-form() {
+	.chatty-form {
+		width: 100%;
+		max-width: 440px;
+		margin: 0 auto;
+		padding: 1rem;
+		box-sizing: border-box;
+	}
+
+	.user-form-wrapper {
+		&__footer {
+			padding: 1rem;
+			text-align: center;
+			font-size: 0.8rem;
+
+			a {
+				color: colour-contrast(map-get($colours, 'dark'));
+
+				&:hover, &:focus, &:active {
+					color: map-get($colours, 'accent');
+
+					svg {
+						animation: move-right 1s infinite;
+					}
+				}
+			}
+		}
+	}
+
+}

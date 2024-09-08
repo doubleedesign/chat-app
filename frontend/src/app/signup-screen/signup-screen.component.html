@@ -1,20 +1,20 @@
-<div class="user-form-wrapper login-form-wrapper" data-theme="primary">
+<div class="user-form-wrapper signup-form-wrapper" data-theme="light">
     <div class="user-form-wrapper__header">
-        <h1>Log in</h1>
+        <h1>Register</h1>
     </div>
     <div class="user-form-wrapper__body">
-        <form class="chatty-form" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+        <form class="chatty-form" [formGroup]="signupForm" (ngSubmit)="onSubmit()">
             <div class="chatty-form__row">
                 <div class="chatty-form__row__field">
                     <label for="email">Email</label>
                     <input id="email" formControlName="email" type="email" />
                 </div>
-                <div class="chatty-form__row__messages" *ngIf="submitted && loginForm.controls['email'].errors">
-                    <p *ngIf="loginForm.controls['email'].errors?.['required']">
+                <div class="chatty-form__row__messages" *ngIf="submitted && signupForm.controls['email'].errors">
+                    <p *ngIf="signupForm.controls['email'].errors?.['required']">
                         <i class="fa-solid fa-triangle-exclamation"></i>
                         Email is required
                     </p>
-                    <p *ngIf="loginForm.controls['email'].errors?.['email']">
+                    <p *ngIf="signupForm.controls['email'].errors?.['email']">
                         <i class="fa-solid fa-triangle-exclamation"></i>
                         Invalid email format
                     </p>
@@ -26,18 +26,18 @@
                     <label for="password">Password</label>
                     <input id="password" formControlName="password" type="password" />
                 </div>
-                <div class="chatty-form__row__messages" *ngIf="submitted && loginForm.controls['password'].errors">
-                    <p *ngIf="loginForm.controls['password'].errors?.['required']">
+                <div class="chatty-form__row__messages" *ngIf="submitted && signupForm.controls['password'].errors">
+                    <p *ngIf="signupForm.controls['password'].errors?.['required']">
                         <i class="fa-solid fa-triangle-exclamation"></i>Password is required
                     </p>
-                    <p *ngIf="loginForm.controls['password'].errors?.['minlength']">
+                    <p *ngIf="signupForm.controls['password'].errors?.['minlength']">
                         <i class="fa-solid fa-triangle-exclamation"></i> Password must be at least 6 characters
                     </p>
                 </div>
             </div>
 
             <div class="chatty-form__row">
-                <button class="chatty-form__row__button button--accent" type="submit">
+                <button class="chatty-form__row__button button--primary" type="submit">
                     Let's chat
                     <i class="fa-regular fa-arrow-right"></i>
                 </button>
@@ -45,6 +45,6 @@
         </form>
     </div>
     <div class="user-form-wrapper__footer">
-        <a [routerLink]="['/register']">New user? Register now <i class="fa-light fa-arrow-right"></i></a>
+        <a [routerLink]="['/login']">Already have an account? Log in now<i class="fa-light fa-arrow-right"></i></a>
     </div>
 </div>

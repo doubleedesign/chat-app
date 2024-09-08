@@ -1,17 +1,4 @@
 @use "sass:math";
-@use "sass:color";
-
-$colours: (
-	primary: #3e0897,
-	secondary: #da00a5,
-	accent: #28f132,
-	success: #28f132,
-	alert: #ea1e3d,
-	warning: #ffa616,
-	info: #0079e9,
-	dark: darken(#3e0897, 20%),
-	light: #f4f4f4
-);
 
 /**
  * Calculate whether a given colour is light or dark, and return whether to use white or black text for contrast.
@@ -47,7 +34,7 @@ $colours: (
 	@if $contrast >= $threshold {
 		@return $colour;
 	}
-	// Otherwise, adjust the colour to darker or lighter
+		// Otherwise, adjust the colour to darker or lighter
 	@else {
 		@if $bgLuminance >= $colourLuminance {
 			@return colourful-contrast($background-colour, darken($colour, 4%), $max-attempts, $attempt + 1);
@@ -94,9 +81,9 @@ $colours: (
 	}
 
 	$channels: (
-		'red': red($colour),
-		'green': green($colour),
-		'blue': blue($colour)
+			'red': red($colour),
+			'green': green($colour),
+			'blue': blue($colour)
 	);
 
 	@each $name, $value in $channels {
@@ -122,7 +109,7 @@ $colours: (
  * Works like colour-contrast, but with less contrast.
  * Intended for scrollbars and other subtle UI interactions, not text.
  */
-@function color-subtle-overlay($colour) {
+@function colour-subtle-overlay($colour) {
 	$luminance: getLuminance($colour);
 
 	@if $luminance > 0.5 {
@@ -134,49 +121,14 @@ $colours: (
 
 /**
  * Calculate a slightly less subtle overlay colour.
- * Intended for use in hover/focus/active states for elements using color-subtle-overlay.
+ * Intended for use in hover/focus/active states for elements using colour-subtle-overlay.
  */
-@function color-subtle-overlay-hover($colour) {
+@function colour-subtle-overlay-hover($colour) {
 	$luminance: getLuminance($colour);
 
 	@if $luminance > 0.5 {
 		@return darken($colour, 30%);
 	} @else {
 		@return rgba(255, 255, 255, 0.6);
-	}
-}
-
-/**
- * Mixin to style scrollbars.
- * @param {string} $background-colour - The background colour of the element the scrollbar is on.
- */
-@mixin pretty-scrollbar($background-colour) {
-	overflow-y: auto;
-
-	/* Firefox */
-	scrollbar-width: thin;
-	scrollbar-color: color-subtle-overlay($background-colour) $background-colour;
-
-	/* WebKit Browsers (Chrome, Edge) */
-	&::-webkit-scrollbar {
-		width: 0.5rem;
-	}
-
-	&::-webkit-scrollbar-track {
-		background: $background-colour;
-	}
-
-	&::-webkit-scrollbar-thumb {
-		background-color: color-subtle-overlay($background-colour);
-	}
-
-	&:hover, &:focus-within {
-		/* Firefox */
-		scrollbar-color: color-subtle-overlay-hover($background-colour) $background-colour;
-
-		/* WebKit Browsers (Chrome, Edge) */
-		&::-webkit-scrollbar-thumb {
-			background-color: color-subtle-overlay-hover($background-colour);
-		}
 	}
 }

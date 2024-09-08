@@ -1,4 +1,4 @@
-@import 'app/theme.scss';
+@import 'app/_common-styles/theme';
 
 /**
  * This file is for global styles that are not specific to any component,
@@ -75,6 +75,7 @@ p {
 
 /* Ignore Angular component tags for styling because they're too fiddly to target with scoped styles */
 app-login-screen,
+app-signup-screen,
 app-page-content,
 app-global-tabs,
 app-tabs-container,
@@ -83,69 +84,3 @@ app-channels {
 	display: contents;
 }
 
-.chatty-form {
-
-	label {
-		font-size: 0.8rem;
-	}
-
-	input, textarea {
-		padding: 0.5rem;
-		box-sizing: border-box;
-	}
-
-	&__row {
-		padding-block: 0.5rem;
-
-		&:has(button) {
-			display: flex;
-			justify-content: flex-end;
-		}
-
-		&__field {
-			width: 100%;
-			background: white;
-			border: 1px solid darken(map-get($colours, 'light'), 10%);
-			border-radius: 0.25rem;
-			box-sizing: border-box;
-			padding-bottom: 1px; // allows for the border-radius
-
-			label {
-				display: block;
-				padding-inline: 0.5rem;
-				padding-block-start: 0.5rem;
-				font-variation-settings: 'wght' 700;
-			}
-
-			input, textarea {
-				width: 100%;
-				border: 0;
-
-				&:focus {
-					outline: none;
-				}
-			}
-
-			&:focus-within {
-				box-shadow: 0 0 4px 0 map-get($colours, 'primary');
-
-				label {
-					color: map-get($colours, 'primary');
-				}
-			}
-		}
-
-		&__messages {
-			padding: 0.5rem;
-			color: map-get($colours, 'alert');
-			font-variation-settings: 'wght' 700;
-
-			svg {
-				margin-inline-end: 0.25rem;
-			}
-		}
-
-		&__button {
-		}
-	}
-}
