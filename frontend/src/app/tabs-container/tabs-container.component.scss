@@ -45,8 +45,9 @@
 
 		&[data-size="wide"] {
 			width: 10rem;
-			flex-basis: 10rem;
+			flex: 0 0 10rem;
 			padding: 0.5rem;
+			z-index: 700;
 
 			@container tabs-container (min-width: 900px) {
 				width: 15rem;

@@ -5,6 +5,7 @@
     <ng-template #globalTabButtonTemplate let-tab="tab" let-tabsContainer="tabsContainer">
         <app-icon-button [iconClass]="tab.icon"
                          [tooltip]="tab.label"
+                         tooltipPosition="right"
                          [active]="tabsContainer.isActive(tab.route)"
                          (click)="tabsContainer.selectTab(tab.route)">
         </app-icon-button>

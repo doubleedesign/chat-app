@@ -17,7 +17,9 @@
         </ul>
     </nav>
     <main class="tab-content">
-        <router-outlet></router-outlet>
+        <div class="page-transitions-wrapper" [@routeAnimations]="activeRouteAnimation">
+            <router-outlet></router-outlet>
+        </div>
     </main>
 </section>
 

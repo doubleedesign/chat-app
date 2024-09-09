@@ -29,18 +29,16 @@ export const animations = {
 		]);
 	},
 	swapLeftToRight() {
-		console.log('swapLeftToRight');
-
 		return ([
 			handlePositioning(),
 			group([
 				query(':leave', [
-					style({ opacity: 1, transform: 'translateX(0)' }),
+					style({ transform: 'translateX(0)' }),
 					animate('0.3s ease-out', style({ opacity: 0, transform: 'translateX(-100px)' }))
 				], { optional: true }),
 				query(':enter', [
-					style({ opacity: 0, transform: 'translateX(100px)' }),
-					animate('0.3s ease-in', style({ opacity: 1, transform: 'translateX(0)' }))
+					style({ transform: 'translateX(-100px)' }), // Entering element starts from the right
+					animate('0.3s ease-in', style({ transform: 'translateX(0)' }))
 				], { optional: true })
 			])
 		]);

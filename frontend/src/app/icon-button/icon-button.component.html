@@ -1,5 +1,10 @@
-<app-tooltip [text]="tooltip" position="right">
-    <button class="icon-button" (click)="onClick()" [class.icon-button--active]="active" [attr.aria-label]="tooltip">
+<app-tooltip [text]="tooltip" [position]="tooltipPosition">
+    <button class="icon-button"
+            [class.icon-button--active]="active"
+            [attr.data-theme]="theme"
+            [attr.aria-label]="tooltip"
+            (click)="onClick()"
+    >
         <i [class]="iconClass"></i>
     </button>
 </app-tooltip>

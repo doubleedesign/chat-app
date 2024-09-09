@@ -14,6 +14,13 @@ $colours: (
 	light: #f4f4f4
 );
 
+// Visually small, but not structurally small (appropriate heading tag should be used)
+@mixin small-heading() {
+	font-size: 0.8rem;
+	font-weight: normal;
+	font-variation-settings: 'wght' 900;
+	text-transform: uppercase;
+}
 
 /**
  * Mixin to style scrollbars.

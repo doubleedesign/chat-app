@@ -7,9 +7,18 @@
 	flex-basis: auto;
 	box-sizing: border-box;
 
-	&__title {
-		font-size: 0.8rem;
-		font-variation-settings: 'wght' 900;
-		text-transform: uppercase;
+	&__header {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		margin-bottom: 0.5rem;
+
+		&__title {
+			@include small-heading();
+			margin-bottom: 0;
+		}
+
+		&__actions {
+		}
 	}
 }

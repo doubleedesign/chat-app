@@ -4,6 +4,7 @@
 	padding: 1rem;
 	border-radius: 0.25rem;
 	text-align: center;
+	line-height: 1.4;
 
 	@each $style, $colour in $colours {
 		&--#{$style} {

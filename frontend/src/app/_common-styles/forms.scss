@@ -9,10 +9,7 @@
 	&__header {
 
 		h1 {
-			font-size: 0.8rem;
-			font-weight: normal;
-			font-variation-settings: 'wght' 900;
-			text-transform: uppercase;
+			@include small-heading();
 			color: colour-contrast(map-get($colours, 'dark'));
 			text-align: center;
 		}

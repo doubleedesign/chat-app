@@ -1,23 +1,61 @@
 @import '../_common-styles/theme';
+@import '../_common-styles/functions';
 
 .icon-button {
 	width: 100%;
+	min-width: 2rem;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 	aspect-ratio: 1 / 1;
 	background: map-get($colours, 'dark');
 	border: 0;
 	font-size: 1.25rem;
 	color: rgba((colour-contrast(map-get($colours, 'dark'))), 0.25);
-	padding: 0;
+	padding: 0.5rem;
+	box-sizing: border-box;
 
-	&:hover, &:focus, &:active {
-		color: colour-contrast(map-get($colours, 'dark'));
+	@each $style, $colour in $colours {
+		&[data-theme="#{$style}"] {
+			background: $colour;
+			color: colour-contrast($colour);
+
+			&:hover, &:focus, &:active, &.icon-button--active {
+				background: darken($colour, 10%);
+				color: colourful-contrast($colour, map-get($colours, 'secondary'));
+			}
+		}
 	}
 
-	&--active {
-		color: map-get($colours, 'secondary');
+	&[data-theme="dark"] {
+		color: rgba((colour-contrast(map-get($colours, 'dark'))), 0.25);
 
 		&:hover, &:focus, &:active {
-			color: map-get($colours, 'secondary');
+			background: map-get($colours, 'dark');
+			color: colour-contrast(map-get($colours, 'dark'));
 		}
+
+		&.icon-button--active {
+			color: map-get($colours, 'secondary');
+			background: map-get($colours, 'dark');
+		}
+	}
+
+	&[data-theme="light"] {
+		background: colour-subtle-overlay(map-get($colours, 'light'));
+
+		&:hover, &:focus, &:active, &.icon-button--active  {
+			background: colour-subtle-overlay-hover(map-get($colours, 'light'));
+			color: colourful-contrast(colour-subtle-overlay-hover(map-get($colours, 'light')), map-get($colours, 'secondary'));
+		}
+	}
+
+	svg[data-icon="sliders"] {
+		width: 1rem;
+		padding-inline: 0.125rem;
+	}
+
+	svg[data-icon="comments"] {
+		width: 1.25rem;
 	}
 }
