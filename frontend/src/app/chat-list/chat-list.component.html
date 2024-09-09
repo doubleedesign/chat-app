@@ -14,8 +14,8 @@
              [class.chat-list-button--active]="tabsContainer.isActive(tab.route)"
              (click)="tabsContainer.selectTab(tab.route)">
             <div class="chat-list-button__avatar">
-                <img *ngIf="tab.icon" [src]="tab.icon" [alt]="tab.label + ' Avatar'">
-                <i *ngIf="!tab.icon" class="fa-duotone fa-solid fa-comments"></i>
+                <img *ngIf="tab.icon" [src]="tab.icon" [alt]="tab.label + ' Avatar'" (error)="tab.icon = null; showGenericPlaceholder = true">
+                <i *ngIf="!tab.icon || showGenericPlaceholder" class="fa-duotone fa-solid fa-comments"></i>
             </div>
             <span class="chat-list-button__label">{{ tab.label }}</span>
         </button>

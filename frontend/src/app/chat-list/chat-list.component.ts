@@ -18,6 +18,7 @@ export class ChatListComponent implements OnInit {
 	@Input() tabs: TabConfig[] = [];
 	@Input() location: 'sidebar' | 'window' = 'sidebar';
 	showBackButton: boolean = false;
+	showGenericPlaceholder: boolean = false; // for if the image doesn't load
 
 	constructor(private router: Router) {}
 

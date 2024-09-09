@@ -1,6 +1,11 @@
 <ng-container *ngIf="type === 'group'; then groupContext else channelContext"></ng-container>
 
 <ng-template #groupContext>
+    <app-page-content title="Group settings">
+       <app-message-box [style]="'info'">
+           <p>Group settings, such as user management, will go here.</p>
+         </app-message-box>
+    </app-page-content>
     <app-page-content title="Group channels">
         <app-chat-list
                 *ngIf="type === 'group' && subTabs.length > 0"
