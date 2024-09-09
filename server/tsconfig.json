@@ -17,6 +17,7 @@
 		"resolveJsonModule": true,
 		"skipLibCheck": true,
 		"allowSyntheticDefaultImports": true,
+		"allowImportingTsExtensions": true,
 		"noImplicitAny": false,
 		"allowJs": false,
 		"sourceMap": true,
