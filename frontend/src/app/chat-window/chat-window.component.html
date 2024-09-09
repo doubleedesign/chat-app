@@ -1,12 +1,21 @@
-<ng-container *ngIf="type === 'group'; then groupContext else channelContext"></ng-container>
+<ng-container *ngIf="type === 'channel' then channelContext else getGroupContext"></ng-container>
 
-<ng-template #groupContext>
+<ng-template #getGroupContext>
+    <ng-container *ngIf="type === 'group' && selected; then groupSelectedContext else noGroupSelectedContext"></ng-container>
+</ng-template>
+
+<ng-template #groupSelectedContext>
     <app-page-content title="Group settings">
-       <app-message-box [style]="'info'">
-           <p>Group settings, such as user management, will go here.</p>
+        <!-- this will appear in the unnamed ng-content slot in the page content -->
+        <app-message-box [style]="'info'">
+           <p>Group settings, such as user management, will go here. </p>
+           <p>Only users with group admin permissions will be able to see and interact with the settings.</p>
          </app-message-box>
     </app-page-content>
     <app-page-content title="Group channels">
+        <!-- actions attribute passes this to the named ng-content slot in the page content -->
+        <app-add-channel actions></app-add-channel>
+        <!-- this will appear in the unnamed ng-content slot in the page content -->
         <app-chat-list
                 *ngIf="type === 'group' && subTabs.length > 0"
                 location="window"
@@ -16,16 +25,24 @@
     </app-page-content>
 </ng-template>
 
-<ng-template #channelContext>
-    <app-page-content [title]="title">
-        <!-- If no chat is selected, show a message -->
-        <app-message-box *ngIf="!selected" [style]="'info'">
-            <p *ngIf="type === 'group'">Select a {{ type }} to view channels.</p>
-            <p *ngIf="type === 'channel'">Select a {{ type }} to view messages.</p>
-        </app-message-box>
-        <!-- TODO: If a channel is selected, show the messages -->
-        <app-message-box *ngIf="selected && type !== 'group'" [style]="'info'">
-            <p>This is where {{ type }} messages will show up.</p>
+<ng-template #noGroupSelectedContext>
+    <app-page-content title="Groups">
+        <!-- actions attribute passes this to the named ng-content slot in the page content -->
+        <app-add-group actions></app-add-group>
+        <!-- this will appear in the unnamed ng-content slot in the page content -->
+        <app-message-box [style]="'info'">
+            <p>Select a group to view its settings and channels.</p>
         </app-message-box>
     </app-page-content>
+</ng-template>
+
+<ng-template #channelContext>
+    <app-page-content *ngIf="!selected" title="Channels">
+        <app-message-box [style]="'info'">
+            <p>Select a channel to view messages.</p>
+        </app-message-box>
+    </app-page-content>
+    <div class="page-transitions-wrapper" [@routeAnimations]="activeRouteAnimation">
+        <router-outlet></router-outlet>
+    </div>
 </ng-template>

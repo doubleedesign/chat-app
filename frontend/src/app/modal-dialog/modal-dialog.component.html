@@ -1,0 +1,19 @@
+<button class="modal-trigger button--primary" (click)="open()">
+    <i *ngIf="triggerIcon" [class]="triggerIcon"></i>
+    {{ triggerLabel }}
+</button>
+<div *ngIf="inDOM" class="modal-dialog">
+    <div class="modal-dialog__backdrop" [@dialogOverlay]="show ? 'open' : 'closed'">
+    </div>
+    <div class="modal-dialog__content" [@dialogContent]="show ? 'open' : 'closed'">
+        <div class="modal-dialog__content__header">
+            <h2>{{ title }}</h2>
+            <div class="modal-content__header__actions">
+                <app-icon-button iconClass="fa-regular fa-xmark" theme="light" tooltip="Close dialog" tooltipPosition="bottom" (click)="close()"></app-icon-button>
+            </div>
+        </div>
+        <div class="modal-dialog__content__body">
+            <ng-content></ng-content>
+        </div>
+    </div>
+</div>

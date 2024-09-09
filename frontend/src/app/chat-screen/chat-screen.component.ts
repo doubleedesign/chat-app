@@ -27,7 +27,7 @@ export class ChatScreen implements OnInit {
 		this.route.data.subscribe((data) => {
 			this.tabs = data['items'].map((item: ChatContainer) => ({
 				label: item.label,
-				route: `/chat/${this.path}/${item.id}`,
+				route: this.path === 'channels' ? `/chat/${this.path}/${item.id}/messages` : `/chat/${this.path}/${item.id}`,
 				icon: item?.avatar
 			}));
 		});

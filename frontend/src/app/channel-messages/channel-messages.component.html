@@ -1,0 +1,8 @@
+<app-page-content title="Channel Chat">
+    <!-- actions attribute passes this to the named ng-content slot in the page content -->
+    <app-icon-button actions iconClass="fa-solid fa-sliders" (click)="goToChannelSettings()" tooltip="Channel settings" theme="light" tooltipPosition="bottom"></app-icon-button>
+    <!-- TODO: If a channel is selected, show the messages -->
+    <app-message-box [style]="'info'">
+        <p>This is where channel messages will show up.</p>
+    </app-message-box>
+</app-page-content>

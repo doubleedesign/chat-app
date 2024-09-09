@@ -1,0 +1,65 @@
+@import '../_common-styles/theme';
+
+.modal-trigger {
+	font-size: 0.7rem;
+	padding-block-start: 0.65rem;
+}
+
+.modal-dialog {
+	position: fixed;
+	z-index: 1100;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+	&__backdrop {
+		background-color: rgba(map-get($colours, 'dark'), 0.9);
+		padding: 1rem;
+		box-sizing: border-box;
+		position: fixed;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		z-index: 1500;
+	}
+
+	&__content {
+		position: relative;
+		z-index: 1600;
+		min-width: 400px;
+		max-width: 520px;
+		width: 100%;
+		background-color: map-get($colours, 'light');
+		padding: 1rem;
+		border-radius: 0.25rem;
+
+		&__header {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+
+			h2 {
+				@include small-heading();
+			}
+
+			&__actions {
+				height: 3rem;
+				width: fit-content;
+			}
+		}
+
+		&__body {
+
+		}
+	}
+
+}
+

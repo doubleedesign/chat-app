@@ -1,0 +1,9 @@
+<app-page-content title="Channel settings">
+    <!-- actions attribute passes this to the named ng-content slot in the page content -->
+    <app-icon-button actions iconClass="fa-solid fa-duotone fa-comments" (click)="goToChannelMessages()" tooltip="Back to messages" theme="light" tooltipPosition="bottom"></app-icon-button>
+    <!-- this will appear in the unnamed ng-content slot in the page content -->
+    <app-message-box [style]="'info'">
+        <p>Channel settings, such as user management, will go here. </p>
+        <p>Only users with channel admin permissions will be able to see and interact with the settings.</p>
+    </app-message-box>
+</app-page-content>
