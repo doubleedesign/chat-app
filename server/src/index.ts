@@ -4,12 +4,14 @@ import { fileURLToPath } from 'url';
 import path from 'node:path';
 import endpoints from './endpoints';
 import expressListEndpoints from 'express-list-endpoints';
+import CustomActionsPlugin from './docs/plugins';
 
 // Basic setup
 const app = express();
 const port = process.env.PORT || 4100;
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(express.static('static'));
 
 // Insert imported routes
 Object.entries(endpoints).map(([key, value]) => (
@@ -27,6 +29,14 @@ app.get('/docs/swagger-ui-styles.css', (req, res) => {
 app.get('/docs/swagger-ui-hacks.js', (req, res) => {
 	res.sendFile(path.resolve('./src/docs/swagger-ui-hacks.js'));
 });
+app.get('/docs/groups.json', (req, res) => {
+	res.sendFile(path.resolve('./src/data/groups.json'));
+});
+app.get('/docs/users.json', (req, res) => {
+	res.sendFile(path.resolve('./src/data/users.json'));
+});
+
+
 // Swagger config
 expressJSDocSwagger(app)({
 	info: {
@@ -34,7 +44,7 @@ expressJSDocSwagger(app)({
 		title: 'Chatty',
 		description: 'Chat app API for 3813ICT Software Frameworks',
 	},
-	security: {	},
+	security: {},
 	baseDir: __dirname,
 	filesPattern: './**/*.ts',
 	swaggerUIPath: '/docs',
@@ -52,14 +62,15 @@ expressJSDocSwagger(app)({
 				return indexOfA - indexOfB;
 			},
 			defaultModelsExpandDepth: 10,
+			supportedSubmitMethods: [], // empty disables "Try it out" option for all methods
+			requestSnippetsEnabled: false,
+			plugins: [CustomActionsPlugin]
 		},
 		customCssUrl: [
 			'https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;600&family=Inter+Tight:wght@300;600&display=swap',
 			'../docs/swagger-ui-styles.css'
 		],
-		customJs: [
-			'../docs/swagger-ui-hacks.js'
-		]
+		customJs: ['../docs/swagger-ui-hacks.js']
 	},
 });
 
@@ -68,5 +79,8 @@ app.listen(port, () => {
 	console.log('================================================');
 	console.log(`Server running on port ${port}`);
 	console.log('Available endpoints:');
-	console.log(endpoints.filter(({ path }) => !path.startsWith('/docs/')).map(({ path, methods }) => ({ path, methods })));
+	console.log(endpoints.filter(({ path }) => !path.startsWith('/docs/')).map(({ path, methods }) => ({
+		path,
+		methods
+	})));
 });
