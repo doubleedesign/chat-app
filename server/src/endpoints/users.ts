@@ -1,7 +1,6 @@
 import express from 'express';
 const router = express.Router();
-import usersFile from '../data/users.json' assert { type: 'json' };
-import { writeFileSync } from 'fs';
+import { createUser, getUser } from '../common.ts';
 
 /**
  * GET /user
@@ -13,25 +12,23 @@ import { writeFileSync } from 'fs';
 router.get('/user', (req, res) => {
 	const userId = req.query.userId;
 
-	// If no userId, return 400
+	// If no userId passed, return 400
 	if (!userId) {
 		return res.status(400).json({
 			error: 'userId is required'
 		});
 	}
 
-	// Find the user
-	const usersObject = JSON.parse(JSON.stringify(usersFile));
-	const user = usersObject.find(user => user.email === userId);
+	try {
+		const user = getUser(userId as string);
 
-	// If user not found, return 404
-	if (!user) {
+		return res.status(200).json(user);
+	}
+	catch(error) {
 		return res.status(404).json({
-			error: 'User not found'
+			error: error.message
 		});
 	}
-
-	return res.status(200).json(user);
 });
 
 
@@ -43,29 +40,24 @@ router.get('/user', (req, res) => {
  * @return {object} 201 - success response
  */
 router.post('/user', (req, res) => {
-	const user = req.body.user;
+	const newUser = req.body.user;
 
-	// If no user data passed, return 400
-	if (!user) {
-		return res.status(400).json({
-			error: 'user details are required'
+	try {
+		const user = createUser(newUser);
+
+		return res.status(201).json(user);
+	}
+	catch(error) {
+		if(error.message === 'User already exists') {
+			return res.status(409).json({
+				error: error.message
+			});
+		}
+
+		return res.status(500).json({
+			error: error.message
 		});
 	}
-
-	// If user already exists, return 409
-	const usersObject = JSON.parse(JSON.stringify(usersFile));
-	if (usersObject.find(u => u.email === user.email)) {
-		return res.status(409).json({
-			error: 'User already exists'
-		});
-	}
-
-	usersObject.push(user);
-
-	// Replace the file with the updated object
-	writeFileSync('./src/data/users.json', JSON.stringify(usersObject, null, 4));
-
-	return res.status(201).json(user);
 });
 
 export default router;

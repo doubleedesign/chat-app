@@ -1,8 +1,7 @@
 import express from 'express';
 const router = express.Router();
-import usersFile from '../data/users.json' assert { type: 'json' };
-import groupsFile from '../data/groups.json' assert { type: 'json' };
-import { writeFileSync } from 'fs';
+import { createGroup, getGroup, getGroupsForUser, getUser, updateGroup } from '../common.ts';
+import { UserId } from '../types.ts';
 
 /**
  * GET /groups
@@ -22,8 +21,7 @@ router.get('/groups', (req, res) => {
 	}
 
 	// Find the user
-	const usersObject = JSON.parse(JSON.stringify(usersFile));
-	const user = usersObject.find(user => user.email === userId);
+	const user = getUser(userId as string);
 
 	// If user not found, return 404
 	if (!user) {
@@ -32,11 +30,9 @@ router.get('/groups', (req, res) => {
 		});
 	}
 
-	const groupsObject = JSON.parse(JSON.stringify(groupsFile));
+	const groups = getGroupsForUser(userId as UserId);
 
-	return res.status(200).json(user.groupIds.map(groupId => {
-		return groupsObject.find(group => group.id === groupId);
-	}));
+	return res.status(200).json(groups);
 });
 
 
@@ -57,18 +53,7 @@ router.get('/groups/:groupId', (req, res) => {
 		});
 	}
 
-	// Find the group
-	const groupsObject = JSON.parse(JSON.stringify(groupsFile));
-	const group = groupsObject.find(group => group.id === groupId);
-
-	// If group not found, return 404
-	if (!group) {
-		return res.status(404).json({
-			error: 'Group not found'
-		});
-	}
-
-	return res.status(200).json(group);
+	return getGroup(groupId);
 });
 
 
@@ -89,14 +74,9 @@ router.post('/groups', (req, res) => {
 		});
 	}
 
-	// Add the group
-	const groupsObject = JSON.parse(JSON.stringify(groupsFile));
-	groupsObject.push(group);
+	const newGroup = createGroup(group);
 
-	// Replace the file with the updated object
-	writeFileSync('./data/groups.json', JSON.stringify(groupsObject, null, 4));
-
-	return res.status(201).json(group);
+	return res.status(201).json(newGroup);
 });
 
 
@@ -108,7 +88,7 @@ router.post('/groups', (req, res) => {
  * @param {object} request.body.required - The group data to update
  * @return {object} 200 - success response
  */
-router.patch('/groups/:groupId', (req, res) => {
+router.patch('/groups', (req, res) => {
 	const group = req.body;
 
 	// If no group data passed, return 400
@@ -118,27 +98,15 @@ router.patch('/groups/:groupId', (req, res) => {
 		});
 	}
 
-	// Find the group
-	const groupsObject = JSON.parse(JSON.stringify(groupsFile));
-	const groupIndex = groupsObject.findIndex(existingGroup => existingGroup.id === group.id);
-
-	// If group not found, return 404
-	if (groupIndex === -1) {
-		return res.status(404).json({
-			error: 'Group not found'
+	try {
+		updateGroup(group);
+	}
+	catch (error) {
+		return res.status(400).json({
+			error: error.message
 		});
 	}
-
-	// Update the group
-	groupsObject[groupIndex] = {
-		...groupsObject[groupIndex],
-		...group
-	};
-
-	// Replace the file with the updated object
-	writeFileSync('./data/groups.json', JSON.stringify(groupsObject, null, 4));
-
-	return res.status(200).json(groupsObject[groupIndex]);
 });
+
 
 export default router;
