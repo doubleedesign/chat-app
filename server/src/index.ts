@@ -1,53 +1,20 @@
 import express from 'express';
 import expressJSDocSwagger from 'express-jsdoc-swagger';
-import users from './data/users.json' assert { type: 'json' };
-import groups from './data/groups.json' assert { type: 'json' };
 import { fileURLToPath } from 'url';
 import path from 'node:path';
+import endpoints from './endpoints';
+import expressListEndpoints from 'express-list-endpoints';
 
 // Basic setup
 const app = express();
 const port = process.env.PORT || 4100;
-
-// Middleware to parse JSON
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
-app.get('/', (req, res) => {
-	res.json({
-		message: 'Hello Chatty!'
-	});
-});
-
-/**
- * GET /groups
- * @summary Get a given user's groups
- * @param {string} userId.query.required - The user's email
- * @return {object} 200 - success response
- */
-app.get('/groups', (req, res) => {
-	const userId = req.query.userId;
-
-	// If no userId, return 400
-	if (!userId) {
-		return res.status(400).json({
-			error: 'userId is required'
-		});
-	}
-
-	// Find the user
-	const user = users.find(user => user.email === userId);
-
-	// If user not found, return 404
-	if (!user) {
-		return res.status(404).json({
-			error: 'User not found'
-		});
-	}
-
-	return res.status(200).json(user.groupIds.map(groupId => {
-		return groups.find(group => group.id === groupId);
-	}));
-});
+// Insert imported routes
+Object.entries(endpoints).map(([key, value]) => (
+	app.use('/', endpoints[key])
+));
 
 // Documentation setup
 const __filename = fileURLToPath(import.meta.url);
@@ -67,12 +34,7 @@ expressJSDocSwagger(app)({
 		title: 'Chatty',
 		description: 'Chat app API for 3813ICT Software Frameworks',
 	},
-	security: {
-		BasicAuth: {
-			type: 'http',
-			scheme: 'basic',
-		},
-	},
+	security: {	},
 	baseDir: __dirname,
 	filesPattern: './**/*.ts',
 	swaggerUIPath: '/docs',
@@ -80,6 +42,17 @@ expressJSDocSwagger(app)({
 	exposeApiDocs: false,
 	notRequiredAsNullable: false,
 	swaggerUiOptions: {
+		swaggerOptions: {
+			tagsSorter: (a, b) => b.localeCompare(a),
+			operationsSorter: (a, b) => {
+				const methodsOrder = ['get', 'post', 'put', 'delete', 'patch', 'options', 'trace'];
+				const indexOfA = methodsOrder.indexOf(a.get('method'));
+				const indexOfB = methodsOrder.indexOf(b.get('method'));
+
+				return indexOfA - indexOfB;
+			},
+			defaultModelsExpandDepth: 10,
+		},
 		customCssUrl: [
 			'https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;600&family=Inter+Tight:wght@300;600&display=swap',
 			'../docs/swagger-ui-styles.css'
@@ -91,5 +64,9 @@ expressJSDocSwagger(app)({
 });
 
 app.listen(port, () => {
+	const endpoints = expressListEndpoints(app);
+	console.log('================================================');
 	console.log(`Server running on port ${port}`);
+	console.log('Available endpoints:');
+	console.log(endpoints.filter(({ path }) => !path.startsWith('/docs/')).map(({ path, methods }) => ({ path, methods })));
 });
