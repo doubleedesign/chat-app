@@ -6,7 +6,8 @@
 	"main": "src/index.ts",
 	"scripts": {
 		"dev": "nodemon",
-		"generate": "node --import ./loader.mjs utils/generate.ts"
+		"generate": "node --import ./loader.mjs utils/generate.ts",
+		"styles": "sass ./src/docs/_swagger-ui-styles.scss ./src/docs/swagger-ui-styles.css"
 	},
 	"dependencies": {
 		"@types/chance": "^1.1.6",
@@ -28,6 +29,7 @@
 		"gfynonce": "^1.0.2",
 		"lodash": "^4.17.21",
 		"nodemon": "^3.1.4",
+		"sass": "^1.78.0",
 		"short-unique-id": "^5.2.0",
 		"ts-node": "^10.9.2"
 	}

@@ -1,0 +1,86 @@
+﻿// Models/schemas throughout 
+// Specific overrides based on their location are in their respective files
+
+.swagger-ui {
+	.model {
+		font-size: 1rem;
+
+		.brace-open, .brace-close {
+			display: none;
+		}
+
+		.prop {
+			display: flex;
+			align-items: center;
+
+			&-type {
+				color: map-get($colors, 'dark');
+			}
+
+			&-format {
+				color: rgba(map-get($colors, 'dark'), 0.75);
+				font-size: 0.8em;
+				padding-left: 0.25rem;
+				display: inline-block;
+			}
+
+			.primitive {
+				margin-left: auto;
+				font-size: 0.8em;
+				font-style: normal;
+
+				br {
+					display: none;
+				}
+			}
+		}
+	}
+
+	table.model {
+		font-size: 1rem;
+
+		.property-row {
+			border-top: 1px solid rgba(map-get($colors, 'dark'), 0.1);
+			border-bottom: 1px solid rgba(map-get($colors, 'dark'), 0.1);
+
+			td {
+				padding: 0.25rem 0.25rem 0.25rem 0 !important;
+
+				&:first-of-type {
+					font-weight: 600;
+					width: 140px;
+				}
+
+				> span.model {
+					font-size: 1rem;
+				}
+
+				.prop[data-name="Orientation"] {
+					display: none;
+				}
+			}
+
+			.model {
+				// Hackily limit nested schemas
+				table.model {
+					display: none;
+				}
+
+				.prop {
+					font-size: 1rem;
+				}
+			}
+		}
+	}
+
+	span.model {
+
+		> span > .prop {
+			font-size: 1rem;
+		}
+
+		.prop-enum {
+			display: none;
+		}
+	}
+}

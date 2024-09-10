@@ -1,0 +1,86 @@
+﻿.swagger-ui .opblock-tag-section {
+	padding: 2rem 0;
+
+	h3 {
+		pointer-events: none;
+		padding-left: 0;
+		padding-right: 0;
+		border-bottom: 0;
+
+		span {
+			font-weight: 600;
+		}
+
+		button {
+			display: none;
+		}
+	}
+
+	.opblock-section-header {
+
+		.opblock-title span, h4 {
+			font-size: 1.25rem;
+			font-family: $body-font;
+			font-weight: 600;
+
+			&:after {
+				display: none;
+			}
+		}
+	}
+
+	.opblock-description-wrapper {
+		* {
+			font-family: $body-font;
+		}
+	}
+
+	.operation-tag-content {
+
+		.opblock {
+			border-radius: 0;
+
+			@each $operation, $value in $op_colors {
+				&-#{$operation} {
+					border-color: $value;
+					background: rgba($value, 0.05);
+
+					.opblock-summary-method {
+						background: $value;
+					}
+				}
+
+				.opblock-summary {
+					border: 0;
+					padding: 0 0.5rem 0 0;
+					display: flex;
+
+					&-method {
+						border-radius: 0;
+						font-family: $body-font;
+						font-weight: 600;
+						font-size: 1.125rem;
+						padding: 0.5rem 1rem;
+						min-width: 95px;
+					}
+
+					&-path {
+						width: 300px;
+						flex-basis: 300px;
+
+						span {
+							font-weight: 600;
+						}
+					}
+
+					&-description {
+						font-family: $body-font;
+						font-size: 1rem;
+					}
+				}
+			}
+
+		}
+	}
+
+}

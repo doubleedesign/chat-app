@@ -52,10 +52,20 @@ app.get('/groups', (req, res) => {
 // Documentation setup
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
+// Set up routes for files I want to be able to access from the Swagger front-end
+// without these, they would need to be in a "/static" folder; I prefer to keep everything Swagger-related in one folder i.e. "/docs"
+app.get('/docs/swagger-ui-styles.css', (req, res) => {
+	res.sendFile(path.resolve('./src/docs/swagger-ui-styles.css'));
+});
+app.get('/docs/swagger-ui-hacks.js', (req, res) => {
+	res.sendFile(path.resolve('./src/docs/swagger-ui-hacks.js'));
+});
+// Swagger config
 expressJSDocSwagger(app)({
 	info: {
 		version: '0.0.1',
 		title: 'Chatty',
+		description: 'Chat app API for 3813ICT Software Frameworks',
 	},
 	security: {
 		BasicAuth: {
@@ -69,7 +79,15 @@ expressJSDocSwagger(app)({
 	exposeSwaggerUI: true,
 	exposeApiDocs: false,
 	notRequiredAsNullable: false,
-	swaggerUiOptions: {},
+	swaggerUiOptions: {
+		customCssUrl: [
+			'https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;600&family=Inter+Tight:wght@300;600&display=swap',
+			'../docs/swagger-ui-styles.css'
+		],
+		customJs: [
+			'../docs/swagger-ui-hacks.js'
+		]
+	},
 });
 
 app.listen(port, () => {

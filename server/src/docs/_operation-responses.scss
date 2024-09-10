@@ -1,0 +1,154 @@
+﻿.swagger-ui .opblock {
+
+	.tab {
+		margin: 0;
+
+		.tabitem {
+			font-family: $body-font;
+			font-size: 1rem;
+			font-weight: 600;
+			color: map-get($colors, 'dark');
+			display: block;
+			padding: 0.5rem 1rem;
+
+			&.active {
+				background: white;
+			}
+
+			&:after {
+				display: none;
+			}
+		}
+	}
+
+	@each $operation, $color in $op_colors {
+		&-#{$operation} {
+			
+			.tab {
+				border-bottom: 3px solid $color;
+				
+				.tabitem {
+
+					&.active {
+						background: $color;
+						color: white;
+					}
+				}
+			}
+		}
+	}
+	
+	.responses-wrapper {
+
+		.response-controls {
+			display: none;
+		}
+		
+		.responses-table {
+			
+			tr.responses-header,
+			tr.response {
+			}
+
+			tr.responses-header {
+
+				td {
+					font-family: $body-font;
+					font-weight: 600;
+					font-size: 1rem;
+
+					&.response-col_links {
+						display: none;
+					}
+				}
+			}
+
+			tr.response {
+				border-bottom: 1px solid rgba(map-get($colors, 'dark'), 0.15);
+				align-items: flex-start;
+				
+				.response-col_status {
+					font-weight: 600;
+				}
+
+				&[data-code="200"],
+				&[data-code="201"],
+				&[data-code="204"] {
+					align-items: flex-start;
+					
+					.response-col_status {
+						color: map-get($colors, 'success')
+					}
+				}
+				
+				&[data-code="400"],
+				&[data-code="404"],
+				&[data-code="409"] {
+					align-items: center;
+					
+					.response-col_status {
+						color: map-get($colors, 'alert');
+					}
+					
+					.model-example {
+						display: none;
+					}
+				}
+			}
+		}
+
+		.model-example {
+			margin-bottom: 1rem;
+
+			.model-box {
+				width: 100%;
+				background: white;
+				border-radius: 0;
+
+				> .model > span {
+					font-size: 0; // hides [] that I can't otherwise grab onto
+				}
+
+				.model-box-control {
+					pointer-events: none;
+
+					.model-toggle {
+						display: none;
+					}
+
+					.model-title {
+
+						&__text {
+							font-size: 1.25rem;
+							color: map-get($colors, 'dark');
+							margin-bottom: 0.25rem;
+							font-weight: 600;
+							display: block;
+						}
+					}
+				}
+
+				.property-row  {
+					display: flex;
+					align-items: center;
+					min-height: 0;
+					
+					td:last-of-type {
+						flex-grow: 1;
+					}
+					
+					.model-box-control {
+
+						.model-title {
+
+							&__text {
+								font-size: 1rem;
+								font-weight: 300;
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}

@@ -1,0 +1,59 @@
+﻿.swagger-ui .information-container {
+	max-width: 100%;
+	padding: 2rem 0;
+	background: #2d2d3a;
+
+	> .block {
+		max-width: 1280px;
+		padding: 0 20px;
+		margin: 0 auto;
+	}
+
+	* {
+		color: white !important;
+	}
+
+	.info {
+		margin: 0;
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+
+		p, a {
+			font-family: $body-font;
+			font-size: 1rem;
+		}
+
+		.main {
+			width: 100%;
+			flex-basis: 100%;
+
+			.title {
+				font-family: 'Syne Mono', 'Poppins', sans-serif;
+				font-weight: 400;
+				font-size: 3rem;
+			}
+		}
+
+		&__contact {
+			margin-left: auto;
+
+			a.link {
+				display: inline-block;
+				font-weight: 600;
+				padding: 0.5rem 1rem;
+				background: #222;
+				text-decoration: underline;
+				text-decoration-color: transparent;
+
+				&:hover, &:focus, &:active {
+					background: #000;
+					text-decoration-color: currentColor;
+				}
+			}
+		}
+
+		p {
+		}
+	}
+}

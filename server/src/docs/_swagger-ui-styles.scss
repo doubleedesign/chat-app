@@ -1,0 +1,30 @@
+﻿@import url('https://use.typekit.net/gna2wzl.css');
+
+html {
+	font-size: 14px;
+}
+
+$body-font: "area-variable", sans-serif;
+$colors: (
+	primary: #3e0897,
+	secondary: #da00a5,
+	success: #28f132,
+	alert: #ea1e3d,
+	warning: #ffa616,
+	'dark': #3b4151
+);
+$op_colors: (
+	'get': map-get($colors, 'primary'),
+	'post': map-get($colors, 'secondary'),
+	'patch': map-get($colors, 'warning'),
+	'delete': map-get($colors, 'alert')
+);
+
+@import 'global';
+@import 'header';
+@import 'models';
+@import 'operation-header';
+@import 'operation-tables';
+@import 'operation-forms';
+@import 'operation-responses';
+@import 'section-schemas';

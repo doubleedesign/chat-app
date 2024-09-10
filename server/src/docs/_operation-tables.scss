@@ -1,0 +1,190 @@
+﻿// General table styles for parameter, request, and response tables
+.swagger-ui .opblock {
+
+	table {
+
+		tr {
+			display: flex;
+			min-height: 42px;
+			align-items: center;
+
+			.col_header {
+				padding: 0.5rem 0;
+			}
+			
+			// Note: parameters-col alone is not a class it's just the prefix
+			// The only shared class for response table cells is .col-header for the headers,
+			// no shared class for the other cells; .response-col alone is not a class it's just the prefix
+			.parameters-col,
+			.response-col {
+				
+				&_name,
+				&_description {
+					width: 100%;
+					flex-basis: 100%;
+					font-family: $body-font;
+					font-size: 1rem;
+					color: map-get($colors, 'dark');
+					padding: 0.5rem 0;
+				}
+
+				&_name {
+					display: flex;
+					align-items: center;
+					flex-wrap: nowrap;
+
+					@media screen and (min-width: 940px) {
+						width: 295px;
+						flex-basis: 295px;
+						min-width: 295px;
+					}
+
+					.parameter {
+
+						&__name,
+						&__type {
+							font-family: $body-font;
+						}
+
+						&__name {
+							font-weight: 600;
+							font-size: 1rem;
+							margin: 0;
+							width: 120px;
+							flex-basis: 120px;
+							
+							&.required {
+								display: flex;
+								align-items: center;
+								
+								span {
+									display: none;
+								}
+								
+								&:after {
+									display: inline-block;
+									top: 0;
+									font-family: $body-font;
+									color: map-get($colors, 'alert');
+									padding: 0;
+									margin-left: 0.5rem;
+								}
+							}
+						}
+
+						&__type {
+							font-weight: 300;
+							padding: 0;
+							flex-grow: 1;
+						}
+
+						&__deprecated,
+						&__in {
+							width: 50px;
+							flex-basis: 50px;
+							padding-right: 0.5rem;
+							
+							&:empty {
+								display: none;
+							}
+						}
+					}
+				}
+			}
+			
+			.parameters-col {
+				&_description {
+					margin-bottom: 0;
+					
+					&:not(.col_header) {
+						padding: 0;
+					}
+
+					@media screen and (min-width: 940px) {
+						flex-grow: 1;
+						flex-basis: auto;
+					}
+
+					div {
+						display: flex;
+						align-items: center;
+					}
+					
+					.renderedMarkdown {
+						display: none;
+						
+						p {
+							margin: 0;
+						}
+					}
+
+					label {
+						font-weight: 300;
+						padding: 0.25rem 1rem;
+						margin: 0;
+					}
+
+					input {
+						border-radius: 0;
+						margin: 0;
+						font-family: $body-font;
+
+						&[type="checkbox"] {
+							width: auto;
+							margin-right: 0.25rem;
+						}
+					}
+				}
+			}
+
+			.response-col {
+				&_status {
+					font-family: $body-font;
+					width: 120px;
+					flex-basis: 120px;
+					min-width: 120px;
+					padding: 0.5rem 0;
+				}
+
+				&_description {
+					flex-grow: 1;
+
+					@media screen and (min-width: 940px) {
+						display: flex;
+					}
+
+					&__inner {
+						@media screen and (min-width: 940px) {
+							width: 175px;
+							flex-basis: 175px;
+							min-width: 175px;
+						}
+
+						.renderedMarkdown {
+
+							p {
+								margin-top: 0 !important;
+
+								&:last-child {
+									margin-bottom: 0 !important;
+								}
+							}
+						}
+					}
+
+					.model-example {
+
+						@media screen and (min-width: 940px) {
+							flex-grow: 1;
+							margin-top: 0;
+						}
+					}
+				}
+
+				&_links {
+					display: none;
+				}
+			}
+		}
+	}
+}

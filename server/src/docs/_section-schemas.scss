@@ -1,0 +1,114 @@
+﻿.swagger-ui section.models {
+	border: 0;
+	padding: 0;
+
+	@media screen and (min-width: 940px) {
+		column-count: 2;
+	}
+
+	h3 {
+		padding: 0;
+		border-bottom: 0 !important;
+		pointer-events: none;
+		column-span: all;
+	}
+
+	.models-control {
+		pointer-events: none;
+		margin: 0;
+
+		svg {
+			display: none;
+		}
+	}
+
+	.model-container {
+		margin: 0 0 1rem 0 !important;
+		border-radius: 0;
+		padding: 1rem;
+		background: rgba(0, 0, 0, 0.05);
+		break-inside: avoid-column;
+
+		&:hover {
+			background: rgba(0, 0, 0, 0.05);
+		}
+
+		h4 {
+			font-family: $body-font;
+			color: map-get($colors, 'dark');
+			font-size: 1.25rem;
+			font-weight: 600;
+			border: 0;
+			pointer-events: none;
+			padding: 0;
+		}
+
+		.model-box {
+			padding: 0;
+		}
+
+		> .model-box {
+			display: block;
+			width: 100%;
+
+			> .model-box {
+				width: 100%;
+			}
+		}
+
+		.model-box-control {
+
+			.model-toggle {
+				display: none;
+			}
+		}
+
+		.model-box-control[aria-expanded="true"] {
+			display: none; // see swagger-ui-hacks.js
+		}
+
+		.property-row .model-box-control[aria-expanded="true"] {
+			display: block !important;
+			pointer-events: none;
+
+			.model-title {
+				font-size: 1em;
+			}
+		}
+	}
+
+	// Specific overrides
+	#model-Orientation {
+
+		.prop {
+			display: flex;
+			align-items: center;
+
+			.renderedMarkdown {
+				display: flex;
+				margin: 0.5rem 0 0.5rem auto;
+
+				p {
+					margin: 0;
+					padding: 0 0.5rem;
+					border-right: 1px solid rgba(map-get($colors, 'dark'), 0.5);
+					line-height: 1;
+
+					&:first-of-type {
+						padding-left: 0;
+					}
+
+					&:last-of-type {
+						border: 0;
+					}
+				}
+			}
+		}
+	}
+	
+	#model-UniqueInstance,
+	#model-HttpValidationProblemDetails,
+	#model-ProblemDetails {
+		display: none;
+	}
+}
