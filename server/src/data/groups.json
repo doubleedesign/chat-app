@@ -1,0 +1,389 @@
+[
+    {
+        "id": "UO8L2mjWx3HP",
+        "label": "Legal Secretaries",
+        "avatar": "https://www.gravatar.com/avatar/51c172faf82a0fb1776be53e71ecfef7",
+        "admins": [
+            "lucile_baldwin@hotmail.com",
+            "seth_wong@example.com",
+            "minerva_hill@outlook.com",
+            "corey_snyder@example.com"
+        ],
+        "channels": []
+    },
+    {
+        "id": "6Le3QUYsPV2R",
+        "label": "Economists",
+        "avatar": "https://www.gravatar.com/avatar/183da885eb154dafb69a5a810a353e49",
+        "admins": [
+            "travis_poole@example.com"
+        ],
+        "channels": [
+            {
+                "id": "K9HnKcE2WNoBqr7t",
+                "label": "Idle valuable kestrels",
+                "avatar": "https://www.gravatar.com/avatar/e3f1f11a6d69b2a136f37b4c4257928f"
+            },
+            {
+                "id": "zHXGy8yYr1d0Pj53",
+                "label": "Naughty general ganders",
+                "avatar": "https://www.gravatar.com/avatar/e46d6eecf67e1b7ae6a73a98acf32d46"
+            },
+            {
+                "id": "HKmf6YKG2cD3OKFB",
+                "label": "Enraged incompatible iriomotecats",
+                "avatar": "https://www.gravatar.com/avatar/5efcfba02913585db4f847f5fcb538cc"
+            },
+            {
+                "id": "9e51LYlyTrKJYXPK",
+                "label": "Beautiful these dwarfmongooses",
+                "avatar": "https://www.gravatar.com/avatar/005c95fc631243b7189bfedc4702268c"
+            },
+            {
+                "id": "bAsP0PVsDQDyjhjO",
+                "label": "Dimwitted neat americanavocets",
+                "avatar": "https://www.gravatar.com/avatar/aee82468cd439396cc10abe21bbce2b8"
+            }
+        ]
+    },
+    {
+        "id": "fO3iYehaMn7p",
+        "label": "Recreational Directors",
+        "avatar": "https://www.gravatar.com/avatar/37930aec15d829259b3b979a8e9af84f",
+        "admins": [
+            "lucile_baldwin@hotmail.com"
+        ],
+        "channels": [
+            {
+                "id": "IFidOHnY08WdhGDz",
+                "label": "Tempting immaculate africanclawedfrogs",
+                "avatar": "https://www.gravatar.com/avatar/0a71a7855656e43c0ca9ab8161edd4b1"
+            },
+            {
+                "id": "LHWRMTmtVmhgPDv3",
+                "label": "Wan chilly joeys",
+                "avatar": "https://www.gravatar.com/avatar/c3f6deba8904e44c01edbd2034e26297"
+            },
+            {
+                "id": "E1E0PWSHmgO2ehoU",
+                "label": "Huge pesky horsechestnutleafminers",
+                "avatar": "https://www.gravatar.com/avatar/f1bddeed2fc39354a2b5ade593f62875"
+            },
+            {
+                "id": "I8KNBMkTLku5xh8y",
+                "label": "Calculating huge horseflies",
+                "avatar": "https://www.gravatar.com/avatar/64b5fbf1d40f0643cf0e0c37ab83381e"
+            },
+            {
+                "id": "ALTIa5qh5IvZzWuP",
+                "label": "Optimistic bloody heterodontosauruses",
+                "avatar": "https://www.gravatar.com/avatar/2c8d0a188bd98443b90d83f105bf16cd"
+            },
+            {
+                "id": "Z2VbVQNcBzBk6XtM",
+                "label": "Disgusting sore hens",
+                "avatar": "https://www.gravatar.com/avatar/aa82455284d57a87f1aa02c09bb6c540"
+            }
+        ]
+    },
+    {
+        "id": "OhcewGKdqzKS",
+        "label": "Computer Graphics Specialists",
+        "avatar": "https://www.gravatar.com/avatar/23a4f8744f29a3a0050c8fa5aefa1634",
+        "admins": [
+            "delia_blake@example.com",
+            "charles_barber@outlook.com",
+            "derek_hart@outlook.com",
+            "aiden_fernandez@hotmail.com",
+            "virginia_sharp@hotmail.com"
+        ],
+        "channels": [
+            {
+                "id": "0txCi3dsPy1UK4Nj",
+                "label": "Oddball zany clingfishes",
+                "avatar": "https://www.gravatar.com/avatar/dc9ba29c53de4d4ecab37b8ac79132b6"
+            },
+            {
+                "id": "PsmR2q4hkLlv3pBc",
+                "label": "Uncomfortable natural fiddlercrabs",
+                "avatar": "https://www.gravatar.com/avatar/47d7e6b7668fba2bd97e952dd74574bb"
+            },
+            {
+                "id": "K9i7SGXQDddNovk6",
+                "label": "Delectable hearty akitainus",
+                "avatar": "https://www.gravatar.com/avatar/f9bcc6fdaeb88df488a89c684cdc1ace"
+            },
+            {
+                "id": "vuUJYEdtb7C64mCu",
+                "label": "Untidy livid gorillas",
+                "avatar": "https://www.gravatar.com/avatar/114a413ea7551cf206fa07ca81fde7d0"
+            },
+            {
+                "id": "rPngshHubLyXZz5B",
+                "label": "Mediocre specific irishterriers",
+                "avatar": "https://www.gravatar.com/avatar/9b31794ef19e756eeebacd1758bf49e0"
+            },
+            {
+                "id": "k5mHxpxp35XD8EJc",
+                "label": "Infantile limping antelopegroundsquirrels",
+                "avatar": "https://www.gravatar.com/avatar/1298cb034766b03e2ccfd4908dce82a2"
+            },
+            {
+                "id": "zZEYSoM1e2tkWl5D",
+                "label": "Fluffy splendid indianrockpythons",
+                "avatar": "https://www.gravatar.com/avatar/eab1172c66c3f6e9deef3dc3fc3558e5"
+            },
+            {
+                "id": "RK4rx74a3C8xnNTM",
+                "label": "Familiar faint killifishes",
+                "avatar": "https://www.gravatar.com/avatar/8d6fa43077a5c5e26e029b64d245de28"
+            }
+        ]
+    },
+    {
+        "id": "kepJ8wmBTu7g",
+        "label": "Agricultural Scientists",
+        "avatar": "https://www.gravatar.com/avatar/e1eec5fd46f261e90de22728bd85d928",
+        "admins": [
+            "corey_snyder@example.com",
+            "dollie_wilkerson@outlook.com"
+        ],
+        "channels": [
+            {
+                "id": "cHUC4hdVe5P24vx5",
+                "label": "Vigilant bland equestrians",
+                "avatar": "https://www.gravatar.com/avatar/7182552fbb1cb346dd8edbc4aa41cd99"
+            },
+            {
+                "id": "fKljMWgjVjOaeFCx",
+                "label": "Poised gloomy archerfishes",
+                "avatar": "https://www.gravatar.com/avatar/3786e41a25bc457192cff268110ca937"
+            },
+            {
+                "id": "IfnPUiuvqFDRrrSV",
+                "label": "Whole flippant lemmings",
+                "avatar": "https://www.gravatar.com/avatar/2c4b5a608b94d77d2704326c0c8c2bbf"
+            },
+            {
+                "id": "nwknq8JR3mMq901d",
+                "label": "Nervous willing globefishes",
+                "avatar": "https://www.gravatar.com/avatar/054c31fca26964a7a147c64b332baf45"
+            }
+        ]
+    },
+    {
+        "id": "zZc7BTULPH9l",
+        "label": "Sanitation Engineers",
+        "avatar": "https://www.gravatar.com/avatar/be0f876e46c3bf511510effec19e1c07",
+        "admins": [
+            "minerva_hill@outlook.com",
+            "caroline_jenkins@outlook.com",
+            "travis_poole@example.com",
+            "maud_walters@example.com"
+        ],
+        "channels": [
+            {
+                "id": "quFwLXgHWpcidjjr",
+                "label": "Aged revolving asiandamselflies",
+                "avatar": "https://www.gravatar.com/avatar/2ff3f8d1a88894dba8841d3a09c66b9d"
+            },
+            {
+                "id": "hduz6AjygKc34i8a",
+                "label": "Miserly great hornets",
+                "avatar": "https://www.gravatar.com/avatar/ef3e1284a6bb428ad07ef1a5f6d959ae"
+            },
+            {
+                "id": "P0tGNz45dvRRHNAl",
+                "label": "Threadbare snoopy americanlobsters",
+                "avatar": "https://www.gravatar.com/avatar/748780d35603f215a7364ec532769f51"
+            }
+        ]
+    },
+    {
+        "id": "Ef8JuR1wdy7I",
+        "label": "University Administrators",
+        "avatar": "https://www.gravatar.com/avatar/259c3701fdeea4606b9fbfaacb42f4d7",
+        "admins": [
+            "lucile_baldwin@hotmail.com",
+            "sally_hunt@gmail.com",
+            "jerry_sims@hotmail.com",
+            "tom_maldonado@example.com"
+        ],
+        "channels": [
+            {
+                "id": "rWlDhqutNjhwFwvh",
+                "label": "Lively broken gnus",
+                "avatar": "https://www.gravatar.com/avatar/407697678b32458c68a24a2246336f49"
+            },
+            {
+                "id": "fQzKY1WvM0KyIkcA",
+                "label": "Disastrous dark achillestangs",
+                "avatar": "https://www.gravatar.com/avatar/666cfe68ac235bdf97741c7975e94e86"
+            },
+            {
+                "id": "4BhMfTBslOWxCwB8",
+                "label": "Rapid delightful bushsqueakers",
+                "avatar": "https://www.gravatar.com/avatar/e319084fcd438dcf0d4f04895170b53b"
+            },
+            {
+                "id": "AX2N2dwxld2ZIFlq",
+                "label": "Genius abstruse intermediateegrets",
+                "avatar": "https://www.gravatar.com/avatar/d57f3306ffd16c7a658c3f6ded56786d"
+            },
+            {
+                "id": "YbDPZlJbSxHi5zCY",
+                "label": "Next astute americanalligators",
+                "avatar": "https://www.gravatar.com/avatar/3ba35b98fe78fc2ba9054489f1b6608d"
+            }
+        ]
+    },
+    {
+        "id": "zNY10dK8TQyB",
+        "label": "Probation Officers",
+        "avatar": "https://www.gravatar.com/avatar/457c0b278b32aa56b658b3e47af439b9",
+        "admins": [
+            "delia_blake@example.com",
+            "sally_hunt@gmail.com",
+            "maurice_nash@hotmail.com",
+            "eula_moss@example.com",
+            "juan_mcbride@outlook.com"
+        ],
+        "channels": []
+    },
+    {
+        "id": "rik1lvWY0O2w",
+        "label": "Software Developers",
+        "avatar": "https://www.gravatar.com/avatar/b58e06b35bc587d6b4ac14fc6c8cbdfa",
+        "admins": [
+            "eula_moss@example.com"
+        ],
+        "channels": [
+            {
+                "id": "X63O33JBd1gO15bm",
+                "label": "Real busy jerboas",
+                "avatar": "https://www.gravatar.com/avatar/d55db5f3b49d1aad06c8c5be1e3ebdd2"
+            },
+            {
+                "id": "0vrMLssyRMxXu3Rq",
+                "label": "Whopping delicious burroes",
+                "avatar": "https://www.gravatar.com/avatar/0463e1ebd2690f5e2250d7bb869670e8"
+            },
+            {
+                "id": "M9jeEHkN125pHCOM",
+                "label": "Showy acrobatic cows",
+                "avatar": "https://www.gravatar.com/avatar/0bde233714347077d550c724da2d98d9"
+            },
+            {
+                "id": "I656YvqMUTRTVr31",
+                "label": "Easy demanding angelfishes",
+                "avatar": "https://www.gravatar.com/avatar/8f13f63c909238aacead31d55724c213"
+            },
+            {
+                "id": "JxvqEw3UIpj66UhS",
+                "label": "Steamy fantastic jaegers",
+                "avatar": "https://www.gravatar.com/avatar/5976635a38f4fa050cffef21d14b404b"
+            },
+            {
+                "id": "iDaTaGl4zbLLPdZU",
+                "label": "Sad scornful conches",
+                "avatar": "https://www.gravatar.com/avatar/08c3be026b7512686cd25ea61ff1464b"
+            }
+        ]
+    },
+    {
+        "id": "v6n9V7VO5oHT",
+        "label": "Physical Therapists",
+        "avatar": "https://www.gravatar.com/avatar/da5e859c7c45c0809d0341b22144940b",
+        "admins": [
+            "derek_hart@outlook.com",
+            "travis_poole@example.com",
+            "mitchell_robbins@hotmail.com",
+            "betty_patrick@example.com"
+        ],
+        "channels": [
+            {
+                "id": "XFMRMNUI2XS4k9EO",
+                "label": "Welltodo litigious bactrians",
+                "avatar": "https://www.gravatar.com/avatar/9b78e6755e1744983baef79971981b55"
+            },
+            {
+                "id": "8kbiZuLSNLJ2Smtl",
+                "label": "Astute last honeybadgers",
+                "avatar": "https://www.gravatar.com/avatar/f3214afa882dce1f552adf194d211e33"
+            }
+        ]
+    },
+    {
+        "id": "FUcoRXoitGv8",
+        "label": "Gourmet Cheves",
+        "avatar": "https://www.gravatar.com/avatar/31e75d38066d26074288be32d635a6ca",
+        "admins": [
+            "lucile_baldwin@hotmail.com",
+            "isabella_sharp@outlook.com",
+            "maud_walters@example.com",
+            "juan_mcbride@outlook.com",
+            "virginia_sharp@hotmail.com"
+        ],
+        "channels": [
+            {
+                "id": "DqLjSwVTijumJbNU",
+                "label": "Thick foolhardy aidis",
+                "avatar": "https://www.gravatar.com/avatar/536f5e33ecfc338cd0a45b5e115b082c"
+            },
+            {
+                "id": "elHCOwDGX9TatGCZ",
+                "label": "Dopey valuable bluewhales",
+                "avatar": "https://www.gravatar.com/avatar/7c67828837fc83b35041733ff392dec2"
+            },
+            {
+                "id": "afRj8yHZy8LImpA7",
+                "label": "Flustered political iberianlynxes",
+                "avatar": "https://www.gravatar.com/avatar/c0252fcad1d873189c8db2263ffa6b09"
+            },
+            {
+                "id": "OBStVlgB8f1ZRt4e",
+                "label": "Cavernous petty asiandamselflies",
+                "avatar": "https://www.gravatar.com/avatar/120ce1e11426e819543b230af1cf4618"
+            },
+            {
+                "id": "sN2w9SZO6Glls7uA",
+                "label": "Rectangular hasty beetles",
+                "avatar": "https://www.gravatar.com/avatar/c73613db938623cfcf308fd607944577"
+            },
+            {
+                "id": "Q1Bo3vyIGUJSfk1r",
+                "label": "Considerate posh americanbulldogs",
+                "avatar": "https://www.gravatar.com/avatar/ecc9fa6808e764ac22b7afa9dfebec0d"
+            }
+        ]
+    },
+    {
+        "id": "6JfcaFTgQyKr",
+        "label": "Medical Secretaries",
+        "avatar": "https://www.gravatar.com/avatar/c73d0efe72ef73de2b668679b7619ed6",
+        "admins": [
+            "minerva_hill@outlook.com",
+            "betty_davis@gmail.com",
+            "dollie_wilkerson@outlook.com",
+            "juan_mcbride@outlook.com",
+            "virginia_sharp@hotmail.com"
+        ],
+        "channels": [
+            {
+                "id": "rqGQOxXxyJxukohh",
+                "label": "Hungry animated borers",
+                "avatar": "https://www.gravatar.com/avatar/1c3e4eebf4b1d3deabe63bb2193cbfda"
+            },
+            {
+                "id": "7qUv99CJRsjfYCab",
+                "label": "Steamy fair blackcrappies",
+                "avatar": "https://www.gravatar.com/avatar/55096ffcad434721a98ff031c83108c9"
+            },
+            {
+                "id": "f4T5cjqVQdZ2L4QW",
+                "label": "Proud legitimate cuckooes",
+                "avatar": "https://www.gravatar.com/avatar/fa5af2c35b4535df955e02abc59fad14"
+            }
+        ]
+    }
+]

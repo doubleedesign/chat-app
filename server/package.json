@@ -9,6 +9,8 @@
 		"generate": "node --import ./loader.mjs utils/generate.ts"
 	},
 	"dependencies": {
+		"@types/chance": "^1.1.6",
+		"chance": "^1.1.12",
 		"express": "^4.19.2",
 		"typescript": "^5.5.4"
 	},
@@ -20,9 +22,10 @@
 		"@typescript-eslint/eslint-plugin": "^8.4.0",
 		"@typescript-eslint/parser": "^8.4.0",
 		"case": "^1.6.3",
+		"en-inflectors": "^1.0.12",
 		"eslint": "^9.10.0",
+		"gfynonce": "^1.0.2",
 		"lodash": "^4.17.21",
-		"name-forge": "^1.0.0",
 		"nodemon": "^3.1.4",
 		"short-unique-id": "^5.2.0",
 		"ts-node": "^10.9.2"

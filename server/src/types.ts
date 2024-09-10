@@ -4,8 +4,10 @@ export enum UserRoles {
 	SUPER_ADMIN = 3
 }
 
+export type UserId = string;
+
 export type User = {
-	email: string;
+	email: UserId;
 	name: string;
 	avatar?: string;
 	groupIds: string[];
@@ -19,7 +21,7 @@ type Container = {
 
 export type Group = Container & {
 	channels: Container[];
-	admins: User[];
+	admins: UserId[];
 };
 
 export type Channel = Container;
