@@ -24,6 +24,7 @@
 		"case": "^1.6.3",
 		"en-inflectors": "^1.0.12",
 		"eslint": "^9.10.0",
+		"express-jsdoc-swagger": "^1.8.0",
 		"gfynonce": "^1.0.2",
 		"lodash": "^4.17.21",
 		"nodemon": "^3.1.4",
