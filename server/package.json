@@ -11,7 +11,9 @@
 	},
 	"dependencies": {
 		"@types/chance": "^1.1.6",
+		"@types/cors": "^2.8.17",
 		"chance": "^1.1.12",
+		"cors": "^2.8.5",
 		"express": "^4.19.2",
 		"typescript": "^5.5.4"
 	},

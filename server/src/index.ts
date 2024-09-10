@@ -5,6 +5,7 @@ import path from 'node:path';
 import endpoints from './endpoints';
 import expressListEndpoints from 'express-list-endpoints';
 import CustomActionsPlugin from './docs/plugins';
+import cors from 'cors';
 
 // Basic setup
 const app = express();
@@ -12,6 +13,7 @@ const port = process.env.PORT || 4100;
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static('static'));
+app.use(cors());
 
 // Insert imported routes
 Object.entries(endpoints).map(([key, value]) => (
