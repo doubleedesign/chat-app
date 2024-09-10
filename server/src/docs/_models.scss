@@ -1,9 +1,14 @@
-﻿// Models/schemas throughout 
+﻿// Models/schemas throughout
 // Specific overrides based on their location are in their respective files
 
 .swagger-ui {
+
 	.model {
 		font-size: 1rem;
+
+		.model-box-control {
+			display: none;
+		}
 
 		.brace-open, .brace-close {
 			display: none;
@@ -14,11 +19,11 @@
 			align-items: center;
 
 			&-type {
-				color: map-get($colors, 'dark');
+				color: map-get($colours, 'dark');
 			}
 
 			&-format {
-				color: rgba(map-get($colors, 'dark'), 0.75);
+				color: rgba(map-get($colours, 'dark'), 0.75);
 				font-size: 0.8em;
 				padding-left: 0.25rem;
 				display: inline-block;
@@ -40,47 +45,119 @@
 		font-size: 1rem;
 
 		.property-row {
-			border-top: 1px solid rgba(map-get($colors, 'dark'), 0.1);
-			border-bottom: 1px solid rgba(map-get($colors, 'dark'), 0.1);
+			display: grid;
+			grid-template-columns: 1fr 4fr;
+			gap: 0.25rem;
+			border-top: 1px solid rgba(map-get($colours, 'dark'), 0.1);
+			padding-block: 0.5rem !important;
+
+			.model-box-control {
+				display: none !important;
+			}
+
+			.star {
+				color: map-get($colours, 'alert') !important;
+			}
+
+			td:first-child {
+				font-weight: unset;
+				font-size: 0.9rem;
+				font-variation-settings: 'wght' 700;
+				display: flex;
+				align-content: center;
+				align-items: center;
+				padding-block-start: 2px;
+				width: unset;
+			}
 
 			td {
-				padding: 0.25rem 0.25rem 0.25rem 0 !important;
+				padding-inline-start: 0 !important;
 
-				&:first-of-type {
-					font-weight: 600;
-					width: 140px;
+				.model .prop {
+					display: flex;
+					align-items: center;
+					justify-content: flex-start;
+
+					.prop-type {
+						font-family: monospace;
+					}
+
+					.renderedMarkdown {
+						padding-inline-start: 1rem;
+
+						p {
+							margin: 0;
+							font-weight: normal;
+							font-variation-settings: 'wght' 300;
+							font-size: 0.9rem;
+							transform: translateY(2px);
+						}
+					}
 				}
 
-				> span.model {
-					font-size: 1rem;
-				}
+				.model:has(.model) {
+					.model {
+						display: flex;
+						align-items: center;
+						justify-content: flex-start;
+						min-width: 5rem;
 
-				.prop[data-name="Orientation"] {
-					display: none;
+						.prop-type {
+							min-width: 0;
+						}
+
+						&:after {
+							content: '[]';
+						}
+					}
 				}
 			}
 
-			.model {
-				// Hackily limit nested schemas
-				table.model {
-					display: none;
-				}
+			span.model > span {
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+				font-size: 0; // Hide the [] text by sizing only the elements we want to see; [] is added where wanted as a pseudo-element
 
 				.prop {
-					font-size: 1rem;
+					width: 100%;
+					font-size: 0.9rem;
+
+					.prop-type {
+						font-size: 1rem;
+						min-width: 5rem;
+					}
+				}
+
+				.renderedMarkdown {
+					order: 10;
+					padding-inline-start: 1rem;
+					flex-grow: 1;
+
+					p {
+						font-weight: normal;
+						font-variation-settings: 'wght' 300;
+						font-size: 0.9rem;
+						margin: 0;
+						line-height: 1.3;
+					}
 				}
 			}
-		}
-	}
 
-	span.model {
+			.inner-object {
+				display: none;
+			}
 
-		> span > .prop {
-			font-size: 1rem;
-		}
+			&:has(.inner-object) {
+				.model-box-control[aria-expanded="true"]:has(.model-title) {
+					display: block !important;
 
-		.prop-enum {
-			display: none;
+					.model-title__text {
+						font-family: monospace;
+						font-size: 1rem;
+					}
+				}
+			}
 		}
 	}
 }

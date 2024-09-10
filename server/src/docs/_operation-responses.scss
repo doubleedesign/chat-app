@@ -6,8 +6,8 @@
 		.tabitem {
 			font-family: $body-font;
 			font-size: 1rem;
-			font-weight: 600;
-			color: map-get($colors, 'dark');
+			font-variation-settings: 'wght' 600;
+			color: map-get($colours, 'dark');
 			display: block;
 			padding: 0.5rem 1rem;
 
@@ -21,12 +21,12 @@
 		}
 	}
 
-	@each $operation, $color in $op_colors {
+	@each $operation, $color in $op_colours {
 		&-#{$operation} {
-			
+
 			.tab {
 				border-bottom: 3px solid $color;
-				
+
 				.tabitem {
 
 					&.active {
@@ -37,15 +37,15 @@
 			}
 		}
 	}
-	
+
 	.responses-wrapper {
 
 		.response-controls {
 			display: none;
 		}
-		
+
 		.responses-table {
-			
+
 			tr.responses-header,
 			tr.response {
 			}
@@ -54,7 +54,7 @@
 
 				td {
 					font-family: $body-font;
-					font-weight: 600;
+					font-variation-settings: 'wght' 600;
 					font-size: 1rem;
 
 					&.response-col_links {
@@ -64,32 +64,32 @@
 			}
 
 			tr.response {
-				border-bottom: 1px solid rgba(map-get($colors, 'dark'), 0.15);
+				border-bottom: 1px solid rgba(map-get($colours, 'dark'), 0.15);
 				align-items: flex-start;
-				
+
 				.response-col_status {
-					font-weight: 600;
+					font-variation-settings: 'wght' 600;
 				}
 
 				&[data-code="200"],
 				&[data-code="201"],
 				&[data-code="204"] {
 					align-items: flex-start;
-					
+
 					.response-col_status {
-						color: map-get($colors, 'success')
+						color: map-get($colours, 'success')
 					}
 				}
-				
+
 				&[data-code="400"],
 				&[data-code="404"],
 				&[data-code="409"] {
 					align-items: center;
-					
+
 					.response-col_status {
-						color: map-get($colors, 'alert');
+						color: map-get($colours, 'alert');
 					}
-					
+
 					.model-example {
 						display: none;
 					}
@@ -120,9 +120,9 @@
 
 						&__text {
 							font-size: 1.25rem;
-							color: map-get($colors, 'dark');
+							color: map-get($colours, 'dark');
 							margin-bottom: 0.25rem;
-							font-weight: 600;
+							font-variation-settings: 'wght' 600;
 							display: block;
 						}
 					}
@@ -132,11 +132,11 @@
 					display: flex;
 					align-items: center;
 					min-height: 0;
-					
+
 					td:last-of-type {
 						flex-grow: 1;
 					}
-					
+
 					.model-box-control {
 
 						.model-title {

@@ -8,7 +8,7 @@
 		border-bottom: 0;
 
 		span {
-			font-weight: 600;
+			font-variation-settings: 'wght' 600;
 		}
 
 		button {
@@ -21,7 +21,7 @@
 		.opblock-title span, h4 {
 			font-size: 1.25rem;
 			font-family: $body-font;
-			font-weight: 600;
+			font-variation-settings: 'wght' 600;
 
 			&:after {
 				display: none;
@@ -40,7 +40,7 @@
 		.opblock {
 			border-radius: 0;
 
-			@each $operation, $value in $op_colors {
+			@each $operation, $value in $op_colours {
 				&-#{$operation} {
 					border-color: $value;
 					background: rgba($value, 0.05);
@@ -58,9 +58,9 @@
 					&-method {
 						border-radius: 0;
 						font-family: $body-font;
-						font-weight: 600;
+						font-variation-settings: 'wght' 600;
 						font-size: 1.125rem;
-						padding: 0.5rem 1rem;
+						padding: 0.75rem 1rem 0.5rem;
 						min-width: 95px;
 					}
 
@@ -69,7 +69,11 @@
 						flex-basis: 300px;
 
 						span {
-							font-weight: 600;
+							font-variation-settings: 'wght' 600;
+						}
+
+						&-description-wrapper {
+							padding-top: 0.25rem;
 						}
 					}
 

@@ -1,7 +1,7 @@
 ﻿.swagger-ui .information-container {
 	max-width: 100%;
 	padding: 2rem 0;
-	background: #2d2d3a;
+	background: map-get($colours, 'primary');
 
 	> .block {
 		max-width: 1280px;
@@ -29,8 +29,9 @@
 			flex-basis: 100%;
 
 			.title {
-				font-family: 'Syne Mono', 'Poppins', sans-serif;
-				font-weight: 400;
+				font-family: $body-font;
+				text-transform: lowercase;
+				font-variation-settings: 'wght' 700;
 				font-size: 3rem;
 			}
 		}
@@ -40,7 +41,7 @@
 
 			a.link {
 				display: inline-block;
-				font-weight: 600;
+				font-variation-settings: 'wght' 600;
 				padding: 0.5rem 1rem;
 				background: #222;
 				text-decoration: underline;
@@ -56,4 +57,9 @@
 		p {
 		}
 	}
+}
+
+// Auth
+.swagger-ui .scheme-container {
+	display: none;
 }

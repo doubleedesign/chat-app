@@ -35,9 +35,9 @@
 
 		h4 {
 			font-family: $body-font;
-			color: map-get($colors, 'dark');
+			color: map-get($colours, 'dark');
 			font-size: 1.25rem;
-			font-weight: 600;
+			font-variation-settings: 'wght' 600;
 			border: 0;
 			pointer-events: none;
 			padding: 0;
@@ -64,11 +64,11 @@
 		}
 
 		.model-box-control[aria-expanded="true"] {
-			display: none; // see swagger-ui-hacks.js
+			// display: none; // see swagger-ui-hacks.js
 		}
 
 		.property-row .model-box-control[aria-expanded="true"] {
-			display: block !important;
+			// display: block !important;
 			pointer-events: none;
 
 			.model-title {
@@ -91,7 +91,7 @@
 				p {
 					margin: 0;
 					padding: 0 0.5rem;
-					border-right: 1px solid rgba(map-get($colors, 'dark'), 0.5);
+					border-right: 1px solid rgba(map-get($colours, 'dark'), 0.5);
 					line-height: 1;
 
 					&:first-of-type {
@@ -105,7 +105,7 @@
 			}
 		}
 	}
-	
+
 	#model-UniqueInstance,
 	#model-HttpValidationProblemDetails,
 	#model-ProblemDetails {

@@ -11,20 +11,20 @@
 			.col_header {
 				padding: 0.5rem 0;
 			}
-			
+
 			// Note: parameters-col alone is not a class it's just the prefix
 			// The only shared class for response table cells is .col-header for the headers,
 			// no shared class for the other cells; .response-col alone is not a class it's just the prefix
 			.parameters-col,
 			.response-col {
-				
+
 				&_name,
 				&_description {
 					width: 100%;
 					flex-basis: 100%;
 					font-family: $body-font;
 					font-size: 1rem;
-					color: map-get($colors, 'dark');
+					color: map-get($colours, 'dark');
 					padding: 0.5rem 0;
 				}
 
@@ -47,25 +47,25 @@
 						}
 
 						&__name {
-							font-weight: 600;
+							font-variation-settings: 'wght' 600;
 							font-size: 1rem;
 							margin: 0;
 							width: 120px;
 							flex-basis: 120px;
-							
+
 							&.required {
 								display: flex;
 								align-items: center;
-								
+
 								span {
 									display: none;
 								}
-								
+
 								&:after {
 									display: inline-block;
 									top: 0;
 									font-family: $body-font;
-									color: map-get($colors, 'alert');
+									color: map-get($colours, 'alert');
 									padding: 0;
 									margin-left: 0.5rem;
 								}
@@ -83,7 +83,7 @@
 							width: 50px;
 							flex-basis: 50px;
 							padding-right: 0.5rem;
-							
+
 							&:empty {
 								display: none;
 							}
@@ -91,11 +91,11 @@
 					}
 				}
 			}
-			
+
 			.parameters-col {
 				&_description {
 					margin-bottom: 0;
-					
+
 					&:not(.col_header) {
 						padding: 0;
 					}
@@ -109,10 +109,10 @@
 						display: flex;
 						align-items: center;
 					}
-					
+
 					.renderedMarkdown {
 						display: none;
-						
+
 						p {
 							margin: 0;
 						}

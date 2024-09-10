@@ -21,7 +21,7 @@ html {
 .swagger-ui section.models > h3 button span {
   color: #3b4151;
   font-size: 1.5rem;
-  font-weight: 600;
+  font-variation-settings: "wght" 700;
 }
 .swagger-ui .highlight-code code * {
   font-family: monospace;
@@ -35,7 +35,7 @@ html {
 .swagger-ui .information-container {
   max-width: 100%;
   padding: 2rem 0;
-  background: #2d2d3a;
+  background: #3e0897;
 }
 .swagger-ui .information-container > .block {
   max-width: 1280px;
@@ -60,8 +60,9 @@ html {
   flex-basis: 100%;
 }
 .swagger-ui .information-container .info .main .title {
-  font-family: "Syne Mono", "Poppins", sans-serif;
-  font-weight: 400;
+  font-family: "area-variable", sans-serif;
+  text-transform: lowercase;
+  font-variation-settings: "wght" 700;
   font-size: 3rem;
 }
 .swagger-ui .information-container .info__contact {
@@ -69,7 +70,7 @@ html {
 }
 .swagger-ui .information-container .info__contact a.link {
   display: inline-block;
-  font-weight: 600;
+  font-variation-settings: "wght" 600;
   padding: 0.5rem 1rem;
   background: #222;
   text-decoration: underline;
@@ -79,8 +80,15 @@ html {
   background: #000;
   text-decoration-color: currentColor;
 }
+.swagger-ui .scheme-container {
+  display: none;
+}
+
 .swagger-ui .model {
   font-size: 1rem;
+}
+.swagger-ui .model .model-box-control {
+  display: none;
 }
 .swagger-ui .model .brace-open, .swagger-ui .model .brace-close {
   display: none;
@@ -110,33 +118,96 @@ html {
   font-size: 1rem;
 }
 .swagger-ui table.model .property-row {
+  display: grid;
+  grid-template-columns: 1fr 4fr;
+  gap: 0.25rem;
   border-top: 1px solid rgba(59, 65, 81, 0.1);
-  border-bottom: 1px solid rgba(59, 65, 81, 0.1);
+  padding-block: 0.5rem !important;
+}
+.swagger-ui table.model .property-row .model-box-control {
+  display: none !important;
+}
+.swagger-ui table.model .property-row .star {
+  color: #ea1e3d !important;
+}
+.swagger-ui table.model .property-row td:first-child {
+  font-weight: unset;
+  font-size: 0.9rem;
+  font-variation-settings: "wght" 700;
+  display: flex;
+  align-content: center;
+  align-items: center;
+  padding-block-start: 2px;
+  width: unset;
 }
 .swagger-ui table.model .property-row td {
-  padding: 0.25rem 0.25rem 0.25rem 0 !important;
+  padding-inline-start: 0 !important;
 }
-.swagger-ui table.model .property-row td:first-of-type {
-  font-weight: 600;
-  width: 140px;
+.swagger-ui table.model .property-row td .model .prop {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
 }
-.swagger-ui table.model .property-row td > span.model {
+.swagger-ui table.model .property-row td .model .prop .prop-type {
+  font-family: monospace;
+}
+.swagger-ui table.model .property-row td .model .prop .renderedMarkdown {
+  padding-inline-start: 1rem;
+}
+.swagger-ui table.model .property-row td .model .prop .renderedMarkdown p {
+  margin: 0;
+  font-weight: normal;
+  font-variation-settings: "wght" 300;
+  font-size: 0.9rem;
+  transform: translateY(2px);
+}
+.swagger-ui table.model .property-row td .model:has(.model) .model {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  min-width: 5rem;
+}
+.swagger-ui table.model .property-row td .model:has(.model) .model .prop-type {
+  min-width: 0;
+}
+.swagger-ui table.model .property-row td .model:has(.model) .model:after {
+  content: "[]";
+}
+.swagger-ui table.model .property-row span.model > span {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0;
+}
+.swagger-ui table.model .property-row span.model > span .prop {
+  width: 100%;
+  font-size: 0.9rem;
+}
+.swagger-ui table.model .property-row span.model > span .prop .prop-type {
   font-size: 1rem;
+  min-width: 5rem;
 }
-.swagger-ui table.model .property-row td .prop[data-name=Orientation] {
+.swagger-ui table.model .property-row span.model > span .renderedMarkdown {
+  order: 10;
+  padding-inline-start: 1rem;
+  flex-grow: 1;
+}
+.swagger-ui table.model .property-row span.model > span .renderedMarkdown p {
+  font-weight: normal;
+  font-variation-settings: "wght" 300;
+  font-size: 0.9rem;
+  margin: 0;
+  line-height: 1.3;
+}
+.swagger-ui table.model .property-row .inner-object {
   display: none;
 }
-.swagger-ui table.model .property-row .model table.model {
-  display: none;
+.swagger-ui table.model .property-row:has(.inner-object) .model-box-control[aria-expanded=true]:has(.model-title) {
+  display: block !important;
 }
-.swagger-ui table.model .property-row .model .prop {
+.swagger-ui table.model .property-row:has(.inner-object) .model-box-control[aria-expanded=true]:has(.model-title) .model-title__text {
+  font-family: monospace;
   font-size: 1rem;
-}
-.swagger-ui span.model > span > .prop {
-  font-size: 1rem;
-}
-.swagger-ui span.model .prop-enum {
-  display: none;
 }
 
 .swagger-ui .opblock-tag-section {
@@ -149,7 +220,7 @@ html {
   border-bottom: 0;
 }
 .swagger-ui .opblock-tag-section h3 span {
-  font-weight: 600;
+  font-variation-settings: "wght" 600;
 }
 .swagger-ui .opblock-tag-section h3 button {
   display: none;
@@ -157,7 +228,7 @@ html {
 .swagger-ui .opblock-tag-section .opblock-section-header .opblock-title span, .swagger-ui .opblock-tag-section .opblock-section-header h4 {
   font-size: 1.25rem;
   font-family: "area-variable", sans-serif;
-  font-weight: 600;
+  font-variation-settings: "wght" 600;
 }
 .swagger-ui .opblock-tag-section .opblock-section-header .opblock-title span:after, .swagger-ui .opblock-tag-section .opblock-section-header h4:after {
   display: none;
@@ -169,10 +240,44 @@ html {
   border-radius: 0;
 }
 .swagger-ui .opblock-tag-section .operation-tag-content .opblock-get {
+  border-color: #0ed818;
+  background: rgba(14, 216, 24, 0.05);
+}
+.swagger-ui .opblock-tag-section .operation-tag-content .opblock-get .opblock-summary-method {
+  background: #0ed818;
+}
+.swagger-ui .opblock-tag-section .operation-tag-content .opblock .opblock-summary {
+  border: 0;
+  padding: 0 0.5rem 0 0;
+  display: flex;
+}
+.swagger-ui .opblock-tag-section .operation-tag-content .opblock .opblock-summary-method {
+  border-radius: 0;
+  font-family: "area-variable", sans-serif;
+  font-variation-settings: "wght" 600;
+  font-size: 1.125rem;
+  padding: 0.75rem 1rem 0.5rem;
+  min-width: 95px;
+}
+.swagger-ui .opblock-tag-section .operation-tag-content .opblock .opblock-summary-path {
+  width: 300px;
+  flex-basis: 300px;
+}
+.swagger-ui .opblock-tag-section .operation-tag-content .opblock .opblock-summary-path span {
+  font-variation-settings: "wght" 600;
+}
+.swagger-ui .opblock-tag-section .operation-tag-content .opblock .opblock-summary-path-description-wrapper {
+  padding-top: 0.25rem;
+}
+.swagger-ui .opblock-tag-section .operation-tag-content .opblock .opblock-summary-description {
+  font-family: "area-variable", sans-serif;
+  font-size: 1rem;
+}
+.swagger-ui .opblock-tag-section .operation-tag-content .opblock-post {
   border-color: #3e0897;
   background: rgba(62, 8, 151, 0.05);
 }
-.swagger-ui .opblock-tag-section .operation-tag-content .opblock-get .opblock-summary-method {
+.swagger-ui .opblock-tag-section .operation-tag-content .opblock-post .opblock-summary-method {
   background: #3e0897;
 }
 .swagger-ui .opblock-tag-section .operation-tag-content .opblock .opblock-summary {
@@ -183,9 +288,9 @@ html {
 .swagger-ui .opblock-tag-section .operation-tag-content .opblock .opblock-summary-method {
   border-radius: 0;
   font-family: "area-variable", sans-serif;
-  font-weight: 600;
+  font-variation-settings: "wght" 600;
   font-size: 1.125rem;
-  padding: 0.5rem 1rem;
+  padding: 0.75rem 1rem 0.5rem;
   min-width: 95px;
 }
 .swagger-ui .opblock-tag-section .operation-tag-content .opblock .opblock-summary-path {
@@ -193,38 +298,10 @@ html {
   flex-basis: 300px;
 }
 .swagger-ui .opblock-tag-section .operation-tag-content .opblock .opblock-summary-path span {
-  font-weight: 600;
+  font-variation-settings: "wght" 600;
 }
-.swagger-ui .opblock-tag-section .operation-tag-content .opblock .opblock-summary-description {
-  font-family: "area-variable", sans-serif;
-  font-size: 1rem;
-}
-.swagger-ui .opblock-tag-section .operation-tag-content .opblock-post {
-  border-color: #da00a5;
-  background: rgba(218, 0, 165, 0.05);
-}
-.swagger-ui .opblock-tag-section .operation-tag-content .opblock-post .opblock-summary-method {
-  background: #da00a5;
-}
-.swagger-ui .opblock-tag-section .operation-tag-content .opblock .opblock-summary {
-  border: 0;
-  padding: 0 0.5rem 0 0;
-  display: flex;
-}
-.swagger-ui .opblock-tag-section .operation-tag-content .opblock .opblock-summary-method {
-  border-radius: 0;
-  font-family: "area-variable", sans-serif;
-  font-weight: 600;
-  font-size: 1.125rem;
-  padding: 0.5rem 1rem;
-  min-width: 95px;
-}
-.swagger-ui .opblock-tag-section .operation-tag-content .opblock .opblock-summary-path {
-  width: 300px;
-  flex-basis: 300px;
-}
-.swagger-ui .opblock-tag-section .operation-tag-content .opblock .opblock-summary-path span {
-  font-weight: 600;
+.swagger-ui .opblock-tag-section .operation-tag-content .opblock .opblock-summary-path-description-wrapper {
+  padding-top: 0.25rem;
 }
 .swagger-ui .opblock-tag-section .operation-tag-content .opblock .opblock-summary-description {
   font-family: "area-variable", sans-serif;
@@ -245,9 +322,9 @@ html {
 .swagger-ui .opblock-tag-section .operation-tag-content .opblock .opblock-summary-method {
   border-radius: 0;
   font-family: "area-variable", sans-serif;
-  font-weight: 600;
+  font-variation-settings: "wght" 600;
   font-size: 1.125rem;
-  padding: 0.5rem 1rem;
+  padding: 0.75rem 1rem 0.5rem;
   min-width: 95px;
 }
 .swagger-ui .opblock-tag-section .operation-tag-content .opblock .opblock-summary-path {
@@ -255,7 +332,10 @@ html {
   flex-basis: 300px;
 }
 .swagger-ui .opblock-tag-section .operation-tag-content .opblock .opblock-summary-path span {
-  font-weight: 600;
+  font-variation-settings: "wght" 600;
+}
+.swagger-ui .opblock-tag-section .operation-tag-content .opblock .opblock-summary-path-description-wrapper {
+  padding-top: 0.25rem;
 }
 .swagger-ui .opblock-tag-section .operation-tag-content .opblock .opblock-summary-description {
   font-family: "area-variable", sans-serif;
@@ -276,9 +356,9 @@ html {
 .swagger-ui .opblock-tag-section .operation-tag-content .opblock .opblock-summary-method {
   border-radius: 0;
   font-family: "area-variable", sans-serif;
-  font-weight: 600;
+  font-variation-settings: "wght" 600;
   font-size: 1.125rem;
-  padding: 0.5rem 1rem;
+  padding: 0.75rem 1rem 0.5rem;
   min-width: 95px;
 }
 .swagger-ui .opblock-tag-section .operation-tag-content .opblock .opblock-summary-path {
@@ -286,7 +366,10 @@ html {
   flex-basis: 300px;
 }
 .swagger-ui .opblock-tag-section .operation-tag-content .opblock .opblock-summary-path span {
-  font-weight: 600;
+  font-variation-settings: "wght" 600;
+}
+.swagger-ui .opblock-tag-section .operation-tag-content .opblock .opblock-summary-path-description-wrapper {
+  padding-top: 0.25rem;
 }
 .swagger-ui .opblock-tag-section .operation-tag-content .opblock .opblock-summary-description {
   font-family: "area-variable", sans-serif;
@@ -332,7 +415,7 @@ html {
 }
 .swagger-ui .opblock table tr .parameters-col_name .parameter__name,
 .swagger-ui .opblock table tr .response-col_name .parameter__name {
-  font-weight: 600;
+  font-variation-settings: "wght" 600;
   font-size: 1rem;
   margin: 0;
   width: 120px;
@@ -452,7 +535,7 @@ html {
 .swagger-ui .opblock .btn-group .btn,
 .swagger-ui .opblock select {
   font-family: "area-variable", sans-serif;
-  font-weight: 600;
+  font-variation-settings: "wght" 600;
   box-shadow: none;
   border-radius: 0;
   margin-left: 0;
@@ -473,27 +556,27 @@ html {
 }
 .swagger-ui .opblock-get .btn,
 .swagger-ui .opblock-get .btn-group .btn {
-  background: #3e0897;
-  border-color: #3e0897;
+  background: #0ed818;
+  border-color: #0ed818;
   color: white;
 }
 .swagger-ui .opblock-get .btn:hover, .swagger-ui .opblock-get .btn:focus, .swagger-ui .opblock-get .btn:active,
 .swagger-ui .opblock-get .btn-group .btn:hover,
 .swagger-ui .opblock-get .btn-group .btn:focus,
 .swagger-ui .opblock-get .btn-group .btn:active {
-  background: #2a0567;
+  background: #0ba813;
 }
 .swagger-ui .opblock-post .btn,
 .swagger-ui .opblock-post .btn-group .btn {
-  background: #da00a5;
-  border-color: #da00a5;
+  background: #3e0897;
+  border-color: #3e0897;
   color: white;
 }
 .swagger-ui .opblock-post .btn:hover, .swagger-ui .opblock-post .btn:focus, .swagger-ui .opblock-post .btn:active,
 .swagger-ui .opblock-post .btn-group .btn:hover,
 .swagger-ui .opblock-post .btn-group .btn:focus,
 .swagger-ui .opblock-post .btn-group .btn:active {
-  background: #a7007e;
+  background: #2a0567;
 }
 .swagger-ui .opblock-patch .btn,
 .swagger-ui .opblock-patch .btn-group .btn {
@@ -538,7 +621,7 @@ html {
 .swagger-ui .opblock .tab .tabitem {
   font-family: "area-variable", sans-serif;
   font-size: 1rem;
-  font-weight: 600;
+  font-variation-settings: "wght" 600;
   color: #3b4151;
   display: block;
   padding: 0.5rem 1rem;
@@ -550,17 +633,17 @@ html {
   display: none;
 }
 .swagger-ui .opblock-get .tab {
-  border-bottom: 3px solid #3e0897;
+  border-bottom: 3px solid #0ed818;
 }
 .swagger-ui .opblock-get .tab .tabitem.active {
-  background: #3e0897;
+  background: #0ed818;
   color: white;
 }
 .swagger-ui .opblock-post .tab {
-  border-bottom: 3px solid #da00a5;
+  border-bottom: 3px solid #3e0897;
 }
 .swagger-ui .opblock-post .tab .tabitem.active {
-  background: #da00a5;
+  background: #3e0897;
   color: white;
 }
 .swagger-ui .opblock-patch .tab {
@@ -582,7 +665,7 @@ html {
 }
 .swagger-ui .opblock .responses-wrapper .responses-table tr.responses-header td {
   font-family: "area-variable", sans-serif;
-  font-weight: 600;
+  font-variation-settings: "wght" 600;
   font-size: 1rem;
 }
 .swagger-ui .opblock .responses-wrapper .responses-table tr.responses-header td.response-col_links {
@@ -593,7 +676,7 @@ html {
   align-items: flex-start;
 }
 .swagger-ui .opblock .responses-wrapper .responses-table tr.response .response-col_status {
-  font-weight: 600;
+  font-variation-settings: "wght" 600;
 }
 .swagger-ui .opblock .responses-wrapper .responses-table tr.response[data-code="200"], .swagger-ui .opblock .responses-wrapper .responses-table tr.response[data-code="201"], .swagger-ui .opblock .responses-wrapper .responses-table tr.response[data-code="204"] {
   align-items: flex-start;
@@ -631,7 +714,7 @@ html {
   font-size: 1.25rem;
   color: #3b4151;
   margin-bottom: 0.25rem;
-  font-weight: 600;
+  font-variation-settings: "wght" 600;
   display: block;
 }
 .swagger-ui .opblock .responses-wrapper .model-example .model-box .property-row {
@@ -683,7 +766,7 @@ html {
   font-family: "area-variable", sans-serif;
   color: #3b4151;
   font-size: 1.25rem;
-  font-weight: 600;
+  font-variation-settings: "wght" 600;
   border: 0;
   pointer-events: none;
   padding: 0;
@@ -701,11 +784,7 @@ html {
 .swagger-ui section.models .model-container .model-box-control .model-toggle {
   display: none;
 }
-.swagger-ui section.models .model-container .model-box-control[aria-expanded=true] {
-  display: none;
-}
 .swagger-ui section.models .model-container .property-row .model-box-control[aria-expanded=true] {
-  display: block !important;
   pointer-events: none;
 }
 .swagger-ui section.models .model-container .property-row .model-box-control[aria-expanded=true] .model-title {

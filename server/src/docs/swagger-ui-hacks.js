@@ -1,6 +1,6 @@
 ﻿document.addEventListener('DOMContentLoaded', function() {
     const swaggerUI = document.getElementById('swagger-ui');
-    
+
     waitForElementToExist('#swagger-ui').then(() => {
         waitForElementToExist('.model-box-control', 100).then(() => {
             swaggerUI.dispatchEvent(new Event('load'));
@@ -8,11 +8,11 @@
     });
 
     swaggerUI.addEventListener('load', function() {
-        
-        // Fix heading level of Schemas
+
+        // Fix heading level of Schemas, and also change it to Types
         const schemaHeading = document.querySelector('.models > h4');
-        schemaHeading.outerHTML = "<h3>" + schemaHeading.innerHTML + "</h3>"
-        
+        schemaHeading.outerHTML = "<h3>" + schemaHeading.innerHTML.replace('Schemas', 'Types') + "</h3>"
+
         // Hack the schema display
         const schemaButtons = document.querySelectorAll('.model-box-control');
         schemaButtons.forEach(button => {
@@ -27,12 +27,12 @@
             button.click();
             // They are then hidden using CSS because .remove() isn't working, it's a hack but it'll do for now
         });
-        
+
         // Add some classes/attributes to things for targeting with CSS
         waitForElementToExist('.prop').then(() => {
             const props = document.querySelectorAll('.prop');
             props.forEach(prop => {
-                prop.dataset.name = prop.querySelector('.prop-name')?.innerHTML; 
+                prop.dataset.name = prop.querySelector('.prop-name')?.innerHTML;
             })
         });
     });

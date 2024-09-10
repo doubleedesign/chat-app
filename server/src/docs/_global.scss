@@ -1,6 +1,6 @@
 ﻿.swagger-ui {
 	overflow-x: hidden;
-	border-bottom: 2rem solid map-get($colors, 'dark');
+	border-bottom: 2rem solid map-get($colours, 'dark');
 
 	* {
 		font-family: $body-font;
@@ -18,14 +18,13 @@
 	// Main headings
 	.opblock-tag,
 	section.models > h3 button span {
-		color: map-get($colors, 'dark');
+		color: map-get($colours, 'dark');
 		font-size: 1.5rem;
-		font-weight: 600;
+		font-variation-settings: 'wght' 700;
 	}
 
 	// Code blocks
 	.highlight-code {
-
 		code * {
 			font-family: monospace;
 		}
