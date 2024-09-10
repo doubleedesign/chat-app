@@ -2,7 +2,7 @@ import { Group, User, UserId } from './types.ts';
 import { writeFileSync, readFileSync } from 'fs';
 
 /**
- * Get the details of the groups a user belongs to from the JSON file
+ * Retrieve the details of the groups a user belongs to from the JSON file
  * @param userId
  *
  * @return {User} The user's details
@@ -51,7 +51,7 @@ export function createUser(newUser: User): User {
 
 
 /**
- * Get the details of the groups a user belongs to from the JSON file
+ * Retrieve details of the groups a user belongs to from the JSON file
  * @param userId
  *
  * @return {Group[]} The groups the user belongs to
@@ -66,7 +66,7 @@ export function getGroupsForUser(userId: UserId): Group[] {
 
 
 /**
- * Get the details of a group from the JSON file
+ * Retrieve the details of a group from the JSON file
  * @param groupId - the ID of the group to look up
  *
  * @return {Group} The group details
