@@ -40,7 +40,7 @@ router.get('/user', (req, res) => {
  * @return {object} 201 - success response
  */
 router.post('/user', (req, res) => {
-	const newUser = req.body.user;
+	const newUser = req.body;
 
 	try {
 		const user = createUser(newUser);

@@ -1,7 +1,5 @@
-import usersFile from './data/users.json' assert { type: 'json' };
-import groupsFile from './data/groups.json' assert { type: 'json' };
 import { Group, User, UserId } from './types.ts';
-import { writeFileSync } from 'fs';
+import { writeFileSync, readFileSync } from 'fs';
 
 /**
  * Get the details of the groups a user belongs to from the JSON file
@@ -10,7 +8,8 @@ import { writeFileSync } from 'fs';
  * @return {User} The user's details
  */
 export function getUser(userId: UserId): User {
-	const usersObject = JSON.parse(JSON.stringify(usersFile));
+	const usersFile = readFileSync('./src/data/users.json', 'utf-8'); // Read as string
+	const usersObject = JSON.parse(usersFile);
 	const user = usersObject.find((user: User) => user.email === userId);
 
 	if(!user) {
@@ -23,25 +22,27 @@ export function getUser(userId: UserId): User {
 
 /**
  * Create a new user by adding them to the JSON file
- * @param user
+ * @param newUser - The new user to add
  *
  * @return {User} - The newly created user
  */
-export function createUser(user: User): User {
-	const userExists = getUser(user.email);
+export function createUser(newUser: User): User {
+	const usersFile = readFileSync('./src/data/users.json', 'utf-8'); // Read as string
+	const usersObject = JSON.parse(usersFile);
+	const userExists = usersObject.find((user: User) => user.email === newUser.email);
 	if(userExists) {
 		throw new Error('User already exists');
 	}
 
 	try {
-		const usersObject = JSON.parse(JSON.stringify(usersFile));
-		usersObject.push(user);
+		const usersObject = JSON.parse(usersFile);
+		usersObject.push(newUser);
 
 		// Replace the file with updated data
 		writeFileSync('./src/data/users.json', JSON.stringify(usersObject, null, 4));
 
 		// Return the user, fetched from the file to make sure they were actually added
-		return getUser(user.email) as User;
+		return getUser(newUser.email) as User;
 	}
 	catch(error) {
 		throw new Error(error);
@@ -56,7 +57,8 @@ export function createUser(user: User): User {
  * @return {Group[]} The groups the user belongs to
  */
 export function getGroupsForUser(userId: UserId): Group[] {
-	const groupsObject = JSON.parse(JSON.stringify(groupsFile));
+	const groupsFile = readFileSync('./src/data/groups.json', 'utf-8'); // Read as string
+	const groupsObject = JSON.parse(groupsFile);
 	const user = getUser(userId);
 
 	return user.groupIds.map(groupId => groupsObject.find((group: Group) => group.id === groupId));
@@ -70,7 +72,8 @@ export function getGroupsForUser(userId: UserId): Group[] {
  * @return {Group} The group details
  */
 export function getGroup(groupId: string): Group | undefined {
-	const groupsObject = JSON.parse(JSON.stringify(groupsFile));
+	const groupsFile = readFileSync('./src/data/groups.json', 'utf-8'); // Read as string
+	const groupsObject = JSON.parse(groupsFile);
 
 	return groupsObject.find((group: Group) => group.id === groupId);
 }
@@ -83,7 +86,8 @@ export function getGroup(groupId: string): Group | undefined {
  * @return {void}
  */
 export function createGroup(group: Group): Group {
-	const groupsObject = JSON.parse(JSON.stringify(groupsFile));
+	const groupsFile = readFileSync('./src/data/groups.json', 'utf-8'); // Read as string
+	const groupsObject = JSON.parse(groupsFile);
 	groupsObject.push(group);
 
 	// Replace the file with updated data
@@ -101,8 +105,8 @@ export function createGroup(group: Group): Group {
  * @return {void}
  */
 export function updateGroup(group: Group): Group {
-	// Find the group
-	const groupsObject = JSON.parse(JSON.stringify(groupsFile));
+	const groupsFile = readFileSync('./src/data/groups.json', 'utf-8'); // Read as string
+	const groupsObject = JSON.parse(groupsFile);
 	const groupIndex = groupsObject.findIndex((g: Group) => g.id === group.id);
 
 	if (groupIndex === -1) {
