@@ -9,3 +9,12 @@ export async function waitForCssTransition(element: HTMLElement): Promise<void> 
 		});
 	});
 }
+
+/**
+ * Utility function to wait for enough time for the route change to complete (because many of them are animated)
+ */
+export async function waitForScreenChange(): Promise<void> {
+	return new Promise<void>((resolve) => {
+		setTimeout(resolve, 200);
+	});
+}

@@ -1,26 +1,35 @@
 import { ExpandableComponent } from './expandable.component';
 import { fireEvent, render, screen, waitFor } from '@testing-library/angular';
 import { waitForCssTransition } from '../../../test.utils';
+import { axe } from 'jasmine-axe';
 
 describe('ExpandableComponent', () => {
+	let component: Element;
+
 	beforeEach(async () => {
-		await render(`
+		const { fixture } = await render(`
             <app-expandable label="Expand" direction="down">
                 <p>Content</p>
             </app-expandable>
         `, { imports: [ExpandableComponent] }
 		);
+
+		component = fixture.nativeElement;
 	});
 
-	it('should render with correct button label', async () => {
+	it('should be accessible', async () => {
+		expect(await axe(component)).toHaveNoViolations();
+	});
+
+	it('renders with correct button label', async () => {
 		expect(screen.getByRole('button', { name: 'Expand' })).toBeVisible();
 	});
 
-	it('should not initially show the content', async () => {
+	it('does not initially show the content', async () => {
 		expect(screen.queryByText('Content')).not.toBeVisible();
 	});
 
-	it('should expand and show the content on click', async() => {
+	it('expands and shows the content on click', async() => {
 		const button = screen.getByRole('button', { name: 'Expand' });
 		const content = screen.getByTestId('expandable-content');
 
