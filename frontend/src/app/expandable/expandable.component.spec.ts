@@ -1,23 +1,32 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { ExpandableComponent } from './expandable.component';
+import { fireEvent, render, screen, waitFor } from '@testing-library/angular';
+import { waitForCssTransition } from '../../../test.utils';
 
 describe('ExpandableComponent', () => {
-  let component: ExpandableComponent;
-  let fixture: ComponentFixture<ExpandableComponent>;
+	beforeEach(async () => {
+		await render(`
+            <app-expandable label="Expand" direction="down">
+                <p>Content</p>
+            </app-expandable>
+        `, { imports: [ExpandableComponent] }
+		);
+	});
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      imports: [ExpandableComponent]
-    })
-    .compileComponents();
+	it('should render with correct button label', async () => {
+		expect(screen.getByRole('button', { name: 'Expand' })).toBeVisible();
+	});
 
-    fixture = TestBed.createComponent(ExpandableComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+	it('should not initially show the content', async () => {
+		expect(screen.queryByText('Content')).not.toBeVisible();
+	});
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
+	it('should expand and show the content on click', async() => {
+		const button = screen.getByRole('button', { name: 'Expand' });
+		const content = screen.getByTestId('expandable-content');
+
+		fireEvent.click(button);
+		await waitForCssTransition(content);
+
+		expect(screen.getByText('Content')).toBeVisible();
+	});
 });

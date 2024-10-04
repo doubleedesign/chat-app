@@ -3,7 +3,11 @@
         {{ label }}
         <i class="fa-solid" [ngClass]="'fa-chevron-' + direction"></i>
     </button>
-    <div #content class="expandable__content" [class.expandable__content--expanded]="isExpanded" [style.height]="isExpanded ? contentHeight : '0px'">
+    <div #content class="expandable__content"
+         data-testId="expandable-content"
+         [class.expandable__content--expanded]="isExpanded"
+         [style.height]="isExpanded ? contentHeight : '0px'"
+    >
         <ng-content></ng-content>
     </div>
 </div>

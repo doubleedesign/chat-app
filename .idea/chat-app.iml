@@ -8,5 +8,8 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" name="@types/jasmine" level="application" />
+    <orderEntry type="library" name="@types/karma" level="application" />
+    <orderEntry type="library" name="@types/testing-library__jasmine-dom" level="application" />
   </component>
 </module>
