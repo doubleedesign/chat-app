@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { booleanAttribute, Component, Input } from '@angular/core';
 import { NgIf } from '@angular/common';
 import { IconButtonComponent } from '../icon-button/icon-button.component';
 import { trigger, state, style, animate, transition } from '@angular/animations';
@@ -55,8 +55,14 @@ export class ModalDialog {
 	@Input() title: string = '';
 	@Input() triggerLabel: string = 'Open';
 	@Input() triggerIcon: string = '';
-	show: boolean = false;
+	@Input({ transform: booleanAttribute }) show: boolean = false;
 	inDOM: boolean = false;
+
+	ngOnInit() {
+		if (this.show) {
+			this.open();
+		}
+	}
 
 	open() {
 		this.inDOM = true;

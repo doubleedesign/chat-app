@@ -1,5 +1,5 @@
 import { LoginScreen } from './login-screen.component';
-import { fireEvent, render, screen, waitFor } from '@testing-library/angular';
+import { fireEvent, render, screen } from '@testing-library/angular';
 import { axe } from 'jasmine-axe';
 import { Router } from '@angular/router';
 import { TestBed } from '@angular/core/testing';
@@ -57,7 +57,7 @@ describe('LoginScreenComponent', () => {
 		expect(router.url).toBe('/register');
 	});
 
-	it('redirects to the chat screen when login is successful', async () => {
+	it('redirects to the home screen when login is successful', async () => {
 		const email = screen.getByRole('textbox', { name: 'Email' });
 		const password = screen.getByLabelText('Password');
 		const button = screen.getByRole('button', { name: 'Let\'s chat' });
@@ -68,5 +68,19 @@ describe('LoginScreenComponent', () => {
 		await waitForScreenChange();
 
 		expect(router.url).toBe('/chat/home');
+	});
+
+	it('saves login status to local storage when login is successful', async () => {
+		const localStorageSpy = spyOn(localStorage, 'setItem');
+		const email = screen.getByRole('textbox', { name: 'Email' });
+		const password = screen.getByLabelText('Password');
+		const button = screen.getByRole('button', { name: 'Let\'s chat' });
+
+		fireEvent.input(email, { target: { value: 'leesa.ward@griffithuni.edu.au' } });
+		fireEvent.input(password, { target: { value: 'test-password' } });
+		fireEvent.click(button);
+		await waitForScreenChange();
+
+		expect(localStorageSpy).toHaveBeenCalledWith('chatty-user', JSON.stringify('leesa.ward@griffithuni.edu.au'));
 	});
 });

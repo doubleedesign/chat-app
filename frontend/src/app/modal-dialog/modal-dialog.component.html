@@ -2,7 +2,7 @@
     <i *ngIf="triggerIcon" [class]="triggerIcon"></i>
     {{ triggerLabel }}
 </button>
-<div *ngIf="inDOM" class="modal-dialog">
+<div *ngIf="inDOM" class="modal-dialog" role="dialog" aria-label="Modal dialog">
     <div class="modal-dialog__backdrop" [@dialogOverlay]="show ? 'open' : 'closed'">
     </div>
     <div class="modal-dialog__content" [@dialogContent]="show ? 'open' : 'closed'">
