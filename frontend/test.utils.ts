@@ -23,6 +23,17 @@ export async function waitForScreenChange(): Promise<void> {
 }
 
 /**
+ * Utility function to wait for enough time for an animated render or similar change to complete
+ * Basically the same as waitForScreenChange just with a more intuitive name
+ * and an option to set the time to wait
+ */
+export async function waitTimeForAnimatedRender(time = 200): Promise<void> {
+	return new Promise<void>((resolve) => {
+		setTimeout(resolve, time);
+	});
+}
+
+/**
  * Mock implementation of the AuthGuard service to mock logged-in state
  */
 export class MockAuthGuard {

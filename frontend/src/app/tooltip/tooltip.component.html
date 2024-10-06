@@ -1,6 +1,12 @@
-<div class="tooltip" (mouseenter)="show()" (mouseleave)="hide()">
+<div class="tooltip"
+     data-testid="tooltipped-element"
+     (mouseenter)="show()"
+     (mouseleave)="hide()"
+     (focusin)="show()"
+     (focusout)="hide()"
+>
     <ng-content></ng-content>
-    <span class="tooltip__content" [class]="transitionClasses" *ngIf="visible" [attr.data-position]="position">
+    <span class="tooltip__content" role="tooltip" [class]="transitionClasses" *ngIf="visible" [attr.data-position]="position">
         {{ text }}
     </span>
 </div>

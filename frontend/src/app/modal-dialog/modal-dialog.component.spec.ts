@@ -7,12 +7,11 @@ describe('ModalDialogComponent', () => {
 	let component: Element;
 
 	describe('closed state', () => {
-
 		beforeEach(async () => {
 			const { fixture } = await render(
 				`<app-modal-dialog triggerLabel="Add group" title="Add group" triggerIcon="fa-solid fa-plus">
-                <p>Modal content</p>
-            </app-modal-dialog>`,
+                    <p>Modal content</p>
+                </app-modal-dialog>`,
 				{ imports: [ModalDialog] }
 			);
 

@@ -1,5 +1,5 @@
 <section class="tabbed-content">
-    <nav class="tabs" [attr.data-theme]="theme" [attr.data-size]="size">
+    <div class="tabs" [attr.data-theme]="theme" [attr.data-size]="size">
         <ul class="tab-list">
             <app-back-button *ngIf="showBackButton"></app-back-button>
             <li *ngFor="let tab of tabs">
@@ -15,12 +15,12 @@
                 </ng-container>
             </li>
         </ul>
-    </nav>
-    <main class="tab-content">
+    </div>
+    <div class="tab-content">
         <div class="page-transitions-wrapper" [@routeAnimations]="activeRouteAnimation">
             <router-outlet></router-outlet>
         </div>
-    </main>
+    </div>
 </section>
 
 <!-- Default button template to use if a custom one is not passed in -->
