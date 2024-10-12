@@ -1,5 +1,5 @@
 import { Collection, Db, MongoClient } from 'mongodb';
-import { Group, User, UserId } from '../types.ts';
+import { Channel, Group, User, UserId } from '../types.ts';
 
 export class DatabaseConnection {
 	private client: MongoClient;
@@ -160,5 +160,72 @@ export class DatabaseConnection {
 		catch (error) {
 			throw new Error(error);
 		}
+	}
+
+
+	/**
+     * Find a channel by its ID
+     * @param channelId
+     *
+     * @return {Channel} The channel details
+     */
+	async getChannel(channelId: string): Promise<Channel | null> {
+		const result = await this.groups.findOne({
+			channels: { $elemMatch: { id: channelId } }
+		});
+
+		if (!result) {
+			throw new Error('Channel not found');
+		}
+
+		return result.channels.find((channel: Channel) => channel.id === channelId);
+	}
+
+
+	/**
+     * Create a new channel in a group
+     * @param groupId
+     * @param channel
+     *
+     * @return {Group} The updated group
+     */
+	async createChannel(groupId: string, channel: Channel): Promise<Group> {
+		try {
+			await this.groups.updateOne(
+				{ id: groupId },
+				{ $push: { channels: channel } }
+			);
+
+			// Return the group, re-fetched from the database
+			return await this.getGroup(groupId);
+		}
+		catch (error) {
+			throw new Error(error);
+		}
+	}
+
+
+	/**
+     * Delete a channel from a group
+     * @param channelId
+     *
+     * @return {Group} The updated group
+     */
+	async deleteChannel(channelId: string): Promise<Group> {
+		const group = await this.groups.findOne({
+			channels: { $elemMatch: { id: channelId } }
+		});
+
+		if (!group) {
+			throw new Error('Channel not found');
+		}
+
+		await this.groups.updateOne(
+			{ id: group.id },
+			{ $pull: { channels: { id: channelId } } }
+		);
+
+		// Return the updated group, retrieved from the database
+		return await this.getGroup(group.id);
 	}
 }

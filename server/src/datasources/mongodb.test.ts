@@ -1,6 +1,6 @@
 import { DatabaseConnection } from './mongodb.ts';
 import { TEST_DATABASE_NAME } from '../../jest.setup.ts';
-import { generateSingleGroup, generateSingleUser } from '../../utils/test.utils.ts';
+import { generateSingleChannel, generateSingleGroup, generateSingleUser } from '../../utils/test.utils.ts';
 import { Collection, MongoClient } from 'mongodb';
 
 describe('MongoDB datasource', () => {
@@ -162,6 +162,53 @@ describe('MongoDB datasource', () => {
 			})).rejects.toThrow('Database update failed');
 
 			expect(spy).toHaveBeenCalledWith({ id: 'rik1lvWY0O2w' }, { $set: expect.any(Object) });
+		});
+	});
+
+	describe('Channels', () => {
+
+		test('getChannel', async () => {
+			const channel = await db.getChannel('M9jeEHkN125pHCOM');
+
+			expect(channel).toEqual(expect.objectContaining({
+				id: 'M9jeEHkN125pHCOM',
+				label: 'Showy acrobatic cows'
+			}));
+		});
+
+		test('getChannel throws an error if the channel does not exist', async () => {
+			await expect(db.getChannel('abc')).rejects.toThrow('Channel not found');
+		});
+
+		test('createChannel', async () => {
+			const channel = generateSingleChannel();
+			const result = await db.createChannel('rik1lvWY0O2w', channel);
+
+			expect(result.channels).toEqual(expect.arrayContaining([channel]));
+		});
+
+		test('createChannel throws an error if the group does not exist', async () => {
+			await expect(db.createChannel('abc', generateSingleChannel())).rejects.toThrow('Group not found');
+		});
+
+		test('createChannel throws an error if insertOne fails', async () => {
+			const spy = jest.spyOn(Collection.prototype, 'updateOne').mockRejectedValue(new Error('Database update failed'));
+			const channel = generateSingleChannel();
+
+			await expect(db.createChannel('rik1lvWY0O2w', channel)).rejects.toThrow('Database update failed');
+			expect(spy).toHaveBeenCalledWith({ id: 'rik1lvWY0O2w' }, { $push: { channels: channel } });
+		});
+
+		test('deleteChannel', async () => {
+			const result = await db.deleteChannel('K9HnKcE2WNoBqr7t');
+
+			expect(result.channels).not.toEqual(expect.objectContaining({
+				id: 'K9HnKcE2WNoBqr7t'
+			}));
+		});
+
+		test('deleteChannel throws an error if the channel does not exist', async () => {
+			await expect(db.deleteChannel('abc')).rejects.toThrow('Channel not found');
 		});
 	});
 });

@@ -1,7 +1,6 @@
 import express from 'express';
 const router = express.Router();
-import groupsFile from '../data/groups.json' assert { type: 'json' };
-import { writeFileSync } from 'fs';
+import { db } from '../constants.ts';
 
 /**
  * GET /channels
@@ -20,18 +19,16 @@ router.get('/channels/:channelId', (req, res) => {
 		});
 	}
 
-	// Find the channel
-	const groupsObject = JSON.parse(JSON.stringify(groupsFile));
-	const channel = groupsObject.find(group => group.channels.find(channel => channel.id === channelId));
+	try {
+		const channel = db.getChannel(channelId as string);
 
-	// If channel not found, return 404
-	if (!channel) {
+		return res.status(200).json(channel);
+	}
+	catch(error) {
 		return res.status(404).json({
-			error: 'Channel not found'
+			error: error.message
 		});
 	}
-
-	return res.status(200).json(channel);
 });
 
 
@@ -43,7 +40,7 @@ router.get('/channels/:channelId', (req, res) => {
  * @param {string} body.groupId.required - The group's ID
  * @return {object} 201 - success response
  */
-router.post('/channels', (req, res) => {
+router.post('/channels', async (req, res) => {
 	const { groupId, channel } = req.body;
 
 	// If no groupId, return 400
@@ -60,24 +57,9 @@ router.post('/channels', (req, res) => {
 		});
 	}
 
-	// Find the group
-	const groupsObject = JSON.parse(JSON.stringify(groupsFile));
-	const group = groupsObject.find(group => group.id === groupId);
+	const updated = await db.createChannel(groupId, channel);
 
-	// If group not found, return 404
-	if (!group) {
-		return res.status(404).json({
-			error: 'Group not found'
-		});
-	}
-
-	// Add the channel
-	groupsObject.channels.push(channel);
-
-	// Replace the file with the updated object
-	writeFileSync('./data/groups.json', JSON.stringify(groupsObject, null, 4));
-
-	return res.status(201).json(group);
+	return res.status(201).json(updated);
 });
 
 
@@ -87,7 +69,7 @@ router.post('/channels', (req, res) => {
  * @summary Remove a channel from the database
  * @param {string} body.channelId.required - The channel's ID
  */
-router.delete('/channels', (req, res) => {
+router.delete('/channels', async (req, res) => {
 	const { channelId } = req.body;
 
 	// If no channelId, return 400
@@ -97,18 +79,9 @@ router.delete('/channels', (req, res) => {
 		});
 	}
 
-	// Find the channel
-	const groupsObject = JSON.parse(JSON.stringify(groupsFile));
-	const group = groupsObject.find(group => group.channels.find(channel => channel.id === channelId));
-	const channelIndex = group.channels.findIndex(channel => channel.id === channelId);
+	const updated = await db.deleteChannel(channelId);
 
-	// Remove the channel
-	group.channels.splice(channelIndex, 1);
-
-	// Replace the file with the updated object
-	writeFileSync('./data/groups.json', JSON.stringify(groupsObject, null, 4));
-
-	return res.status(200).json(group);
+	return res.status(204).json(updated);
 });
 
 export default router;

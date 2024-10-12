@@ -3,7 +3,7 @@
  * Based on the generate.ts script functions used for phase 1, but separated out for clarity
  * (with some functions moved to this file if they're used for both)
  */
-import { User } from '../src/types.ts';
+import { User, Group, Channel } from '../src/types.ts';
 import Case from 'case';
 import sampleSize from 'lodash/sampleSize';
 import { Inflectors } from 'en-inflectors';
@@ -25,7 +25,7 @@ export function generateSingleUser(): User {
 	};
 }
 
-export function generateSingleGroup() {
+export function generateSingleGroup(): Group {
 	const uid = new ShortUniqueId({ length: 12 });
 
 	return {
@@ -34,6 +34,16 @@ export function generateSingleGroup() {
 		avatar: chance.avatar({ protocol: 'https' }),
 		admins: ['henrietta_reed@hotmail.com', 'sadie_harrington@example.com'],
 		channels: []
+	};
+}
+
+export function generateSingleChannel(): Channel {
+	const uid = new ShortUniqueId({ length: 12 });
+
+	return {
+		id: uid.rnd(),
+		label: generateRandomChannelName(),
+		avatar: chance.avatar({ protocol: 'https' }),
 	};
 }
 
