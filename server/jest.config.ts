@@ -4,6 +4,15 @@ const config: Config = {
 	preset: 'ts-jest',
 	testEnvironment: 'node',
 	moduleFileExtensions: ['ts', 'js'],
+	collectCoverage: true,
+	coverageDirectory: 'coverage',
+	coverageReporters: ['text', 'lcov'],
+	collectCoverageFrom: [
+		'src/**/*.ts',
+		'!src/docs/**',
+		'!src/types.ts',
+	],
+	forceExit: true, // make sure Jest exits after tests complete
 	testMatch: ['**/*.test.ts'],
 	globals: {
 		'ts-jest': {
