@@ -1,19 +1,21 @@
 # Chatty
 
-Phase 1 of a chat application for 3813ICT Software Frameworks at Griffith University.
+Chat application for 3813ICT Software Frameworks at Griffith University.
 
 ## Table of contents
 - [Overview](#overview)
   - [Data structure](#data-structure)
-  - [API endpoints and associated functions](#api-endpoints-and-associated-functions)
+  - [API endpoints](#api-endpoints)
 - [Server](#server)
   - [Installation and local development](#installation-and-local-development)
   - [Interactive documentation](#interactive-documentation)
+  - [Unit tests](#unit-tests)
   - [Mock data generation](#mock-data-generation)
 - [Front-end](#front-end)
   - [Installation and local development](#installation-and-local-development-1)
   - [Navigation structure](#navigation-structure)
   - [UI prototype screenshots](#ui-prototype-screenshots)
+  - [Unit tests](#unit-tests-1)
 
 ---
 ## Overview
@@ -43,25 +45,24 @@ In a relational database, constraints such as requiring a channel belong to exac
 
 The constraint of making this work in a JSON-like structure meant I had to implement logic at the code level to ensure data integrity. I did this by creating REST API endpoints for all valid interactions.
 
-### API endpoints and associated functions
+### API endpoints
 
-| Method and endpoint | Parameters     | Function                                                                         |
-|---------------------|----------------|----------------------------------------------------------------------------------|
-| `GET /user`         | User ID        | Get the details of a given user.                                                 |
-| `POST /user`        | User object    | Create a new user.                                                               |
-| `GET /groups`       | User ID        | Get the groups a user belongs to.                                                |
-| `GET /group`        | Group ID       | Get the details of a given group, including its channels and admins.             |
-| `POST /group`       | Group object   | Create a new group.                                                              |
-| `PATCH /group`      | Group object   | Update an existing group. For example, to add/remove an admin user or a channel. |
-| `GET /channel`      | Channel ID     | Get the details of a given channel.                                              |
-| `POST /channel`     | Channel object | Create a new channel.                                                            |
-| `DELETE /channel`   | Channel ID     | Delete a channel.                                                                |
-
+| Method and endpoint           | Parameters              | Function                                                            |
+|-------------------------------|-------------------------|---------------------------------------------------------------------|
+| `GET /user/:userId`           | User ID (email address) | Get the details of a given user.                                    |
+| `GET /user/:userId/groups`    | User ID (email address) | Get the details of groups that the given user is a member of.       |
+| `POST /user`                  | `User` object           | Create a new user.                                                  |
+| `GET /groups/:groupId`        | Group ID (string)       | Get the details of a given group.                                   |
+| `POST /groups`                | `Group` object          | Create a new group.                                                 |
+| `PATCH /groups/:groupId`      | `Group` object          | Update an existing group, such as changing its name or admin users. |
+| `GET /channels/:channelId`    | Channel ID (string)     | Get the details of a given channel.                                 |
+| `POST /channels`              | `Channel` object        | Create a new channel.                                               |
+| `DELETE /channels/:channelId` | Channel ID (string)     | Delete a given channel.                                             |
 
 ---
 
 ## Server
-The server is a Node.js application that uses Express.js to serve a RESTful API. The server is responsible for managing users, groups, and channels. For the purposes of Phase 1, data is currently stored in JSON files. 
+The server is a Node.js application that uses Express.js to serve a RESTful API. The server is responsible for managing users, groups, and channels in a Mongo database.
 
 ### Installation and local development
 
@@ -78,12 +79,30 @@ npm run dev
 ```
 
 ### Interactive documentation
-I have used [express-jsdoc-swagger](https://www.npmjs.com/package/express-jsdoc-swagger) to generate web-based documentation of the API. The documentation can be accessed at `http://localhost:4100/docs` when the server is running.
+I have used [express-jsdoc-swagger](https://www.npmjs.com/package/express-jsdoc-swagger) to generate web-based documentation of the API. The documentation can be accessed at `http://localhost:4100/docs` when the server is running. The documentation includes complete examples of parameters and responses for each endpoint, along with the associated type definitions.
 
-![Swagger documentation screenshot](./doc-assets/swagger-ui.png)
+![Swagger documentation screenshot](./doc-assets/swagger-ui-v2.png)
+
+### Unit tests
+
+I have written unit tests for all methods in the interaction class and all REST endpoints. MongoDB needs to be running locally, but the Express server does not.
+
+These can be run using the provided Run configuration in WebStorm/IntelliJ, or with the below command:
+
+```bash
+cd server
+npm run test
+```
+Under the hood, this:
+- Sets the `NODE_ENV` environment variable to `test` so that certain things can be skipped (notably the custom Swagger doc webpage)
+- Sets up a test database populated with the mock data from the `./src/data/groups.json` and `./src/data/users.json` files
+- Runs the Jest test runner with the `--coverage` flag to generate a coverage report
+- Uses [SuperTest](https://www.npmjs.com/package/supertest) to test the REST API endpoints without needing to run the server.
 
 ### Mock data generation
-I have created a script to generate mock users, groups, and channels for development and testing purposes. Generated files are included in this repository, but the generation script can be re-run using:
+I have created a script to generate mock users, groups, and channels for development and testing purposes. Generated files are included in this repository and are used for unit tests.
+
+New mock data can be generated using the below command, but bear in mind that replacing the current data files will break unit tests. You may want to back up the current data files first.
 
 ```bash
 cd server
@@ -123,5 +142,17 @@ The navigation structure is as follows:
 ![Group screen - group selected](./doc-assets/ui-prototype-group.png)
 ![Channel screen](./doc-assets/ui-prototype-channel-settings.png)
 
+### Unit tests
 
+I have written unit tests for the front-end components using Karma, Jasmine with [Jasmine DOM](https://github.com/testing-library/jasmine-dom), and [Angular Testing Library](https://testing-library.com/docs/angular-testing-library/intro). 
 
+These can be run using the provided Run configuration in WebStorm/IntelliJ, or with the below command:
+
+```bash
+cd frontend
+npm run test
+```
+
+Under the hood, this:
+- Runs the Karma test runner with the `--code-coverage` flag to generate a coverage report
+- Uses Jasmine with the additional [Jasmine DOM](https://github.com/testing-library/jasmine-dom) library to provide additional assertion matchers such as `.toBeVisible()`.

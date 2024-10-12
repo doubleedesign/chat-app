@@ -6,6 +6,7 @@
 	"main": "src/index.ts",
 	"scripts": {
 		"dev": "nodemon",
+		"test": "NODE_ENV=test jest --coverage --detectOpenHandles",
 		"generate": "node --import ./loader.mjs utils/generate.ts",
 		"styles": "sass ./src/docs/_swagger-ui-styles.scss ./src/docs/swagger-ui-styles.css"
 	},

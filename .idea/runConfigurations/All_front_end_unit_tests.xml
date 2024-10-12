@@ -1,0 +1,11 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="All front-end unit tests" type="JavaScriptTestRunnerKarma">
+    <config-file value="$PROJECT_DIR$/frontend/karma.conf.cjs" />
+    <karma-options value="--code-coverage" />
+    <karma-package-dir value="$PROJECT_DIR$/frontend/node_modules/@angular/cli" />
+    <working-directory value="$PROJECT_DIR$/frontend" />
+    <node-interpreter value="project" />
+    <envs />
+    <method v="2" />
+  </configuration>
+</component>
