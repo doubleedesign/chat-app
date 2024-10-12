@@ -15,9 +15,8 @@ import ShortUniqueId from 'short-unique-id';
 import Case from 'case';
 import sampleSize from 'lodash/sampleSize';
 import random from 'lodash/random';
-import { Inflectors } from 'en-inflectors';
 import Chance from 'chance';
-import gfynonce from 'gfynonce';
+import { generateRandomChannelName, generateRandomGroupName } from './test.utils.ts';
 
 const chance = new Chance();
 
@@ -106,29 +105,4 @@ function addUsersToGroups(users: User[], groups: Group[]) {
 		const randomGroups = sampleSize(groups, random(1, 5));
 		user.groupIds.concat(randomGroups.map(group => group.id));
 	});
-}
-
-
-/**
- * Generate random-ish group names for the mock data
- */
-function generateRandomGroupName() {
-	let name = chance.profession();
-	const words = name.split(' ');
-	const lastWord = words[words.length - 1];
-
-	return Case.title(
-		name.replace(lastWord, new Inflectors(lastWord).toPlural())
-	);
-}
-
-/**
- * Generate random-ish channel names for the mock data
- */
-function generateRandomChannelName() {
-	const phrase = new Inflectors(
-		gfynonce({ adjectives: 2, separator: '_' })
-	).toPlural();
-
-	return Case.sentence(phrase);
 }

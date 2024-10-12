@@ -15,6 +15,11 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static('static'));
 app.use(cors());
 
+// Allow CORS from local front-end
+app.use(cors({
+	origin: 'http://localhost:4200',
+}));
+
 // Insert imported routes
 Object.entries(endpoints).map(([key, value]) => (
 	app.use('/', endpoints[key])

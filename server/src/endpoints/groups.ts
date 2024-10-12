@@ -1,7 +1,7 @@
 import express from 'express';
 const router = express.Router();
-import { createGroup, getGroup, getGroupsForUser, getUser, updateGroup } from '../common.ts';
 import { UserId } from '../types.ts';
+import { db } from '../constants.ts';
 
 /**
  * GET /groups
@@ -21,7 +21,7 @@ router.get('/groups', (req, res) => {
 	}
 
 	// Find the user
-	const user = getUser(userId as string);
+	const user = db.getUser(userId as string);
 
 	// If user not found, return 404
 	if (!user) {
@@ -30,7 +30,7 @@ router.get('/groups', (req, res) => {
 		});
 	}
 
-	const groups = getGroupsForUser(userId as UserId);
+	const groups = db.getGroupsForUser(userId as UserId);
 
 	return res.status(200).json(groups);
 });
@@ -53,7 +53,7 @@ router.get('/groups/:groupId', (req, res) => {
 		});
 	}
 
-	return getGroup(groupId);
+	return db.getGroup(groupId);
 });
 
 
@@ -74,7 +74,7 @@ router.post('/groups', (req, res) => {
 		});
 	}
 
-	const newGroup = createGroup(group);
+	const newGroup = db.createGroup(group);
 
 	return res.status(201).json(newGroup);
 });
@@ -99,7 +99,9 @@ router.patch('/groups', (req, res) => {
 	}
 
 	try {
-		updateGroup(group);
+		const updated = db.updateGroup(group);
+
+		return res.status(201).json(updated);
 	}
 	catch (error) {
 		return res.status(400).json({

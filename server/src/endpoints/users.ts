@@ -1,6 +1,6 @@
 import express from 'express';
 const router = express.Router();
-import { createUser, getUser } from '../common.ts';
+import { db } from '../constants.ts';
 
 /**
  * GET /user
@@ -20,7 +20,7 @@ router.get('/user', (req, res) => {
 	}
 
 	try {
-		const user = getUser(userId as string);
+		const user = db.getUser(userId as string);
 
 		return res.status(200).json(user);
 	}
@@ -43,7 +43,7 @@ router.post('/user', (req, res) => {
 	const newUser = req.body;
 
 	try {
-		const user = createUser(newUser);
+		const user = db.createUser(newUser);
 
 		return res.status(201).json(user);
 	}
