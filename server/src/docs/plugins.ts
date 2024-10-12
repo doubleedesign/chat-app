@@ -23,11 +23,13 @@ const CustomActionsPlugin = function(system) {
 	 * so I don't have to put them in the JSDoc comments for the routes
 	 * @param originalAction
 	 * @param system
+     *
 	 * @return {function(*): *}
 	 */
 	function addExamplesToJsonSpec(originalAction, system) {
 
 		return async (json) => {
+			console.log(json);
 			// Fetch the JSON files because importing it doesn't work in this context for some reason
 			// I think it has something to do with this plugin becoming part of the Swagger config object
 			// and the import not being in that scope.

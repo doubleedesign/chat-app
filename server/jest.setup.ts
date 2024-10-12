@@ -1,7 +1,6 @@
 import { MongoClient } from 'mongodb';
 import { promises as fs } from 'fs';
 import path from 'path';
-import chalk from 'chalk';
 
 const client = new MongoClient('mongodb://localhost:27017');
 export const TEST_DATABASE_NAME = 'chatapp-test';
@@ -40,8 +39,8 @@ beforeAll(async () => {
 afterAll(async () => {
 	const db = client.db(TEST_DATABASE_NAME);
 	await db.dropDatabase();
-	console.log(chalk.cyan('Dropped test database'));
-    
+	console.log('Dropped test database');
+
 	await client.close();
 	console.log('MongoDB connection closed');
 });

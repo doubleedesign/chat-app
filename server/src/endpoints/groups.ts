@@ -1,7 +1,7 @@
 import express from 'express';
 const router = express.Router();
 import { UserId } from '../types.ts';
-import { db } from '../constants.ts';
+import { getDatabase } from '../constants.ts';
 
 /**
  * GET /groups
@@ -10,7 +10,8 @@ import { db } from '../constants.ts';
  * @param {string} userId.query.required - The user's email
  * @return {object} 200 - success response
  */
-router.get('/groups', (req, res) => {
+router.get('/groups', async (req, res) => {
+	const db = await getDatabase();
 	const userId = req.query.userId;
 
 	// If no userId, return 400
@@ -20,19 +21,18 @@ router.get('/groups', (req, res) => {
 		});
 	}
 
-	// Find the user
-	const user = db.getUser(userId as string);
+	try {
+		const user = await db.getUser(userId as string);
+		const groups = await db.getGroupsForUser(userId as UserId);
 
-	// If user not found, return 404
-	if (!user) {
+		return res.status(200).json(groups);
+	}
+	catch (error) {
 		return res.status(404).json({
-			error: 'User not found'
+			error: error.message
 		});
 	}
 
-	const groups = db.getGroupsForUser(userId as UserId);
-
-	return res.status(200).json(groups);
 });
 
 
@@ -43,17 +43,21 @@ router.get('/groups', (req, res) => {
  * @param {string} groupId.path.required - The group's ID
  * @return {object} 200 - success response
  */
-router.get('/groups/:groupId', (req, res) => {
+router.get('/groups/:groupId', async (req, res) => {
+	const db = await getDatabase();
 	const groupId = req.params.groupId;
+	// If no groupId, this endpoint won't be hit - it goes to /groups
 
-	// If no groupId, return 400
-	if (!groupId) {
-		return res.status(400).json({
-			error: 'groupId is required'
+	try {
+		const group = await db.getGroup(groupId as string);
+
+		return res.status(200).json(group);
+	}
+	catch (error) {
+		return res.status(404).json({
+			error: error.message
 		});
 	}
-
-	return db.getGroup(groupId);
 });
 
 
@@ -64,19 +68,26 @@ router.get('/groups/:groupId', (req, res) => {
  * @param {object} request.body.required - The group to create
  * @return {object} 201 - success response
  */
-router.post('/groups', (req, res) => {
+router.post('/groups', async (req, res) => {
+	const db = await getDatabase();
 	const group = req.body;
 
-	// If no group data passed, return 400
-	if (!group) {
+	try {
+		const newGroup = await db.createGroup(group);
+
+		return res.status(201).json(newGroup);
+	}
+	catch (error) {
+		if (error.message === 'Group already exists') {
+			return res.status(409).json({
+				error: error.message
+			});
+		}
+
 		return res.status(400).json({
-			error: 'group is required'
+			error: error.message
 		});
 	}
-
-	const newGroup = db.createGroup(group);
-
-	return res.status(201).json(newGroup);
 });
 
 
@@ -88,22 +99,22 @@ router.post('/groups', (req, res) => {
  * @param {object} request.body.required - The group data to update
  * @return {object} 200 - success response
  */
-router.patch('/groups', (req, res) => {
+router.patch('/groups', async (req, res) => {
+	const db = await getDatabase();
 	const group = req.body;
 
-	// If no group data passed, return 400
-	if (!group) {
-		return res.status(400).json({
-			error: 'group details are required'
-		});
-	}
-
 	try {
-		const updated = db.updateGroup(group);
+		const updated = await db.updateGroup(group);
 
 		return res.status(201).json(updated);
 	}
 	catch (error) {
+		if(error.message === 'Group not found') {
+			return res.status(404).json({
+				error: error.message
+			});
+		}
+
 		return res.status(400).json({
 			error: error.message
 		});

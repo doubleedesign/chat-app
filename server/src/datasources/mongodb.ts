@@ -2,7 +2,7 @@ import { Collection, Db, MongoClient } from 'mongodb';
 import { Channel, Group, User, UserId } from '../types.ts';
 
 export class DatabaseConnection {
-	private client: MongoClient;
+	client: MongoClient;
 	private db: Db;
 	private users: Collection<User>;
 	private groups: Collection<Group>;
@@ -39,7 +39,6 @@ export class DatabaseConnection {
      */
 	async getUser(userId: UserId): Promise<User | null> {
 		const result = await this.users.findOne({ email: userId });
-
 		if (!result) {
 			throw new Error('User not found');
 		}
@@ -57,7 +56,7 @@ export class DatabaseConnection {
 	async createUser(newUser: User): Promise<User> {
 		// Make sure newUser is a valid User object
 		if (!newUser.name || !newUser.email || !newUser.groupIds) {
-			throw new TypeError('User object is missing required fields');
+			throw new TypeError('User is missing required fields');
 		}
 
 		const userExists = await this.users.findOne({ email: newUser.email });
@@ -117,11 +116,10 @@ export class DatabaseConnection {
 	async createGroup(group: Group): Promise<Group> {
 		// Make sure group is a valid Group object
 		if (!group.id || !group.label || !group.admins || !group.channels) {
-			throw new TypeError('Group object is missing required fields');
+			throw new TypeError('Group is missing required fields');
 		}
 
 		const groupExists = await this.groups.findOne({ id: group.id });
-
 		if (groupExists) {
 			throw new Error('Group already exists');
 		}
@@ -146,9 +144,12 @@ export class DatabaseConnection {
      */
 	async updateGroup(group: Group): Promise<Group> {
 		const groupExists = await this.groups.findOne({ id: group.id });
-
 		if (!groupExists) {
 			throw new Error('Group not found');
+		}
+
+		if(!group.label || !group.admins || !group.channels) {
+			throw new TypeError('Group is missing required fields');
 		}
 
 		try {
@@ -190,6 +191,14 @@ export class DatabaseConnection {
      * @return {Group} The updated group
      */
 	async createChannel(groupId: string, channel: Channel): Promise<Group> {
+		const channelExistsWithName = await this.groups.findOne({
+			channels: { $elemMatch: { label: channel.label } }
+		});
+
+		if (channelExistsWithName) {
+			throw new Error('Channel already exists');
+		}
+
 		try {
 			await this.groups.updateOne(
 				{ id: groupId },

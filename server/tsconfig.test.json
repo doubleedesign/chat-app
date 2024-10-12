@@ -1,0 +1,15 @@
+{
+	"extends": "./tsconfig.json",
+	"compilerOptions": {
+		"module": "esnext",
+		"target": "esnext",
+		"moduleResolution": "node",
+		"lib": ["es2022", "dom"]
+	},
+	"include": [
+		"utils/**/*",
+		"src/**/*",
+		"jest.setup.ts",
+		"jest.config.ts"
+	]
+}

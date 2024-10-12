@@ -27,6 +27,10 @@
 		"utils/**/*",
 		"src/**/*"
 	],
+	"exclude": [
+		"jest.setup.ts",
+		"jest.config.ts"
+	],
 	"ts-node": {
 		"esm": true,
 		"experimentalSpecifierResolution": "node"

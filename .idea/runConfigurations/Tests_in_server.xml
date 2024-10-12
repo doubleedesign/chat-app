@@ -4,7 +4,9 @@
     <jest-package value="$PROJECT_DIR$/server/node_modules/jest" />
     <working-dir value="$PROJECT_DIR$/server" />
     <jest-options value="--coverage --detectOpenHandles" />
-    <envs />
+    <envs>
+      <env name="NODE_ENV" value="test" />
+    </envs>
     <scope-kind value="DIRECTORY" />
     <test-directory value="$PROJECT_DIR$/server" />
     <method v="2" />
