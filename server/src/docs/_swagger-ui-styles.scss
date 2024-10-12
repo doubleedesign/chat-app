@@ -7,17 +7,23 @@ html {
 $body-font: "area-variable", sans-serif;
 $colours: (
 	'primary': #3e0897,
-	'secondary': #da00a5,
+	'secondary': #00c1da,
 	'success': #28f132,
-	'alert': #ea1e3d,
-	'warning': #ffa616,
+	'alert': #c0223b,
+	'warning': #f19200,
 	'dark': #3b4151
 );
 $op_colours: (
-	'get': darken(map-get($colours, 'success'), 10%),
+	'get': map-get($colours, 'secondary'),
 	'post': map-get($colours, 'primary'),
 	'patch': map-get($colours, 'warning'),
 	'delete': map-get($colours, 'alert')
+);
+$response_colours: (
+	'2xx': darken(map-get($colours, 'success'), 15%),
+	'3xx': map-get($colours, 'warning'),
+	'4xx': map-get($colours, 'alert'),
+	'5xx': map-get($colours, 'alert')
 );
 
 @import 'global';
@@ -26,5 +32,6 @@ $op_colours: (
 @import 'operation-header';
 @import 'operation-tables';
 @import 'operation-forms';
+@import 'operation-parameters';
 @import 'operation-responses';
 @import 'section-schemas';

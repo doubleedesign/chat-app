@@ -1,0 +1,15 @@
+.swagger-ui .opblock-body {
+
+	> .opblock-section {
+		padding-top: 1.5rem;
+
+		.parameters-container {
+			padding: 1.5rem;
+			padding-top: 0.5rem;
+		}
+
+		& + .execute-wrapper:empty {
+			padding: 0;
+		}
+	}
+}

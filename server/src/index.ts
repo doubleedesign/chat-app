@@ -3,7 +3,8 @@ import expressJSDocSwagger from 'express-jsdoc-swagger';
 import path from 'node:path';
 import endpoints from './endpoints';
 import expressListEndpoints from 'express-list-endpoints';
-import CustomActionsPlugin from './docs/plugins';
+import { CustomActionsPlugin } from './docs/plugins';
+import { CustomComponentOverridePlugin } from './docs/plugin-component-override.tsx';
 import cors from 'cors';
 import { getFileInfo } from './utils.ts';
 
@@ -38,10 +39,10 @@ if(env !== 'test') {
 		res.sendFile(path.resolve('./src/docs/swagger-ui-hacks.js'));
 	});
 	app.get('/docs/groups.json', (req, res) => {
-		res.sendFile(path.resolve('./src/data/groups.json'));
+		res.sendFile(path.resolve('./data/groups.json'));
 	});
 	app.get('/docs/users.json', (req, res) => {
-		res.sendFile(path.resolve('./src/data/users.json'));
+		res.sendFile(path.resolve('./data/users.json'));
 	});
 
 
@@ -54,7 +55,7 @@ if(env !== 'test') {
 		},
 		security: {},
 		baseDir: __dirname,
-		filesPattern: './endpoints/**/*.ts',
+		filesPattern: ['./endpoints/**/*.ts', './types.ts'],
 		swaggerUIPath: '/docs',
 		exposeSwaggerUI: true,
 		exposeApiDocs: false,
@@ -69,10 +70,12 @@ if(env !== 'test') {
 
 					return indexOfA - indexOfB;
 				},
-				defaultModelsExpandDepth: 10,
+				displayModels: true,
+				defaultModelsExpandDepth: 10, // Expands the Types (models) section
+				defaultModelExpandDepth: 3, // Expands the models inside the responses
 				supportedSubmitMethods: [], // empty disables "Try it out" option for all methods
 				requestSnippetsEnabled: false,
-				plugins: [CustomActionsPlugin]
+				plugins: [CustomActionsPlugin, CustomComponentOverridePlugin]
 			},
 			customCssUrl: [
 				'https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;600&family=Inter+Tight:wght@300;600&display=swap',

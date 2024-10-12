@@ -9,6 +9,9 @@
 
     swaggerUI.addEventListener('load', function() {
 
+        // Do stuff, such as update the Schema tab label to Type, when an operation is expanded
+        doStuffOnOperationExpansion();
+
         // Fix heading level of Schemas, and also change it to Types
         const schemaHeading = document.querySelector('.models > h4');
         schemaHeading.outerHTML = "<h3>" + schemaHeading.innerHTML.replace('Schemas', 'Types') + "</h3>"
@@ -52,3 +55,28 @@ const waitForElementToExist = (selector, limit) => {
         })();
     });
 };
+
+function doStuffOnOperationExpansion() {
+    const observer = new MutationObserver((mutationsList) => {
+        mutationsList.forEach((mutation) => {
+            // Check if an operation has been expanded
+            if (mutation.addedNodes.length > 0) {
+                mutation.addedNodes.forEach((node) => {
+                    if (node.nodeType === 1 && node.matches('.responses-wrapper')) {
+                        // Change the Schema tab text
+                        const schemaTab = node.querySelector('.tab .tabitem button[data-name="model"]');
+                        if(schemaTab) {
+                            schemaTab.innerHTML = 'Type';
+                        }
+                    }
+                });
+            }
+        });
+    });
+
+    // Start observing changes in the swagger container
+    const targetNode = document.querySelector('.swagger-container');
+    if (targetNode) {
+        observer.observe(targetNode, { childList: true, subtree: true });
+    }
+}

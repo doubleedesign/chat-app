@@ -9,7 +9,7 @@
 			font-variation-settings: 'wght' 600;
 			color: map-get($colours, 'dark');
 			display: block;
-			padding: 0.5rem 1rem;
+			padding: 0.75rem 1rem 0.5rem;
 
 			&.active {
 				background: white;
@@ -32,6 +32,7 @@
 					&.active {
 						background: $color;
 						color: white;
+						font-weight: unset;
 					}
 				}
 			}
@@ -39,6 +40,12 @@
 	}
 
 	.responses-wrapper {
+		margin-top: 1rem;
+
+		.responses-inner {
+			padding: 1.5rem;
+			padding-top: 0.5rem;
+		}
 
 		.response-controls {
 			display: none;
@@ -60,6 +67,10 @@
 					&.response-col_links {
 						display: none;
 					}
+
+					&.response-col_description {
+						padding-left: 1rem;
+					}
 				}
 			}
 
@@ -69,6 +80,16 @@
 
 				.response-col_status {
 					font-variation-settings: 'wght' 600;
+					padding: 0.65rem 0.5rem 0.25rem 0.5rem;
+					margin-top: 0.5rem;
+				}
+
+				.response-col_description {
+					padding-left: 1rem;
+
+					&__inner {
+						margin-top: 0.5rem;
+					}
 				}
 
 				&[data-code="200"],
@@ -77,17 +98,41 @@
 					align-items: flex-start;
 
 					.response-col_status {
-						color: map-get($colours, 'success')
+						background: map-get($colours, 'success');
 					}
 				}
 
 				&[data-code="400"],
+				&[data-code="401"],
+				&[data-code="403"],
 				&[data-code="404"],
 				&[data-code="409"] {
 					align-items: center;
+					padding-bottom: 0.5rem;
 
 					.response-col_status {
-						color: map-get($colours, 'alert');
+						background: map-get($response_colours, '4xx');
+						color: white;
+					}
+
+					.response-col_description {
+						&__inner {
+							width: 100%;
+							flex-basis: 100%;
+						}
+					}
+
+					.model-example {
+						display: none;
+					}
+				}
+
+				&[data-code="500"] {
+					align-items: center;
+
+					.response-col_status {
+						background: map-get($response_colours, '5xx');
+						color: white;
 					}
 
 					.model-example {

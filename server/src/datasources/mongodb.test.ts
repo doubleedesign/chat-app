@@ -126,7 +126,7 @@ describe('MongoDB datasource', () => {
 		test('updateGroup', async () => {
 			const group = await db.getGroup('rik1lvWY0O2w');
 
-			const updatedGroup = await db.updateGroup({
+			const updatedGroup = await db.updateGroup('rik1lvWY0O2w', {
 				...group,
 				label: 'Software Engineers'
 			});
@@ -141,7 +141,7 @@ describe('MongoDB datasource', () => {
 		});
 
 		test('updateGroup throws an error if the group does not exist', async () => {
-			await expect(db.updateGroup({
+			await expect(db.updateGroup('abc', {
 				id: 'abc',
 				label: 'Software Engineers',
 				avatar: '',
@@ -153,7 +153,7 @@ describe('MongoDB datasource', () => {
 		test('updateGroup throws an error if updateOne fails', async() => {
 			const spy = jest.spyOn(Collection.prototype, 'updateOne').mockRejectedValue(new Error('Database update failed'));
 
-			await expect(db.updateGroup({
+			await expect(db.updateGroup('rik1lvWY0O2w', {
 				id: 'rik1lvWY0O2w',
 				label: 'Software Engineers',
 				avatar: '',

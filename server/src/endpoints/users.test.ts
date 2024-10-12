@@ -17,10 +17,9 @@ jest.mock('../constants.ts', () => ({
 
 describe('Users endpoint', () => {
 
-	test('GET /user', async () => {
+	test('GET /user/:userId', async () => {
 		const response = await supertest(app)
-			.get('/user')
-			.query({ userId: 'leesa.ward@griffithuni.edu.au' });
+			.get('/user/leesa.ward@griffithuni.edu.au');
 
 		expect(response.status).toBe(200);
 		expect(response.body).toEqual(expect.objectContaining({
@@ -29,7 +28,7 @@ describe('Users endpoint', () => {
 		}));
 	});
 
-	test('GET /user with no userId', async () => {
+	test('GET /user/:userId with no userId', async () => {
 		const response = await supertest(app)
 			.get('/user');
 
@@ -39,13 +38,33 @@ describe('Users endpoint', () => {
 		});
 	});
 
-	test('GET /user with an invalid userId', async () => {
+	test('GET /user/:userId with an invalid userId', async () => {
 		const response = await supertest(app)
-			.get('/user')
-			.query({ userId: 'notauser@example.com' });
+			.get('/user/notauser@example.com');
 
 		expect(response.status).toBe(404);
 		expect(response.body.error).toEqual('User not found');
+	});
+
+	test('GET /user/:userId/groups', async () => {
+		const response = await supertest(app)
+			.get('/user/leesa.ward@griffithuni.edu.au/groups');
+
+		expect(response.status).toBe(200);
+		expect(response.body).toHaveLength(3);
+		expect(response.body).toEqual(expect.arrayContaining([
+			expect.objectContaining({
+				id: 'rik1lvWY0O2w',
+				label: 'Software Developers'
+			}),
+		]));
+	});
+
+	test('GET /user/:userId/groups with invalid userId', async () => {
+		const response = await supertest(app)
+			.get('/user/notauser@example.com/groups');
+
+		expect(response.status).toBe(404);
 	});
 
 	test('POST /user', async () => {

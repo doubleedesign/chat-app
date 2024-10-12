@@ -7,7 +7,7 @@ import { getDatabase } from '../constants.ts';
  * GET /channels
  * @tags Channels
  *
- * @return {object} 400 - error response if no parameters are passed
+ * @return {object} 400 - Error response if no parameters are passed
  */
 router.get('/channels', async (req, res) => {
 	return res.status(400).json({
@@ -17,12 +17,13 @@ router.get('/channels', async (req, res) => {
 
 
 /**
- * GET /channels
+ * GET /channels/:channelId
  * @tags Channels
  * @summary Get a given channel's details
- * @param {string} channelId.query.required - The channel's ID
+ * @param {string} channelId.param.required - The channel's ID
  *
- * @return {object} 200 - success response
+ * @return {object} 200 - Channel details
+ * @return {object} 404 - Channel not found
  */
 router.get('/channels/:channelId', async (req, res, next) => {
 	const db = await getDatabase();
@@ -46,10 +47,11 @@ router.get('/channels/:channelId', async (req, res, next) => {
  * POST /channels
  * @tags Channels
  * @summary Add a channel to a group
- * @param {object} body.channel.required - The channel details
- * @param {string} body.groupId.required - The group's ID
+ * @param {object} body.request.required - The channel details and group ID
  *
- * @return {object} 201 - success response
+ * @return {Channel} 201 - Created Channel
+ * @return {object} 409 - Conflict (channel already exists)
+ * @return {object} 400 - Bad request
  */
 router.post('/channels', async (req, res) => {
 	const db = await getDatabase();
@@ -91,21 +93,28 @@ router.post('/channels', async (req, res) => {
 /**
  * DELETE /channels
  * @tags Channels
- * @summary Remove a channel from the database
- * @param {string} body.channelId.required - The channel's ID
  *
- * @return {object} 204 - success response
+ * @return {object} 400 - Error response if no parameters are passed
  */
 router.delete('/channels', async (req, res) => {
-	const db = await getDatabase();
-	const { channelId } = req.body;
+	return res.status(400).json({
+		error: 'Channel ID is required'
+	});
+});
 
-	// If no channelId, return 400
-	if (!channelId) {
-		return res.status(400).json({
-			error: 'Channel ID is required'
-		});
-	}
+
+/**
+ * DELETE /channels/:channelId
+ * @tags Channels
+ * @summary Remove a channel from the database
+ * @param {string} channelId.param.required - The channel's ID
+ *
+ * @return {object} 204 - Updated Group
+ * @return {object} 400 - Bad request
+ */
+router.delete('/channels/:channelId', async (req, res) => {
+	const db = await getDatabase();
+	const { channelId } = req.params;
 
 	try {
 		const updated = await db.deleteChannel(channelId);
@@ -113,6 +122,12 @@ router.delete('/channels', async (req, res) => {
 		return res.status(204).json(updated);
 	}
 	catch (error) {
+		if(error.message === 'Channel not found') {
+			return res.status(404).json({
+				error: error.message
+			});
+		}
+
 		return res.status(400).json({
 			error: error.message
 		});

@@ -22,6 +22,7 @@
 		"noImplicitAny": false,
 		"allowJs": false,
 		"sourceMap": true,
+		"jsx": "react"
 	},
 	"include": [
 		"utils/**/*",

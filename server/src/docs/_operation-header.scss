@@ -17,11 +17,16 @@
 	}
 
 	.opblock-section-header {
+		background: transparent;
+		box-shadow: none;
+		min-height: 0;
+		padding-top: 0;
+		padding-bottom: 0;
 
 		.opblock-title span, h4 {
 			font-size: 1.25rem;
 			font-family: $body-font;
-			font-variation-settings: 'wght' 600;
+			font-variation-settings: 'wght' 500;
 
 			&:after {
 				display: none;
@@ -39,6 +44,9 @@
 
 		.opblock {
 			border-radius: 0;
+			box-sizing: border-box;
+			margin: 0 0 1rem 0;
+			box-shadow: none;
 
 			@each $operation, $value in $op_colours {
 				&-#{$operation} {
@@ -52,36 +60,63 @@
 
 				.opblock-summary {
 					border: 0;
-					padding: 0 0.5rem 0 0;
+					padding: 0;
 					display: flex;
+
+					&-control {
+						width: 100%;
+						display: flex;
+						align-items: stretch;
+					}
 
 					&-method {
 						border-radius: 0;
 						font-family: $body-font;
-						font-variation-settings: 'wght' 600;
+						font-variation-settings: 'wght' 500;
 						font-size: 1.125rem;
-						padding: 0.75rem 1rem 0.5rem;
+						padding: 0.9rem 1rem 0.5rem;
 						min-width: 95px;
+						flex-basis: 95px;
+						display: flex;
+						align-items: center;
+						justify-content: center;
+						align-self: stretch;
+						text-shadow: none;
 					}
 
 					&-path {
-						width: 300px;
-						flex-basis: 300px;
-
 						span {
 							font-variation-settings: 'wght' 600;
+							font-size: 1.125rem;
 						}
 
 						&-description-wrapper {
-							padding-top: 0.25rem;
+							flex-direction: row;
+							box-sizing: border-box;
+							width: auto;
+							flex-basis: auto;
+							padding: 1.125rem 1rem 0.75rem 1rem;
+							align-self: stretch;
+							display: flex;
+							align-items: center;
 						}
 					}
 
 					&-description {
 						font-family: $body-font;
 						font-size: 1rem;
+						white-space: nowrap;
+						overflow: hidden;
+						text-overflow: ellipsis;
 					}
 				}
+			}
+
+			&-control-arrow {
+				display: flex;
+				padding: 0.5rem;
+				align-self: stretch;
+				align-items: center;
 			}
 
 		}

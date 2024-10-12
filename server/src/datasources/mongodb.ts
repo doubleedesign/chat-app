@@ -96,7 +96,7 @@ export class DatabaseConnection {
      *
      * @return {Group} The group details
      */
-	async getGroup(groupId: string): Promise<Group | null> {
+	async getGroup(groupId: string): Promise<Group> {
 		const result = await this.groups.findOne({ id: groupId });
 
 		if (!result) {
@@ -138,12 +138,13 @@ export class DatabaseConnection {
 
 	/**
      * Update a group's details
+     * @param groupId - The ID of the group to update
      * @param group - Updated group data
      *
      * @return {Group} The updated group
      */
-	async updateGroup(group: Group): Promise<Group> {
-		const groupExists = await this.groups.findOne({ id: group.id });
+	async updateGroup(groupId, group: Group): Promise<Group> {
+		const groupExists = await this.groups.findOne({ id: groupId });
 		if (!groupExists) {
 			throw new Error('Group not found');
 		}

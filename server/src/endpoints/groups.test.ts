@@ -24,29 +24,6 @@ describe('Groups endpoint', () => {
 		expect(response.status).toBe(400);
 	});
 
-	test('GET /groups', async () => {
-		const response = await supertest(app)
-			.get('/groups')
-			.query({ userId: 'leesa.ward@griffithuni.edu.au' });
-
-		expect(response.status).toBe(200);
-		expect(response.body).toHaveLength(3);
-		expect(response.body).toEqual(expect.arrayContaining([
-			expect.objectContaining({
-				id: 'rik1lvWY0O2w',
-				label: 'Software Developers'
-			}),
-		]));
-	});
-
-	test('GET /groups with invalid userId', async () => {
-		const response = await supertest(app)
-			.get('/groups')
-			.query({ userId: 'notauser@example.com' });
-
-		expect(response.status).toBe(404);
-	});
-
 	test('GET /groups/:groupId', async () => {
 		const response = await supertest(app)
 			.get('/groups/OhcewGKdqzKS');
@@ -114,9 +91,9 @@ describe('Groups endpoint', () => {
 		expect(response.body.error).toEqual('Group is missing required fields');
 	});
 
-	test('PATCH /groups', async () => {
+	test('PATCH /groups/:groupId', async () => {
 		const response = await supertest(app)
-			.patch('/groups')
+			.patch('/groups/OhcewGKdqzKS')
 			.send({
 				id: 'OhcewGKdqzKS',
 				label: 'Updated Group',
@@ -131,9 +108,9 @@ describe('Groups endpoint', () => {
 		}));
 	});
 
-	test('PATCH /groups with no group data', async () => {
+	test('PATCH /groups/:groupId with no group data', async () => {
 		const response = await supertest(app)
-			.patch('/groups');
+			.patch('/groups/abc');
 
 		expect(response.status).toBe(404);
 		expect(response.body.error).toEqual('Group not found');
@@ -141,7 +118,7 @@ describe('Groups endpoint', () => {
 
 	test('PATCH /groups with invalid group ID', async () => {
 		const response = await supertest(app)
-			.patch('/groups')
+			.patch('/groups/abc')
 			.send({
 				id: 'abc',
 				label: 'Updated Group'
@@ -153,7 +130,7 @@ describe('Groups endpoint', () => {
 
 	test('PATCH /groups with missing fields', async () => {
 		const response = await supertest(app)
-			.patch('/groups')
+			.patch('/groups/OhcewGKdqzKS')
 			.send({ id: 'OhcewGKdqzKS' });
 
 		expect(response.status).toBe(400);

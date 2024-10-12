@@ -2,14 +2,30 @@
 .swagger-ui .opblock {
 
 	table {
+		border-bottom: 1px solid rgba(map-get($colours, 'dark'), 0.15);
 
 		tr {
 			display: flex;
 			min-height: 42px;
 			align-items: center;
 
+			&[data-param-name="body"] {
+				align-items: flex-start;
+				margin-top: 0.5rem;
+
+				textarea {
+					background: rgb(51, 51, 51); // same as the code block theme
+					border-radius: 0;
+					font-size: 1rem;
+					line-height: 1.4;
+					font-family: 'Fira Code', monospace;
+					text-wrap: nowrap;
+				}
+			}
+
 			.col_header {
 				padding: 0.5rem 0;
+				font-variation-settings: 'wght' 500;
 			}
 
 			// Note: parameters-col alone is not a class it's just the prefix
@@ -93,12 +109,22 @@
 			}
 
 			.parameters-col {
+
+				&_name {
+
+					.parameter__type {
+						font-size: 1rem;
+						padding-left: 1rem;
+					}
+
+					.parameter__in {
+						display: none;
+					}
+				}
+
 				&_description {
 					margin-bottom: 0;
-
-					&:not(.col_header) {
-						padding: 0;
-					}
+					padding-left: 1rem;
 
 					@media screen and (min-width: 940px) {
 						flex-grow: 1;
@@ -133,6 +159,14 @@
 							width: auto;
 							margin-right: 0.25rem;
 						}
+
+						&[type="text"] {
+							padding: 0.75rem 0.5rem 0.5rem 0.5rem;
+						}
+					}
+
+					textarea {
+						margin: 0;
 					}
 				}
 			}

@@ -119,10 +119,7 @@ describe('Channels endpoint', () => {
 
 	test('DELETE /channels', async () => {
 		const response = await supertest(app)
-			.delete('/channels')
-			.send({
-				channelId: '0txCi3dsPy1UK4Nj'
-			});
+			.delete('/channels/0txCi3dsPy1UK4Nj');
 
 		expect(response.status).toBe(204);
 	});
@@ -135,14 +132,11 @@ describe('Channels endpoint', () => {
 		expect(response.body.error).toEqual('Channel ID is required');
 	});
 
-	test('DELETE /channels with an invalid channelId', async () => {
+	test('DELETE /channels/:channelId with an invalid channelId', async () => {
 		const response = await supertest(app)
-			.delete('/channels')
-			.send({
-				channelId: 'abc'
-			});
+			.delete('/channels/abc');
 
-		expect(response.status).toBe(400);
+		expect(response.status).toBe(404);
 		expect(response.body.error).toEqual('Channel not found');
 	});
 });
