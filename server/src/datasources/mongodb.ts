@@ -55,6 +55,11 @@ export class DatabaseConnection {
      * @return {User} - The newly created user
      */
 	async createUser(newUser: User): Promise<User> {
+		// Make sure newUser is a valid User object
+		if (!newUser.name || !newUser.email || !newUser.groupIds) {
+			throw new TypeError('User object is missing required fields');
+		}
+
 		const userExists = await this.users.findOne({ email: newUser.email });
 
 		if (userExists) {
@@ -110,6 +115,11 @@ export class DatabaseConnection {
      * @return {Group} The newly created group
      */
 	async createGroup(group: Group): Promise<Group> {
+		// Make sure group is a valid Group object
+		if (!group.id || !group.label || !group.admins || !group.channels) {
+			throw new TypeError('Group object is missing required fields');
+		}
+
 		const groupExists = await this.groups.findOne({ id: group.id });
 
 		if (groupExists) {
