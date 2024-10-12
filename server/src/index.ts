@@ -7,6 +7,9 @@ import { CustomActionsPlugin } from './docs/plugins';
 import { CustomComponentOverridePlugin } from './docs/plugin-component-override.tsx';
 import cors from 'cors';
 import { getFileInfo } from './utils.ts';
+import { DATABASE_NAME } from './constants.ts';
+import { MongoClient } from 'mongodb';
+import { populateMockData } from './utils.ts';
 
 // Basic setup
 const app: Application = express();
@@ -89,8 +92,21 @@ if(env !== 'test') {
 // Run the server if we are in the development environment
 if(env === 'development') {
 	app.listen(port, () => {
-		const endpoints = expressListEndpoints(app);
 		console.log('================================================');
+
+		// If the database is empty (using my account as a proxy measure for 'emtpy'), add the mock data
+		const client = new MongoClient('mongodb://localhost:27017');
+		client.connect().then(async () => {
+			const db = client.db(DATABASE_NAME);
+			const iAmHere = await db.collection('users').findOne({ email: 'leesa.ward@griffithuni.edu.au' });
+			if (!iAmHere) {
+				console.log('Database is probably empty, populating with mock data');
+				await populateMockData(db);
+				console.log('================================================');
+			}
+		});
+
+		const endpoints = expressListEndpoints(app);
 		console.log(`Server running on port ${port}`);
 		console.log('Available endpoints:');
 		console.log(endpoints.filter(({ path }) => !path.startsWith('/docs/')).map(({ path, methods }) => ({

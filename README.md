@@ -43,7 +43,7 @@ The below diagram visualises the data structure I have developed accordingly:
 
 In a relational database, constraints such as requiring a channel belong to exactly one valid group, a group's link to its users being removed when the group is deleted, and similar behaviours could be enforced at the database level using commands like `[key] REFERENCES [other table's field]` for linking relationships, and `ON DELETE CASCADE` for preventing orphaned data.
 
-The constraint of making this work in a JSON-like structure meant I had to implement logic at the code level to ensure data integrity. I did this by creating REST API endpoints for all valid interactions.
+The constraint of making this work in a JSON-like structure meant I had to implement logic at the code level to ensure data integrity. I did this by creating REST API endpoints for all valid interactions, and including constraint logic (such as not allowing a user to be created if an account with that email already exists) in the underlying code.
 
 ### API endpoints
 
@@ -78,6 +78,16 @@ Run the server in development mode (uses Nodemon to watch for changes):
 npm run dev
 ```
 
+If my user account is not present, the local database will be populated with mock data from the `./src/data/groups.json` and `./src/data/users.json` files (the same data used for unit tests), so that a demo instance for dev, debugging, and testing can be spun up quickly.
+
+Example response in Postman after mock data is loaded:
+
+![Postman response screenshot](./doc-assets/postman-example-output.png)
+
+I have also set up [express-list-endpoints](https://www.npmjs.com/package/express-list-endpoints) to list all available endpoints in the terminal for easy reference:
+
+![Express list endpoints screenshot](./doc-assets/express-list-endpoints.png)
+
 ### Interactive documentation
 I have used [express-jsdoc-swagger](https://www.npmjs.com/package/express-jsdoc-swagger) to generate web-based documentation of the API. The documentation can be accessed at `http://localhost:4100/docs` when the server is running. The documentation includes complete examples of parameters and responses for each endpoint, along with the associated type definitions.
 
@@ -85,7 +95,7 @@ I have used [express-jsdoc-swagger](https://www.npmjs.com/package/express-jsdoc-
 
 ### Unit tests
 
-I have written unit tests for all methods in the interaction class and all REST endpoints. MongoDB needs to be running locally, but the Express server does not.
+I have written unit tests for all methods in the interaction class and all REST endpoints using [Jest](https://jestjs.io/). MongoDB needs to be running locally, but the Express server does not.
 
 These can be run using the provided Run configuration in WebStorm/IntelliJ, or with the below command:
 
@@ -96,11 +106,11 @@ npm run test
 Under the hood, this:
 - Sets the `NODE_ENV` environment variable to `test` so that certain things can be skipped (notably the custom Swagger doc webpage)
 - Sets up a test database populated with the mock data from the `./src/data/groups.json` and `./src/data/users.json` files
-- Runs the Jest test runner with the `--coverage` flag to generate a coverage report
+- Runs the [Jest](https://jestjs.io/) test runner with the `--coverage` flag to generate a coverage report
 - Uses [SuperTest](https://www.npmjs.com/package/supertest) to test the REST API endpoints without needing to run the server.
 
 ### Mock data generation
-I have created a script to generate mock users, groups, and channels for development and testing purposes. Generated files are included in this repository and are used for unit tests.
+I have created a script to generate mock users, groups, and channels for development and testing purposes. Generated files are included in this repository and are used for unit tests, and is added to the local development instance if the database is empty.
 
 New mock data can be generated using the below command, but bear in mind that replacing the current data files will break unit tests. You may want to back up the current data files first.
 
@@ -132,7 +142,7 @@ npm run start
 
 The navigation structure is as follows:
 
-[!Navigation structure diagram](./doc-assets/navigation-structure.png)
+![Navigation structure diagram](./doc-assets/navigation-structure.png)
 [Link to original diagram](https://www.figma.com/board/1AIsEvGFkMVhqiMuMNNSE4/3813ICT?node-id=0-1&t=mioMbQlxrygdLFyQ-1)
 
 ### UI prototype screenshots
@@ -144,7 +154,7 @@ The navigation structure is as follows:
 
 ### Unit tests
 
-I have written unit tests for the front-end components using Karma, Jasmine with [Jasmine DOM](https://github.com/testing-library/jasmine-dom), and [Angular Testing Library](https://testing-library.com/docs/angular-testing-library/intro). 
+I have written unit tests for the front-end components using [Karma](https://karma-runner.github.io/latest/index.html), [Jasmine](https://jasmine.github.io/) with [Jasmine DOM](https://github.com/testing-library/jasmine-dom), and [Angular Testing Library](https://testing-library.com/docs/angular-testing-library/intro). 
 
 These can be run using the provided Run configuration in WebStorm/IntelliJ, or with the below command:
 
@@ -154,5 +164,5 @@ npm run test
 ```
 
 Under the hood, this:
-- Runs the Karma test runner with the `--code-coverage` flag to generate a coverage report
-- Uses Jasmine with the additional [Jasmine DOM](https://github.com/testing-library/jasmine-dom) library to provide additional assertion matchers such as `.toBeVisible()`.
+- Runs the [Karma](https://karma-runner.github.io/latest/index.html) test runner with the `--code-coverage` flag to generate a coverage report
+- Uses [Jasmine](https://jasmine.github.io/) with the additional [Jasmine DOM](https://github.com/testing-library/jasmine-dom) library to provide additional assertion matchers such as `.toBeVisible()`.
