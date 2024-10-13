@@ -15,6 +15,7 @@ Chat application for 3813ICT Software Frameworks at Griffith University.
   - [Installation and local development](#installation-and-local-development-1)
   - [Navigation structure](#navigation-structure)
   - [UI prototype screenshots](#ui-prototype-screenshots)
+  - [UI screenshots after MongoDB integration](#ui-screenshots-after-mongodb-integration)
   - [Unit tests](#unit-tests-1)
 
 ---
@@ -157,6 +158,10 @@ The navigation structure is as follows:
 ![Group screen - no group selected](./doc-assets/ui-prototype-no-group-selected.png)
 ![Group screen - group selected](./doc-assets/ui-prototype-group.png)
 ![Channel screen](./doc-assets/ui-prototype-channel-settings.png)
+
+### UI screenshots after MongoDB integration
+
+![Groups screen with real data](./doc-assets/ui-real-data-groups.png)
 
 ### Unit tests
 
