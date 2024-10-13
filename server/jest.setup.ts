@@ -18,12 +18,12 @@ beforeAll(async () => {
 		const users = db.collection('users');
 		const groups = db.collection('groups');
 
-		const userDataFile = await fs.readFile(path.resolve(__dirname, './src/data/users.json'), 'utf-8');
+		const userDataFile = await fs.readFile(path.resolve(__dirname, './data/users.json'), 'utf-8');
 		const userData = JSON.parse(userDataFile);
 		await users.insertMany(userData);
 		console.log('Inserted test users');
 
-		const groupsDataFile = await fs.readFile(path.resolve(__dirname, './src/data/groups.json'), 'utf-8');
+		const groupsDataFile = await fs.readFile(path.resolve(__dirname, './data/groups.json'), 'utf-8');
 		const groupsData = JSON.parse(groupsDataFile);
 		await groups.insertMany(groupsData);
 		console.log('Inserted test groups');
