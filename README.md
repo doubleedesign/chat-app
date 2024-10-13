@@ -31,11 +31,15 @@ The data requirements are as follows:
 - A group can have multiple channels
 - Each channel belongs to exactly one group. 
 
-In Phase 2, the requirements specify that we will implement a NoSQL database (MongoDB) to store user, group, and channel data. To me, the data is inherently relational, so developing a data structure that would not risk duplicate data and orphaned records was a challenge.
+The requirements specify the use of a NoSQL database (MongoDB) to store user, group, and channel data. To me, the data is inherently relational, so developing a data structure that would not risk duplicate data and orphaned records was a challenge.
 
 The below diagram visualises the data structure I have developed accordingly:
 
 ![Data structure diagram](./doc-assets/data-structure.png)` 
+
+An example of this in action in MongoDB Compass:
+
+![MongoDB Compass screenshot](./doc-assets/mongodb-groups.png)
 
 #### Related links:
 - [Original diagram](https://www.figma.com/board/1AIsEvGFkMVhqiMuMNNSE4/3813ICT?node-id=0-1&t=mioMbQlxrygdLFyQ-1)
