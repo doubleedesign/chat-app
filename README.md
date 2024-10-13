@@ -109,6 +109,8 @@ Under the hood, this:
 - Runs the [Jest](https://jestjs.io/) test runner with the `--coverage` flag to generate a coverage report
 - Uses [SuperTest](https://www.npmjs.com/package/supertest) to test the REST API endpoints without needing to run the server.
 
+![Server test coverage screenshot](./doc-assets/test-coverage-server.png)
+
 ### Mock data generation
 I have created a script to generate mock users, groups, and channels for development and testing purposes. Generated files are included in this repository and are used for unit tests, and is added to the local development instance if the database is empty.
 
@@ -166,3 +168,5 @@ npm run test
 Under the hood, this:
 - Runs the [Karma](https://karma-runner.github.io/latest/index.html) test runner with the `--code-coverage` flag to generate a coverage report
 - Uses [Jasmine](https://jasmine.github.io/) with the additional [Jasmine DOM](https://github.com/testing-library/jasmine-dom) library to provide additional assertion matchers such as `.toBeVisible()`.
+
+![Front-end test coverage screenshot](./doc-assets/test-coverage-frontend.png)
